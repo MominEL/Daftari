@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,30 +13,43 @@
   <meta name="referrer" content="no-referrer" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#1c1917" />
-  <title>Daftari</title>
-  <meta name="description" content="Daftari: a calm notebook for lectures, with built-in AI. Your notes are plain files on your own computer." />
+  <title>Daftari – a quiet notebook for lectures</title>
+  <meta name="description" content="Daftari: a calm, free notebook for lectures, with built-in AI. Records and transcribes on your own computer; your notes are plain files in a folder you choose." />
+  <link rel="canonical" href="https://mominel.github.io/Daftari/" />
+  <!-- How the link looks when it is shared (WhatsApp, iMessage, Discord…) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Daftari" />
+  <meta property="og:title" content="Daftari – a quiet notebook for lectures" />
+  <meta property="og:description" content="A calm, free notebook for Windows and Mac. Records a lecture, transcribes it on your computer and turns it into notes." />
+  <meta property="og:url" content="https://mominel.github.io/Daftari/" />
+  <meta property="og:image" content="https://mominel.github.io/Daftari/img/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="The Daftari notebook icon, a cream notebook with a gold binding and a bold D, on a dark desk under lamp light, with the words: Daftari, a quiet notebook for lectures." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="img/icon.png" type="image/png" />
-  <link rel="stylesheet" href="style.css?v=a4efd774e1" />
+  <link rel="stylesheet" href="style.css?v=dbb498f548" />
   <script src="site.js?v=efd7515721"></script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to the content</a>
   <div class="lamp" aria-hidden="true"></div>
 
   <header class="top">
-    <a class="brand" href="#top" id="top"><img src="img/icon.png" width="40" height="40" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
+    <a class="brand" href="#top" id="top" aria-label="Daftari, back to the top"><img src="img/icon.png" width="40" height="40" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
     <nav aria-label="Sections">
       <a href="#how">The notebook</a>
       <a href="#lecture">Lectures</a>
       <a href="#features">What it does</a>
       <a href="#open">Opening it</a>
       <a href="#privacy">Privacy</a>
+      <a href="#faq">Questions</a>
       <a class="pill" href="#download">Download</a>
     </nav>
   </header>
 
-  <main>
-    <section class="story" id="how" aria-labelledby="how-title" data-steps="5" data-step="0">
-      <h2 class="sr" id="how-title">Daftari, the notebook</h2>
+  <main id="main">
+    <section class="story" id="how" aria-label="Daftari, the notebook" data-steps="5" data-step="0">
       <div class="stage" data-stage>
         <div class="captions">
           <div class="caption cH">
@@ -47,6 +60,7 @@
               <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
             </div>
             <p class="meta">Free, for Windows 10 or 11 and Macs with Apple silicon. <a href="#open">Opening it the first time</a>.</p>
+            <p class="phone-note">Daftari is for Windows and Mac computers. Open this page on your computer to download.</p>
           </div>
           <div class="caption c0">
             <h2>Plain files, in a folder you choose.</h2>
@@ -75,7 +89,7 @@
             <div class="base">
               <div class="face">
                 <div class="take">
-                  <h3>Take it with you.</h3>
+                  <p class="take-title">Take it with you.</p>
                   <p>Free, for Windows 10 or 11 and Macs with Apple silicon.</p>
                   <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Windows</a>
                   <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Mac</a>
@@ -84,11 +98,11 @@
             </div>
 
             <!-- the leaves, back to front -->
-            <div class="leaf l2" aria-hidden="true">
-              <div class="face ruled"><div class="print"><img src="img/shot-study.png" width="800" height="1105" alt="" /></div></div>
+            <div class="leaf l2">
+              <div class="face ruled"><div class="print"><img src="img/shot-study.png" width="800" height="1105" alt="Daftari reviewing a flashcard: the question “What is φ(15)?”, its answer, and buttons to rate how well you knew it." /></div></div>
               <div class="face back ruled">
                 <div class="page">
-                  <h3>Lecture, 10:02</h3>
+                  <p class="page-title">Lecture, 10:02</p>
                   <p class="mono">0:12 Modular inverses.</p>
                   <p class="mono">0:48 gcd(a, n) = 1,</p>
                   <p class="mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so a has an inverse.</p>
@@ -97,9 +111,9 @@
                 </div>
               </div>
             </div>
-            <div class="leaf l1" aria-hidden="true">
-              <div class="face ruled"><div class="print"><img src="img/shot-page.png" width="800" height="1105" alt="" /></div></div>
-              <div class="face back ruled"><div class="print"><img src="img/shot-search.png" width="800" height="1105" alt="" /></div></div>
+            <div class="leaf l1">
+              <div class="face ruled"><div class="print"><img src="img/shot-page.png" width="800" height="1105" alt="A Daftari page of notes on modular arithmetic, with headings, a bulleted list, a formula and two flashcards." /></div></div>
+              <div class="face back ruled"><div class="print"><img src="img/shot-search.png" width="800" height="1105" alt="Daftari’s search: typing “euler” finds a page title and the matching words inside other pages." /></div></div>
             </div>
             <div class="leaf l0" aria-hidden="true">
               <div class="face cover">
@@ -110,7 +124,7 @@
               </div>
               <div class="face back ruled">
                 <div class="page">
-                  <h3>Your notes</h3>
+                  <p class="page-title">Your notes</p>
                   <p class="mono">Notes/</p>
                   <p class="mono">&nbsp;&nbsp;Cryptography/</p>
                   <p class="mono">&nbsp;&nbsp;&nbsp;&nbsp;Week 3 – Euler.json</p>
@@ -138,7 +152,8 @@
             <span class="wave"><span class="wave-inner"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></span>
             <span class="rec-ok">Mic OK</span>
           </div>
-          <ol class="transcript" aria-label="Transcript">
+          <h3 class="sr">An example transcript</h3>
+          <ol class="transcript">
             <li class="t1"><time>47:02</time><span>So an inverse modulo n only exists when a and n share no factor.</span></li>
             <li class="t2"><time>47:18</time><span>In other words, when the gcd of a and n is one.</span></li>
             <li class="t3"><time>47:41</time><span>Euler’s theorem gives it to us directly: a to the phi of n is one, mod n.</span></li>
@@ -172,30 +187,39 @@
       </ul>
     </section>
 
-    <section class="plain" id="download">
-      <h2>Download</h2>
+    <section class="plain" id="download" aria-labelledby="download-title">
+      <h2 id="download-title">Download</h2>
       <p class="muted">Version <strong>0.1.2</strong>, 10 October 2026. Free. The installers are not signed (that needs a paid certificate), so your computer will ask you to confirm the first time: see <a href="#open">Opening it</a>.</p>
+      <p class="phone-note">Daftari is for Windows and Mac computers. Open this page on your computer to download.</p>
       <ul class="downloads">
         <li>
           <div class="dl-head"><strong>Windows</strong><span>Windows 10 or 11, 64-bit</span></div>
           <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Download for Windows</a>
-          <p class="hash">SHA-256: <code>ccb07664feb6c46bbe019801dec9600009bbeb1405e70af30e42da8c8aa3f58e</code></p>
+          <p class="hash"><span class="hash-label">SHA-256 of <code class="file">Daftari-Windows-Setup.exe</code></span><code class="sha">ccb07664feb6c46bbe019801dec9600009bbeb1405e70af30e42da8c8aa3f58e</code></p>
         </li>
         <li>
           <div class="dl-head"><strong>Mac, Apple silicon</strong><span>M1, M2, M3, M4 and newer, macOS 12 or later</span></div>
           <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
-          <p class="hash">SHA-256: <code>95b285cff64e391d00a38eeafc67a4da1bca2cc77d5ea6ffffc02b08c3f8a145</code></p>
-          <p class="muted small">Not sure which Mac you have? Apple menu → <strong>About This Mac</strong> → look at <strong>Chip</strong>. If it says “Apple M…”, this is the one. If it says “Intel”, wait for the Intel version below.</p>
-        </li>
-        <li class="soon">
-          <div class="dl-head"><strong>Mac, Intel</strong><span>Coming soon</span></div>
-          <span class="button disabled" aria-disabled="true">Coming soon</span>
-        </li>
-        <li class="soon">
-          <div class="dl-head"><strong>Linux</strong><span>Coming soon</span></div>
-          <span class="button disabled" aria-disabled="true">Coming soon</span>
+          <p class="hash"><span class="hash-label">SHA-256 of <code class="file">Daftari-Mac-AppleSilicon.dmg</code></span><code class="sha">95b285cff64e391d00a38eeafc67a4da1bca2cc77d5ea6ffffc02b08c3f8a145</code></p>
+          <p class="muted small">Not sure which Mac you have? Apple menu → <strong>About This Mac</strong> → look at <strong>Chip</strong>. If it says “Apple M…”, this is the one. If it says “Intel”, the Intel version is not ready yet.</p>
         </li>
       </ul>
+      <ul class="soon-list">
+        <li>Intel Mac – coming soon</li>
+        <li>Linux – coming soon</li>
+      </ul>
+
+      <div class="needs" aria-labelledby="needs-title">
+        <h3 id="needs-title">What you need</h3>
+        <ul class="plain">
+          <li><strong>Windows 10 or 11</strong> (64-bit), or <strong>macOS 12 or later</strong> on a Mac with Apple silicon.</li>
+          <li><strong>Disk:</strong> the Windows installer is 108 MB and Daftari takes about 380 MB once installed; the Mac download is 127 MB.</li>
+          <li><strong>Speech-to-text (optional)</strong>, downloaded inside Daftari when you want it: a speech model of 148 MB (Base), 488 MB (Small), 1.5 GB (Medium) or 1.6 GB (Large v3 Turbo). On Windows the speech program adds 9 MB, or 685 MB for computers with an NVIDIA graphics card. On a Mac it is installed with Homebrew, and Daftari shows the two commands.</li>
+          <li><strong>Memory:</strong> a Mac with 8 GB works well with the Small and Medium models. Daftari suggests one for your computer.</li>
+          <li><strong>Internet:</strong> only to download Daftari and the speech models, to sync, and to use an online AI provider. Writing, search, flashcards, recording and speech-to-text work offline.</li>
+        </ul>
+      </div>
+
       <details class="verify">
         <summary>Check that your download is genuine</summary>
         <p>Each file has a SHA-256 checksum above (and in <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>). After downloading, compare it with your own:</p>
@@ -205,8 +229,8 @@
       </details>
     </section>
 
-    <section class="plain" id="open">
-      <h2>Opening it the first time</h2>
+    <section class="plain" id="open" aria-labelledby="open-title">
+      <h2 id="open-title">Opening it the first time</h2>
       <p class="muted">Because the installers are not signed, Windows and macOS warn you once. That is expected. Only continue if you downloaded the file from this page.</p>
       <div class="two">
         <div>
@@ -228,8 +252,8 @@
       <p class="muted small">Updates: on Windows, Daftari downloads new versions itself and installs them when you close it. On a Mac it tells you a new version is ready and opens this page.</p>
     </section>
 
-    <section class="plain" id="ai">
-      <h2>The AI helper needs your own key</h2>
+    <section class="plain" id="ai" aria-labelledby="ai-title">
+      <h2 id="ai-title">The AI helper needs your own key</h2>
       <p>Daftari comes with <strong>no AI key</strong>: you use your own, from the company you choose, and it is stored encrypted on your computer. The first-time setup walks you through it with step-by-step guides. The official pages:</p>
       <ul class="plain">
         <li><a rel="noopener noreferrer" href="https://ai.google.dev/gemini-api/docs/api-key">Gemini (Google)</a>: has a free plan.</li>
@@ -242,21 +266,119 @@
       <p class="note muted">Free tiers can be generous, but some providers may use what you send them to improve their products, so keep private notes out of free-tier requests. Daftari works fully without the AI.</p>
     </section>
 
-    <section class="plain" id="privacy">
-      <h2>Your notes stay yours</h2>
-      <ul class="plain">
-        <li>No accounts, no analytics, no tracking, no advertising. This website has none either: no cookies, no forms, nothing from other sites. Its one small script only moves the pictures as you scroll.</li>
-        <li>Your notes stay in the folder you chose. If you pick a cloud folder or turn on GitHub sync, that service holds a copy: that is your choice.</li>
-        <li>Recordings and transcripts stay on your computer and are never synced.</li>
-        <li>Daftari contacts the internet only when you ask it to: the AI company you set up, GitHub (if you turn on sync), the download sites for the speech-to-text program, and GitHub to look for a new version of Daftari (you can switch that off in Settings → About).</li>
+    <section class="plain" id="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">How it looks after your data</h2>
+      <ul class="facts">
+        <li><strong>Your AI keys are locked away.</strong> They are encrypted with your computer’s own secure storage and kept in Daftari’s settings, never in your notes folder.</li>
+        <li><strong>Recordings stay on your computer.</strong> Lecture audio is kept in Daftari’s own folder, outside your notes, and is never synced.</li>
+        <li><strong>No analytics, no tracking.</strong> No accounts, no analytics, no advertising, in the app and on this website (no cookies, no forms, nothing from other sites; its one small script only moves the pictures as you scroll).</li>
+        <li><strong>You decide about updates.</strong> The check for a new version can be switched off in Settings → About.</li>
       </ul>
+      <p class="muted small">Daftari contacts the internet only when you ask it to: the AI company you set up, GitHub (if you turn on sync, and to look for a new version), and the download sites for the speech-to-text program. Your notes stay in the folder you chose; if you pick a cloud folder or turn on GitHub sync, that service holds a copy.</p>
+    </section>
+
+    <section class="plain" id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">Questions</h2>
+      <p class="muted faq-intro">Short answers, grouped. Click a question to open it.</p>
+      <div class="faq-groups">
+        <div class="faq-group" role="group" aria-labelledby="faq-start">
+          <h3 id="faq-start">Getting started</h3>
+          <div class="faq">
+            <details>
+              <summary>Does it cost anything?</summary>
+              <p>No. Daftari is free, with no account and no subscription. The only possible cost is the AI provider you choose: some have a free plan, some charge for what you use, and Daftari works fully without one.</p>
+            </details>
+            <details>
+              <summary>Which computers does it run on?</summary>
+              <p>Windows 10 or 11 (64-bit), and Macs with Apple silicon (M1 or newer) on macOS 12 or later. Intel Macs and Linux are coming. There is no phone version. <a href="#needs-title">What you need</a> lists the disk space.</p>
+            </details>
+            <details>
+              <summary>Why does Windows or macOS warn me?</summary>
+              <p>Because the installers are not signed. A signature is a paid certificate that tells your computer who made a program; Daftari is a free project by one person and does not have one yet. The warning appears once. <a href="#open">Opening it the first time</a> shows exactly what to click.</p>
+            </details>
+            <details>
+              <summary>Is it safe?</summary>
+              <p>The installers are built automatically on GitHub from the source code and published with a SHA-256 checksum, so you can <a href="#download">check that your file is the one that was published</a>. Daftari only reads and writes the notes folder you choose, its own settings folder and files you pick yourself, uses the microphone only while you record, and contacts the internet only for the things listed under <a href="#privacy">How it looks after your data</a>. Programs attached to a page are never run: Daftari only shows them in their folder.</p>
+            </details>
+          </div>
+        </div>
+
+        <div class="faq-group" role="group" aria-labelledby="faq-notes">
+          <h3 id="faq-notes">Your notes</h3>
+          <div class="faq">
+            <details>
+              <summary>Where do my notes go?</summary>
+              <p>Into a folder you choose the first time Daftari opens: “Documents/Daftari Notes”, a folder in OneDrive, iCloud Drive, Google Drive or Dropbox, or one you sync with GitHub. Every page is its own file, and pictures and attachments sit next to them in an <code>assets</code> folder. Recordings and Daftari’s settings are kept separately, in Daftari’s own folder on your computer.</p>
+            </details>
+            <details>
+              <summary>Can I use my notes on two computers?</summary>
+              <p>Yes, two ways. Put the notes folder in a cloud folder (OneDrive, iCloud Drive, Google Drive or Dropbox) on both computers, or turn on sync with your own private GitHub repository in Settings → Sync. With GitHub, if the same page was changed on both computers, Daftari keeps both versions. With a cloud folder, avoid editing the same page on two computers at once.</p>
+            </details>
+            <details>
+              <summary>Does it work offline?</summary>
+              <p>Yes. Writing, search, flashcards, quizzes, recording and speech-to-text (once the speech model is downloaded) all work without the internet. You need a connection for an online AI provider (Ollama runs on your own computer), for sync, and for downloads and updates.</p>
+            </details>
+            <details>
+              <summary>Can I get my notes out of Daftari?</summary>
+              <p>They are already ordinary files in your folder. Settings → Notes → <strong>Export all notes</strong> also makes a zip with one Markdown file per page, the pictures and attachments, in the same folders as in Daftari, so you can open them in almost any other notes app.</p>
+            </details>
+          </div>
+        </div>
+
+        <div class="faq-group" role="group" aria-labelledby="faq-lectures">
+          <h3 id="faq-lectures">Lectures and AI</h3>
+          <div class="faq">
+            <details>
+              <summary>Do I need an AI key?</summary>
+              <p>No. Writing, recording, transcription, search and flashcards all work without one. A key adds the AI helper and the written notes from a lecture; the first-time setup explains how to get one, and <a href="#ai">some providers have a free plan</a>.</p>
+            </details>
+            <details>
+              <summary>Which languages can it transcribe?</summary>
+              <p>English, for now. The speech-to-text runs on your computer and is set to English for every model.</p>
+            </details>
+            <details>
+              <summary>What happens to my lecture recordings?</summary>
+              <p>The audio stays on your computer, in Daftari’s own folder (not your notes folder), and is never synced. After you save a lecture’s notes, Daftari offers to delete the audio and keep the transcript; you can also export a recording as an audio file or delete it from the Recordings list.</p>
+            </details>
+          </div>
+        </div>
+
+        <div class="faq-group" role="group" aria-labelledby="faq-keep">
+          <h3 id="faq-keep">Updating, removing and help</h3>
+          <div class="faq">
+            <details>
+              <summary>How do I update?</summary>
+              <p><strong>Windows:</strong> Daftari downloads a new version by itself and installs it when you close the app, or straight away with <strong>Update now</strong> in Settings → About. It never updates in the middle of a recording or a transcription. <strong>Mac:</strong> Daftari tells you a new version is ready and opens this page; download it and drag it into Applications to replace the old one. Your notes are not touched either way.</p>
+            </details>
+            <details>
+              <summary>How do I remove it?</summary>
+              <p>From Daftari 0.2: Settings → General → <strong>Remove Daftari from this computer…</strong> You choose whether Daftari’s settings, keys and recordings go too, and whether your notes do (they are kept unless you tick them and type DELETE). Everything goes to the Recycle Bin or Bin first, so it can be put back.</p>
+              <p>In version 0.1: on Windows, Settings → Apps → Installed apps → Daftari → <strong>Uninstall</strong>; on a Mac, quit Daftari and drag it from Applications to the Bin. Your notes folder stays. To remove Daftari’s own folder too, delete <code>%APPDATA%\Daftari</code> on Windows or <code>~/Library/Application Support/Daftari</code> on a Mac.</p>
+            </details>
+            <details>
+              <summary>How do I report a bug or ask for a feature?</summary>
+              <p>Open an issue on <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">Daftari’s GitHub page</a> (you need a free GitHub account). Please say what you did, what happened, and your Daftari version (Settings → About). For a security problem, use the private report in the repository’s <strong>Security</strong> tab instead, so it is not public.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plain" id="changes" aria-labelledby="changes-title">
+      <h2 id="changes-title">Changes</h2>
+      <!-- One line per release, newest first: <li><strong>0.2.0</strong> – 1 November 2026 – what changed.</li> -->
+      <ol class="changes" reversed>
+        <li><strong>0.1.2</strong> – 10 October 2026 – no changes you will notice; checked that Windows installs updates by itself.</li>
+        <li><strong>0.1.1</strong> – 10 October 2026 – first release.</li>
+      </ol>
     </section>
   </main>
 
   <footer>
-    <a class="brand" href="#top"><img src="img/icon.png" width="40" height="40" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
+    <a class="brand" href="#top" aria-label="Daftari, back to the top"><img src="img/icon.png" width="40" height="40" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
+    <p>Found a bug or have an idea? Message Momin on <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">GitHub</a>.</p>
     <p><strong>Made by Momin.</strong> © 2026 Momin. All rights reserved.</p>
-    <p class="muted small">Daftari is built with open-source software, fonts and icons, listed with their licences in <a href="notices.txt">the notices</a>. The Lexend and Source Serif fonts on this page are under the SIL Open Font Licence.</p>
+    <p class="muted small"><a href="#changes">Changes</a> · Daftari is built with open-source software, fonts and icons, listed with their licences in <a href="notices.txt">the notices</a>. The Lexend and Source Serif fonts on this page are under the SIL Open Font Licence.</p>
   </footer>
 </body>
 </html>

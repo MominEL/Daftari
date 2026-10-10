@@ -5,7 +5,9 @@ Thank you for looking. Daftari is a small project made by one person, and I woul
 ## How to report
 
 Use GitHub's private report: open the **Security** tab of this repository → **Report a vulnerability**. Only I can see it.
-Please do not open a public issue for a security problem.
+Please do not open a public issue for a security problem. (If you cannot see **Report a vulnerability**, open an issue that only says you have a security problem to report, with no details, and I will get in touch.)
+
+Bugs and ideas that are not about security are welcome as normal [issues](https://github.com/MominEL/Daftari/issues).
 
 ## What helps
 
