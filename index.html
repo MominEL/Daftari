@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!--
     Security: this page is only HTML and CSS. No scripts, no analytics, no cookies, no forms, no third-party anything.
+    The notebook that opens as you scroll is CSS 3D with CSS scroll-driven animation: not a line of JavaScript.
     Pictures and fonts come from this site only. (GitHub Pages cannot send security headers, so the policy is set here.)
   -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'" />
@@ -17,88 +18,123 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="lamp" aria-hidden="true"></div>
+
   <header class="top">
     <a class="brand" href="#top" id="top"><img src="img/icon.png" width="40" height="40" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
     <nav aria-label="Sections">
-      <a href="#how">How it works</a>
+      <a href="#how">The notebook</a>
+      <a href="#features">What it does</a>
       <a href="#open">Opening it</a>
-      <a href="#ai">AI key</a>
       <a href="#privacy">Privacy</a>
       <a class="pill" href="#download">Download</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <img class="mark" src="img/icon.png" width="112" height="112" alt="The Daftari icon: a notebook with a gold binding, a bold D and a ribbon bookmark." />
-      <p class="eyebrow">A notebook for lectures, revision and ideas</p>
-      <h1>A quiet notebook for <em>long lectures</em>.</h1>
-      <p class="lead">Daftari (Arabic <span lang="ar" dir="rtl">دفتري</span>, “my notebook”) is one calm page, a command bar, and an AI helper only when you ask. It can record a lecture and turn it into written notes, all on your own computer.</p>
-      <p class="lead">Your notes are <strong>plain files in a folder you choose</strong>. No account, no subscription, no lock-in.</p>
-      <div class="cta">
-        <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Download for Windows</a>
-        <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
-      </div>
-      <p class="meta">Free · Windows 10 or 11 · Mac with Apple silicon · <a href="#open">Opening it the first time</a></p>
+    <section class="story" id="how" aria-labelledby="how-title">
+      <h2 class="sr" id="how-title">Daftari, the notebook</h2>
       <div class="stage">
-        <img class="frame" src="img/daftari-dark.png" width="1400" height="850" alt="A Daftari page in the dark theme: a title, tags, a paragraph with a formula, a list, an equation and a flashcard, with a search bar at the bottom." />
+        <div class="captions">
+          <div class="caption cH">
+            <h1>A quiet notebook for long lectures.</h1>
+            <p class="lead">Daftari (Arabic <span lang="ar" dir="rtl">دفتري</span>, “my notebook”) records a lecture, turns it into written notes, and keeps everything as <strong>plain files in a folder you choose</strong> on your own computer. No account, no subscription, no lock-in.</p>
+            <div class="cta">
+              <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Download for Windows</a>
+              <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
+            </div>
+            <p class="meta">Free, for Windows 10 or 11 and Macs with Apple silicon. <a href="#open">Opening it the first time</a>.</p>
+          </div>
+          <div class="caption c0">
+            <h2>Plain files, in a folder you choose.</h2>
+            <p>Every page is one file you can back up, sync or read without Daftari. Delete the app and your notes are still there.</p>
+          </div>
+          <div class="caption c1">
+            <h2>Write it down.</h2>
+            <p>Headings, tables, code, formulas, toggles. Tabs for the pages you have open, and nothing else on screen until you ask for it.</p>
+          </div>
+          <div class="caption c2">
+            <h2>Find it. Learn it.</h2>
+            <p>One search covers titles and every word inside every page, formulas included. Flashcards and quizzes live in the pages, with spaced repetition that remembers what you know.</p>
+          </div>
+          <div class="caption c3">
+            <h2>Press record in the lecture.</h2>
+            <p>Audio is saved every 30 seconds. Speech-to-text runs on your computer, and the AI you choose writes the notes as the lecture goes.</p>
+          </div>
+        </div>
+
+        <div class="scene">
+          <div class="book">
+            <div class="ground"></div>
+
+            <!-- the last page: the download, inside the back cover -->
+            <div class="base">
+              <div class="face">
+                <div class="take">
+                  <h3>Take it with you.</h3>
+                  <p>Free, for Windows 10 or 11 and Macs with Apple silicon.</p>
+                  <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Windows</a>
+                  <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Mac</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- the leaves, back to front -->
+            <div class="leaf l2" aria-hidden="true">
+              <div class="face ruled"><div class="print"><img src="img/shot-study.png" width="800" height="1105" alt="" /></div></div>
+              <div class="face back ruled">
+                <div class="page">
+                  <h3>Lecture, 10:02</h3>
+                  <p class="mono">0:12 Modular inverses.</p>
+                  <p class="mono">0:48 gcd(a, n) = 1,</p>
+                  <p class="mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so a has an inverse.</p>
+                  <p class="mono">1:30 Euler gives it.</p>
+                  <p class="stamp">Notes written: 3 sections</p>
+                </div>
+              </div>
+            </div>
+            <div class="leaf l1" aria-hidden="true">
+              <div class="face ruled"><div class="print"><img src="img/shot-page.png" width="800" height="1105" alt="" /></div></div>
+              <div class="face back ruled"><div class="print"><img src="img/shot-search.png" width="800" height="1105" alt="" /></div></div>
+            </div>
+            <div class="leaf l0" aria-hidden="true">
+              <div class="face cover">
+                <span class="stitch s1"></span><span class="stitch s2"></span><span class="stitch s3"></span>
+                <span class="d">D</span>
+                <span class="title">Daftari</span>
+                <span class="ribbon"></span>
+              </div>
+              <div class="face back ruled">
+                <div class="page">
+                  <h3>Your notes</h3>
+                  <p class="mono">Notes/</p>
+                  <p class="mono">&nbsp;&nbsp;Cryptography/</p>
+                  <p class="mono">&nbsp;&nbsp;&nbsp;&nbsp;Week 3 – Euler.json</p>
+                  <p class="mono">&nbsp;&nbsp;&nbsp;&nbsp;Week 4 – RSA.json</p>
+                  <p class="mono">&nbsp;&nbsp;assets/</p>
+                  <p class="stamp">Plain files. Yours.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="how">
-      <p class="eyebrow">From lecture to notes</p>
-      <h2>Press record. Listen. Read your notes afterwards.</h2>
-      <ol class="steps">
-        <li><span class="step-n">1</span><h3>Record</h3><p>Use the microphone, your computer’s own sound (an online lecture or a call), or both. Audio is saved every 30 seconds, so a crash never loses the lecture.</p></li>
-        <li><span class="step-n">2</span><h3>It becomes text</h3><p>Speech-to-text runs on your computer while you listen. Nothing is uploaded, and you can still read the transcript as it grows.</p></li>
-        <li><span class="step-n">3</span><h3>Notes appear</h3><p>Every few minutes the AI you chose writes structured notes. At the end you get a clean page and a transcript page, and you decide what to keep.</p></li>
-      </ol>
-      <div class="shots">
-        <figure>
-          <img class="frame" src="img/shot-search.png" width="1400" height="850" loading="lazy" alt="The search sheet in Daftari, finding the word Euler in page titles and inside pages." />
-          <figcaption class="caption"><strong>Find anything.</strong> One search looks at titles and at the text inside every page, formulas included.</figcaption>
-        </figure>
-        <figure>
-          <img class="frame" src="img/shot-study.png" width="1400" height="850" loading="lazy" alt="A flashcard being reviewed in Daftari, with the answer shown and four rating buttons." />
-          <figcaption class="caption"><strong>Revise.</strong> Flashcards and quizzes live in your notes, with spaced repetition that remembers what you know.</figcaption>
-        </figure>
-      </div>
+    <section class="plain" id="features" aria-label="What it does">
+      <h2>What it does</h2>
+      <ul class="index">
+        <li><strong>Write</strong><span>Headings, lists, tables, code, toggles, formulas, flashcards and quizzes. Everything else stays hidden until you ask.</span></li>
+        <li><strong>Record</strong><span>Record a lecture or a call, watch it turn into text as it goes, and get structured notes at the end. The speech-to-text runs on your computer.</span></li>
+        <li><strong>Ask</strong><span>Improve, summarise or quiz yourself on a page. You always see a preview first, and nothing is replaced until you say so.</span></li>
+        <li><strong>Keep</strong><span>Plain files you can back up, sync with the service you already use, or read without Daftari. Deleted pages go to a Trash you can restore from.</span></li>
+        <li><strong>Maths</strong><span>Type <code>$…$</code> for an equation. Shorthand turns <code>a/b</code> into a fraction as you type, and templates cover the formulas you write all the time.</span></li>
+        <li><strong>Spelling</strong><span>Fixes clear typos as you type, and leaves code, formulas, acronyms and names alone.</span></li>
+      </ul>
     </section>
 
-    <section aria-label="What it does">
-      <p class="eyebrow">What it does</p>
-      <h2>Everything a student needs, nothing in the way.</h2>
-      <div class="features">
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>
-          <h3>Write</h3><p>Headings, lists, tables, code, toggles, formulas, flashcards and quizzes. Tabs for the pages you have open; everything else stays hidden until you ask.</p>
-        </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>
-          <h3>Record</h3><p>Record a lecture (or a call), see it turn into text as it goes, and get structured notes at the end. The speech-to-text runs on your computer.</p>
-        </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3.5h8l3 8H8zM12 11.5V17M8 21h8M12 17l-3 4"/></svg>
-          <h3>Ask</h3><p>Improve, summarise or quiz yourself on a page. You always see a preview first, and nothing is replaced until you say so.</p>
-        </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h4l2 2.5h6a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></svg>
-          <h3>Keep</h3><p>Plain files you can back up, sync with the service you already use, or read without Daftari. Deleted pages go to a Trash you can restore from.</p>
-        </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 5H7l6 7-6 7h11"/></svg>
-          <h3>Maths</h3><p>Type <code>$…$</code> for an equation, with shorthand that turns <code>a/b</code> into a fraction as you type, a symbol keyboard, and templates for the formulas you write all the time.</p>
-        </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6M9 12h6M9 15.5h3"/></svg>
-          <h3>Calm</h3><p>A dark, warm page that is easy on the eyes in a lecture hall. No pop-ups, no sound, no “what’s new”. Fixes obvious typos as you type and never touches code, formulas or names.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="download">
-      <p class="eyebrow">Download</p>
-      <h2>Get Daftari.</h2>
+    <section class="plain" id="download">
+      <h2>Download</h2>
       <p class="muted">Version <strong>0.1.1</strong>, 10 October 2026. Free. The installers are not signed (that needs a paid certificate), so your computer will ask you to confirm the first time: see <a href="#open">Opening it</a>.</p>
       <ul class="downloads">
         <li>
@@ -130,8 +166,7 @@
       </details>
     </section>
 
-    <section id="open">
-      <p class="eyebrow">First launch</p>
+    <section class="plain" id="open">
       <h2>Opening it the first time</h2>
       <p class="muted">Because the installers are not signed, Windows and macOS warn you once. That is expected. Only continue if you downloaded the file from this page.</p>
       <div class="two">
@@ -154,8 +189,7 @@
       <p class="muted small">Updates: on Windows, Daftari downloads new versions itself and installs them when you close it. On a Mac it tells you a new version is ready and opens this page.</p>
     </section>
 
-    <section id="ai">
-      <p class="eyebrow">Optional</p>
+    <section class="plain" id="ai">
       <h2>The AI helper needs your own key</h2>
       <p>Daftari comes with <strong>no AI key</strong>: you use your own, from the company you choose, and it is stored encrypted on your computer. The first-time setup walks you through it with step-by-step guides. The official pages:</p>
       <ul class="plain">
@@ -169,9 +203,8 @@
       <p class="note muted">Free tiers can be generous, but some providers may use what you send them to improve their products, so keep private notes out of free-tier requests. Daftari works fully without the AI.</p>
     </section>
 
-    <section id="privacy">
-      <p class="eyebrow">Privacy</p>
-      <h2>Your notes stay yours.</h2>
+    <section class="plain" id="privacy">
+      <h2>Your notes stay yours</h2>
       <ul class="plain">
         <li>No accounts, no analytics, no tracking, no advertising. This website has none either: no scripts, no cookies, no forms.</li>
         <li>Your notes stay in the folder you chose. If you pick a cloud folder or turn on GitHub sync, that service holds a copy: that is your choice.</li>
