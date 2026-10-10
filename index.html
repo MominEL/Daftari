@@ -4,11 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!--
-    Security: this page is only HTML and CSS. No scripts, no analytics, no cookies, no forms, no third-party anything.
-    The notebook that opens as you scroll is CSS 3D with CSS scroll-driven animation: not a line of JavaScript.
-    Pictures and fonts come from this site only. (GitHub Pages cannot send security headers, so the policy is set here.)
+    Security: no analytics, no cookies, no forms, no third-party anything. One small script from this site (site.js) moves
+    the notebook and the lecture scene on to the next step as you scroll and makes the mouse wheel glide; it sends nothing
+    anywhere. Without it the page is complete, just still. Pictures, fonts and the script come from this site only.
+    (GitHub Pages cannot send security headers, so the policy is set here.)
   -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'" />
   <meta name="referrer" content="no-referrer" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#1c1917" />
@@ -16,6 +17,7 @@
   <meta name="description" content="Daftari: a calm notebook for lectures, with built-in AI. Your notes are plain files on your own computer." />
   <link rel="icon" href="img/icon.png" type="image/png" />
   <link rel="stylesheet" href="style.css" />
+  <script src="site.js"></script>
 </head>
 <body>
   <div class="lamp" aria-hidden="true"></div>
@@ -33,9 +35,9 @@
   </header>
 
   <main>
-    <section class="story" id="how" aria-labelledby="how-title">
+    <section class="story" id="how" aria-labelledby="how-title" data-steps="5" data-step="0">
       <h2 class="sr" id="how-title">Daftari, the notebook</h2>
-      <div class="stage">
+      <div class="stage" data-stage>
         <div class="captions">
           <div class="caption cH">
             <h1>A quiet notebook for long lectures.</h1>
@@ -123,8 +125,8 @@
       </div>
     </section>
 
-    <section class="lecture" id="lecture" aria-labelledby="lecture-title">
-      <div class="lecture-stage">
+    <section class="lecture" id="lecture" aria-labelledby="lecture-title" data-steps="4" data-step="0">
+      <div class="lecture-stage" data-stage>
         <div class="lecture-words">
           <h2 id="lecture-title">From the lecture hall to your notes.</h2>
           <p>Daftari records with your microphone, your computer’s own sound, or both. Speech-to-text runs on your computer while you listen, and the AI you choose turns what was said into notes before the lecture ends.</p>
@@ -243,7 +245,7 @@
     <section class="plain" id="privacy">
       <h2>Your notes stay yours</h2>
       <ul class="plain">
-        <li>No accounts, no analytics, no tracking, no advertising. This website has none either: no scripts, no cookies, no forms.</li>
+        <li>No accounts, no analytics, no tracking, no advertising. This website has none either: no cookies, no forms, nothing from other sites. Its one small script only moves the pictures as you scroll.</li>
         <li>Your notes stay in the folder you chose. If you pick a cloud folder or turn on GitHub sync, that service holds a copy: that is your choice.</li>
         <li>Recordings and transcripts stay on your computer and are never synced.</li>
         <li>Daftari contacts the internet only when you ask it to: the AI company you set up, GitHub (if you turn on sync), the download sites for the speech-to-text program, and GitHub to look for a new version of Daftari (you can switch that off in Settings → About).</li>
