@@ -15,7 +15,7 @@
   --paper: #f1e8d4; --paper-2: #e2d6ba; --ink: #2b251c; --ink-2: #5a4d3a; --rule: rgba(92, 70, 36, 0.2);
   --font: 'Lexend', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --w: clamp(220px, 27vw, 360px);   /* one page of the notebook */
+  --w: clamp(220px, calc(25vw - 30px), 360px);   /* one page of the notebook (an open spread, two pages, fits its half of the screen) */
   --h: calc(var(--w) * 1.38);
 }
 * { box-sizing: border-box; }
@@ -123,12 +123,15 @@ main, footer { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
 /* ---- Without the scroll-driven opening (older browsers, or "reduce motion"): the notebook is open at its first spread ---- */
 .leaf.l0 { transform: rotateY(-180deg) translateZ(3px); }
 .story .stage { min-height: 0; }
+/* (beside the words, the open notebook stays in view while you read them) */
+@media (min-width: 861px) { .story .scene { align-self: start; position: sticky; top: 14vh; } }
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     main { timeline-scope: --story; }
     .story { view-timeline: --story block; height: 480vh; }
     .stage { position: sticky; top: 0; height: 100vh; min-height: 0; padding: 0; }
+    .story .scene { position: relative; top: auto; align-self: center; }
     .captions, .book, .leaf, .caption, .ground { animation-timeline: --story; animation-fill-mode: both; animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); animation-duration: 1ms; }
 
     /* the pinned part of the scroll is 17.2% .. 82.8% of the section (one screen of 100vh before and after 480vh); everything below is relative to that stretch */
