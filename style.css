@@ -73,7 +73,7 @@ main, footer { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
 .story { position: relative; }
 .stage { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 24px; min-height: 100vh; padding: 40px 0; }
 .captions { position: relative; align-self: center; min-height: 14em; }
-.caption { max-width: 22em; padding: 0 0 28px; }
+.caption { max-width: 18em; padding: 0 0 28px; }
 .caption p { color: var(--text-2); font-size: 19px; margin: 0; }
 .caption h2 { font-size: clamp(30px, 3.6vw, 44px); }
 
@@ -201,7 +201,7 @@ li { margin-bottom: 8px; }
 ul.plain { list-style: none; padding: 0; }
 ul.plain li { position: relative; padding-left: 22px; }
 ul.plain li::before { content: ''; position: absolute; left: 2px; top: 0.72em; width: 7px; height: 7px; border-radius: 50%; background: var(--brass); }
-.note { border-left: 3px solid var(--brass); padding: 4px 0 4px 18px; margin-top: 20px; }
+.note { border-left: 1px solid var(--brass); padding: 4px 0 4px 18px; margin-top: 20px; }
 
 footer { padding: 44px 28px 70px; border-top: 1px solid var(--line); margin-top: 24px; }
 footer p { margin: 0 0 10px; }
@@ -230,4 +230,123 @@ footer .brand { margin-bottom: 14px; }
 /* without the animation the captions just follow each other under the notebook */
 @media (not (prefers-reduced-motion: no-preference)) {
   .stage { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+/* ==== The parts of the browser this page didn't draw ==== */
+html { scrollbar-color: #51483d var(--bg); }
+::selection { background: rgba(217, 179, 112, 0.32); color: var(--text); }
+.face ::selection, .notes-page ::selection { background: rgba(184, 142, 69, 0.3); color: var(--ink); }
+
+/* ==== The notebook, richer: paper edges under the pages, and light that moves across them ==== */
+.base .face { box-shadow: inset 18px 0 22px -18px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--line-2),
+  1px 1px 0 #e9dfc6, 2px 2px 0 #d9cdb0, 3px 3px 0 #e9dfc6, 4px 4px 0 #cfc1a1, 5px 5px 0 #e2d7bb, 10px 14px 30px rgba(0, 0, 0, 0.5); }
+.face::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: linear-gradient(90deg, rgba(40, 26, 6, 0.55), rgba(40, 26, 6, 0.08) 70%); }
+.face.back::after { background: linear-gradient(270deg, rgba(40, 26, 6, 0.55), rgba(40, 26, 6, 0.08) 70%); }
+@property --lx { syntax: '<percentage>'; inherits: false; initial-value: 30%; }
+.scene { position: relative; }
+.scene::after { content: ''; position: absolute; inset: -12% -6%; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(34% 44% at var(--lx) 32%, rgba(255, 214, 150, 0.16), transparent 72%); }
+
+/* ==== The lecture scene ==== */
+.lecture { position: relative; border-top: 1px solid var(--line); }
+.lecture-stage { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; padding: clamp(56px, 8vw, 96px) 0; }
+.lecture-words p { color: var(--text-2); max-width: 30em; }
+.lecture-words h2 { max-width: 12em; }
+.desk2 { position: relative; display: grid; gap: 14px; perspective: 1600px; }
+
+.recorder { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 999px; background: var(--raised); border: 1px solid var(--line-2); font: 400 15px var(--font); color: var(--text); width: max-content; max-width: 100%; }
+.rec-dot { width: 10px; height: 10px; border-radius: 50%; background: #e0786b; flex: none; }
+.rec-time { font: 400 15px ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace; color: var(--text); font-variant-numeric: tabular-nums; }
+.rec-ok { color: var(--text-2); }
+.wave { display: block; width: 168px; height: 24px; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
+.wave-inner { display: flex; align-items: center; gap: 3px; height: 100%; width: max-content; }
+.wave i { display: block; width: 2px; height: 30%; border-radius: 2px; background: var(--amber); opacity: 0.85; }
+.wave i:nth-child(3n) { height: 70%; } .wave i:nth-child(4n+1) { height: 45%; } .wave i:nth-child(5n+2) { height: 90%; }
+.wave i:nth-child(7n+3) { height: 20%; } .wave i:nth-child(11n+5) { height: 100%; } .wave i:nth-child(13n) { height: 12%; }
+
+.transcript { list-style: none; margin: 0; padding: 18px 20px; border-radius: 14px; background: var(--panel); border: 1px solid var(--line); display: grid; gap: 10px; }
+.transcript li { display: grid; grid-template-columns: 3.4em 1fr; gap: 12px; margin: 0; padding: 2px 6px; font-size: 16.5px; line-height: 1.5; color: var(--text); border-radius: 6px; }
+.transcript time { font: 400 14px/1.75 ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace; color: var(--text-2); font-variant-numeric: tabular-nums; }
+
+.notes-page { position: relative; padding: 22px 26px 24px; border-radius: 6px 14px 14px 6px; color: var(--ink); transform: rotateY(-7deg) rotateX(3deg); transform-origin: left center;
+  background: linear-gradient(90deg, transparent 0 44px, rgba(190, 70, 40, 0.35) 44px 45px, transparent 45px), repeating-linear-gradient(180deg, transparent 0 29px, var(--rule) 29px 30px), var(--paper);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.5); }
+.notes-page h3 { color: var(--ink); font-size: 24px; line-height: 30px; margin: 0 0 6px 34px; }
+.notes-page ul { margin: 0 0 14px 34px; padding: 0 0 0 18px; }
+.notes-page li { color: var(--ink-2); font-size: 16.5px; line-height: 30px; margin: 0; }
+.notes-page li::marker { color: var(--brass); }
+.notes-page var, .card2 var { font-style: italic; font-family: var(--serif); }
+.math { color: var(--ink); white-space: nowrap; }
+.math sup { font-size: 0.72em; }
+.card2 { position: relative; margin-left: 34px; min-height: 96px; transform-style: preserve-3d; }
+.card-face { border-radius: 10px; padding: 12px 16px; font: 400 16px/1.45 var(--serif); background: #2a2623; color: var(--text); box-shadow: 0 8px 20px rgba(30, 20, 5, 0.35); }
+.card-face var { color: var(--text); }
+.card-back { margin-top: 8px; background: #33291a; }
+.card-tag { display: block; font: 400 13px var(--font); color: var(--amber); margin-bottom: 2px; }
+
+@property --sec { syntax: '<integer>'; inherits: true; initial-value: 2; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* the notebook: shading on a page while it turns, and the lamp light sliding across */
+    .leaf .face::after, .scene::after { animation-timeline: --story; animation-range: cover 17.2% cover 82.8%; animation-fill-mode: both; animation-duration: 1ms; animation-timing-function: linear; }
+    .leaf.l0 .face::after { animation-name: shade0; }
+    .leaf.l1 .face::after { animation-name: shade1; }
+    .leaf.l2 .face::after { animation-name: shade2; }
+    .scene::after { animation-name: lamp-sweep; }
+    @keyframes shade0 { 0%, 20% { opacity: 0; } 28% { opacity: 0.9; } 36%, 100% { opacity: 0; } }
+    @keyframes shade1 { 0%, 42% { opacity: 0; } 50% { opacity: 0.9; } 58%, 100% { opacity: 0; } }
+    @keyframes shade2 { 0%, 66% { opacity: 0; } 75% { opacity: 0.9; } 84%, 100% { opacity: 0; } }
+    @keyframes lamp-sweep { 0% { --lx: 18%; } 100% { --lx: 82%; } }
+  }
+}
+
+/* the lecture: pinned for two screens while the transcript writes itself and becomes notes (wide screens) */
+@media (prefers-reduced-motion: no-preference) and (min-width: 861px) {
+  @supports (animation-timeline: view()) {
+    main { timeline-scope: --story, --lecture; }
+    .lecture { view-timeline: --lecture block; height: 300vh; }
+    .lecture-stage { position: sticky; top: 0; height: 100vh; padding: 0; }
+    .wave-inner, .transcript li, .transcript li span, .notes-page h3, .notes-page li, .card2, .rec-time {
+      animation-timeline: --lecture; animation-fill-mode: both; animation-duration: 1ms; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+    /* the pinned stretch is cover 25% .. 75% */
+    .wave-inner { animation-name: wave-roll; animation-range: cover 25% cover 75%; animation-timing-function: linear; }
+    @keyframes wave-roll { from { transform: translateX(0); } to { transform: translateX(-62%); } }
+    .transcript li span { animation-name: write; }
+    .transcript li.t1 span { animation-range: cover 25% cover 29%; }
+    .transcript li.t2 span { animation-range: cover 29% cover 33%; }
+    .transcript li.t3 span { animation-range: cover 33% cover 37%; }
+    .transcript li.t4 span { animation-range: cover 37% cover 41%; }
+    @keyframes write { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    .transcript li { animation-name: picked; }
+    .transcript li.t1, .transcript li.t2 { animation-range: cover 45% cover 53%; }
+    .transcript li.t3 { animation-range: cover 49% cover 57%; }
+    .transcript li.t4 { animation-range: cover 53% cover 61%; }
+    @keyframes picked { 0% { background: transparent; } 40%, 70% { background: rgba(217, 179, 112, 0.16); } 100% { background: transparent; } }
+    .notes-page h3 { animation-name: arrive; animation-range: cover 42% cover 46%; }
+    .notes-page li.n1 { animation-name: arrive; animation-range: cover 46% cover 50%; }
+    .notes-page li.n2 { animation-name: arrive; animation-range: cover 50% cover 54%; }
+    .notes-page li.n3 { animation-name: arrive; animation-range: cover 54% cover 58%; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(10px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+    /* the flashcard turns over to show its answer */
+    .card2 { animation-name: card-flip; animation-range: cover 63% cover 70%; }
+    /* (the fade is on the two faces, not the card: fading the card itself would flatten its 3D and show the front mirrored) */
+    .card-face { animation: card-in 1ms both; animation-timeline: --lecture; animation-range: cover 59% cover 62%; }
+    .card-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: block; }
+    .card-back { margin-top: 0; transform: rotateY(180deg); }
+    @keyframes card-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes card-flip { from { transform: rotateY(0deg); } to { transform: rotateY(180deg); } }
+    /* the clock keeps time with the scroll */
+    .rec-time { animation-name: tick; animation-range: cover 25% cover 75%; animation-timing-function: linear; color: transparent; position: relative; }
+    .rec-time::after { counter-reset: s var(--sec); content: '47:' counter(s, decimal-leading-zero); position: absolute; left: 0; top: 0; color: var(--text); }
+    @keyframes tick { from { --sec: 2; } to { --sec: 59; } }
+  }
+}
+
+@media (max-width: 860px) {
+  .lecture-stage { grid-template-columns: 1fr; gap: 28px; }
+  .notes-page { transform: none; }
+  .wave { width: 110px; }
 }

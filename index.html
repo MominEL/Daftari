@@ -24,6 +24,7 @@
     <a class="brand" href="#top" id="top"><img src="img/icon.png" width="40" height="40" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
     <nav aria-label="Sections">
       <a href="#how">The notebook</a>
+      <a href="#lecture">Lectures</a>
       <a href="#features">What it does</a>
       <a href="#open">Opening it</a>
       <a href="#privacy">Privacy</a>
@@ -117,6 +118,41 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lecture" id="lecture" aria-labelledby="lecture-title">
+      <div class="lecture-stage">
+        <div class="lecture-words">
+          <h2 id="lecture-title">From the lecture hall to your notes.</h2>
+          <p>Daftari records with your microphone, your computer’s own sound, or both. Speech-to-text runs on your computer while you listen, and the AI you choose turns what was said into notes before the lecture ends.</p>
+          <p class="small muted">An example lecture, as Daftari shows it.</p>
+        </div>
+        <div class="desk2">
+          <div class="recorder" aria-hidden="true">
+            <span class="rec-dot"></span><span class="rec-label">Recording</span><span class="rec-time">48:12</span>
+            <span class="wave"><span class="wave-inner"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></span>
+            <span class="rec-ok">Mic OK</span>
+          </div>
+          <ol class="transcript" aria-label="Transcript">
+            <li class="t1"><time>47:02</time><span>So an inverse modulo n only exists when a and n share no factor.</span></li>
+            <li class="t2"><time>47:18</time><span>In other words, when the gcd of a and n is one.</span></li>
+            <li class="t3"><time>47:41</time><span>Euler’s theorem gives it to us directly: a to the phi of n is one, mod n.</span></li>
+            <li class="t4"><time>48:05</time><span>So the inverse is a to the phi of n minus one.</span></li>
+          </ol>
+          <article class="notes-page" aria-label="The notes Daftari writes">
+            <h3>Modular inverses</h3>
+            <ul>
+              <li class="n1">An inverse of <var>a</var> modulo <var>n</var> exists only when gcd(<var>a</var>, <var>n</var>) = 1.</li>
+              <li class="n2">Euler’s theorem: <span class="math"><var>a</var><sup>φ(<var>n</var>)</sup> ≡ 1 (mod <var>n</var>)</span></li>
+              <li class="n3">So <span class="math"><var>a</var><sup>−1</sup> ≡ <var>a</var><sup>φ(<var>n</var>)−1</sup> (mod <var>n</var>)</span></li>
+            </ul>
+            <div class="card2">
+              <div class="card-face card-front"><span class="card-tag">Flashcard</span>When does <var>a</var> have an inverse modulo <var>n</var>?</div>
+              <div class="card-face card-back"><span class="card-tag">Answer</span>Exactly when gcd(<var>a</var>, <var>n</var>) = 1.</div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
