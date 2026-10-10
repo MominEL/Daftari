@@ -264,7 +264,7 @@ html { scrollbar-color: #51483d var(--bg); }
 .rec-time { font: 400 15px ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace; color: var(--text); font-variant-numeric: tabular-nums; }
 .rec-ok { color: var(--text-2); }
 .wave { display: block; width: 168px; height: 24px; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
-.wave-inner { display: flex; align-items: center; gap: 3px; height: 100%; width: max-content; }
+.wave-inner { will-change: transform; display: flex; align-items: center; gap: 3px; height: 100%; width: max-content; }
 .wave i { display: block; width: 2px; height: 30%; border-radius: 2px; background: var(--amber); opacity: 0.85; }
 .wave i:nth-child(3n) { height: 70%; } .wave i:nth-child(4n+1) { height: 45%; } .wave i:nth-child(5n+2) { height: 90%; }
 .wave i:nth-child(7n+3) { height: 20%; } .wave i:nth-child(11n+5) { height: 100%; } .wave i:nth-child(13n) { height: 12%; }
@@ -289,7 +289,6 @@ html { scrollbar-color: #51483d var(--bg); }
 .card-back { margin-top: 8px; background: #33291a; }
 .card-tag { display: block; font: 400 13px var(--font); color: var(--amber); margin-bottom: 2px; }
 
-@property --sec { syntax: '<integer>'; inherits: true; initial-value: 2; }
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
@@ -312,22 +311,25 @@ html { scrollbar-color: #51483d var(--bg); }
     main { timeline-scope: --story, --lecture; }
     .lecture { view-timeline: --lecture block; height: 300vh; }
     .lecture-stage { position: sticky; top: 0; height: 100vh; padding: 0; }
-    .wave-inner, .transcript li, .transcript li span, .notes-page h3, .notes-page li, .card2, .rec-time {
+    .wave-inner, .transcript li::before, .transcript li span::after, .notes-page h3, .notes-page li, .card2 {
       animation-timeline: --lecture; animation-fill-mode: both; animation-duration: 1ms; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
     /* the pinned stretch is cover 25% .. 75% */
     .wave-inner { animation-name: wave-roll; animation-range: cover 25% cover 75%; animation-timing-function: linear; }
     @keyframes wave-roll { from { transform: translateX(0); } to { transform: translateX(-62%); } }
-    .transcript li span { animation-name: write; }
-    .transcript li.t1 span { animation-range: cover 25% cover 29%; }
-    .transcript li.t2 span { animation-range: cover 29% cover 33%; }
-    .transcript li.t3 span { animation-range: cover 33% cover 37%; }
-    .transcript li.t4 span { animation-range: cover 37% cover 41%; }
-    @keyframes write { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
-    .transcript li { animation-name: picked; }
-    .transcript li.t1, .transcript li.t2 { animation-range: cover 45% cover 53%; }
-    .transcript li.t3 { animation-range: cover 49% cover 57%; }
-    .transcript li.t4 { animation-range: cover 53% cover 61%; }
-    @keyframes picked { 0% { background: transparent; } 40%, 70% { background: rgba(217, 179, 112, 0.16); } 100% { background: transparent; } }
+    .transcript li span { position: relative; display: block; }
+    .transcript li span::after { content: ''; position: absolute; inset: -2px -4px; background: var(--panel); transform-origin: right center; animation-name: write; }
+    .transcript li.t1 span::after { animation-range: cover 25% cover 29%; }
+    .transcript li.t2 span::after { animation-range: cover 29% cover 33%; }
+    .transcript li.t3 span::after { animation-range: cover 33% cover 37%; }
+    .transcript li.t4 span::after { animation-range: cover 37% cover 41%; }
+    @keyframes write { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+    /* the lines the notes are made from light up (a tinted layer fades in and out) */
+    .transcript li { position: relative; }
+    .transcript li::before { content: ''; position: absolute; inset: 0; border-radius: 6px; background: rgba(217, 179, 112, 0.16); opacity: 0; animation-name: picked; }
+    .transcript li.t1::before, .transcript li.t2::before { animation-range: cover 45% cover 53%; }
+    .transcript li.t3::before { animation-range: cover 49% cover 57%; }
+    .transcript li.t4::before { animation-range: cover 53% cover 61%; }
+    @keyframes picked { 0% { opacity: 0; } 40%, 70% { opacity: 1; } 100% { opacity: 0; } }
     .notes-page h3 { animation-name: arrive; animation-range: cover 42% cover 46%; }
     .notes-page li.n1 { animation-name: arrive; animation-range: cover 46% cover 50%; }
     .notes-page li.n2 { animation-name: arrive; animation-range: cover 50% cover 54%; }
@@ -342,9 +344,6 @@ html { scrollbar-color: #51483d var(--bg); }
     @keyframes card-in { from { opacity: 0; } to { opacity: 1; } }
     @keyframes card-flip { from { transform: rotateY(0deg); } to { transform: rotateY(180deg); } }
     /* the clock keeps time with the scroll */
-    .rec-time { animation-name: tick; animation-range: cover 25% cover 75%; animation-timing-function: linear; color: transparent; position: relative; }
-    .rec-time::after { counter-reset: s var(--sec); content: '47:' counter(s, decimal-leading-zero); position: absolute; left: 0; top: 0; color: var(--text); }
-    @keyframes tick { from { --sec: 2; } to { --sec: 59; } }
   }
 }
 
@@ -394,3 +393,6 @@ html { scrollbar-color: #51483d var(--bg); }
 
 /* phones: the header stays on one line */
 @media (max-width: 560px) { .top { padding: 10px 18px; flex-wrap: nowrap; } .brand { font-size: 21px; } .brand img { width: 34px; height: 34px; } nav a.pill { padding: 8px 16px; } }
+
+/* (the notes page is drawn once as a layer; the pieces inside it only fade and move) */
+.transcript { contain: paint; }
