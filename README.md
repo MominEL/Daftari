@@ -6,7 +6,7 @@
 
 Daftari records a lecture, turns the speech into text **on your own computer**, and writes structured notes from it. Pages are plain files in a folder you choose, with a block editor, nested pages, search, flashcards and quizzes, and maths.
 
-## ⬇ Download
+## Download
 
 ### **[Download Daftari from the website →](https://mominel.github.io/Daftari/)**
 
