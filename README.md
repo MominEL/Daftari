@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://mominel.github.io/Daftari/"><b>⬇&nbsp; Download Daftari</b></a>
+  <a href="https://mominel.github.io/Daftari/"><b>Download Daftari</b></a>
   &nbsp;·&nbsp;
   <a href="https://github.com/MominEL/Daftari/releases/latest">Latest release</a>
   &nbsp;·&nbsp;
@@ -38,12 +38,12 @@
 
 | | |
 |---|---|
-| 🎙️ **Records lectures** | From your microphone, from the sound your computer plays (online lectures, Teams), or both. Saved to disk every 30 seconds, so a crash or a flat battery loses almost nothing. |
-| 📝 **Writes the notes** | Speech-to-text runs **on your computer** (Whisper). Then an AI of your choice turns it into structured notes: key points, definitions, a summary. You see a preview before anything is saved. |
-| 📚 **Study tools** | Flashcards with spaced repetition and quizzes (multiple choice, true/false, fill in the blank, short answer), made by hand or by the AI from any page. |
-| ✏️ **A proper editor** | Headings, lists, to-dos, tables, code, quotes, toggles, images, PDFs, drag and drop, and a `/` menu. Maths in LaTeX with a symbol keyboard and typing shortcuts. |
-| 🔎 **Finds everything** | One search across the text inside every page, with the words highlighted when you open the result. |
-| 🗂️ **Yours to keep** | Pages are plain files in a folder you choose. Put it in OneDrive, iCloud or Dropbox, or sync with your own private GitHub repository. Export everything as Markdown whenever you like. |
+| **Records lectures** | From your microphone, from the sound your computer plays (online lectures, Teams), or both. Saved to disk every 30 seconds, so a crash or a flat battery loses almost nothing. |
+| **Writes the notes** | Speech-to-text runs **on your computer** (Whisper). Then an AI of your choice turns it into structured notes: key points, definitions, a summary. You see a preview before anything is saved. |
+| **Study tools** | Flashcards with spaced repetition and quizzes (multiple choice, true/false, fill in the blank, short answer), made by hand or by the AI from any page. |
+| **A proper editor** | Headings, lists, to-dos, tables, code, quotes, toggles, images, PDFs, drag and drop, and a `/` menu. Maths in LaTeX with a symbol keyboard and typing shortcuts. |
+| **Finds everything** | One search across the text inside every page, with the words highlighted when you open the result. |
+| **Yours to keep** | Pages are plain files in a folder you choose. Put it in OneDrive, iCloud or Dropbox, or sync with your own private GitHub repository. Export everything as Markdown whenever you like. |
 
 ## Download
 
