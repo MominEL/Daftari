@@ -77,7 +77,7 @@ Daftari is free and made by one person, so it is not registered with Microsoft o
 **Mac**
 
 1. Open the downloaded file and drag Daftari into **Applications**.
-2. Open it **from Applications**. macOS says it cannot verify it: click **Done**.
+2. Open it **from Applications**. macOS says it cannot verify it. Click **Done**, not the highlighted "Move to Bin".
 3. Go to **System Settings → Privacy & Security**, scroll down and click **Open Anyway**, then enter your Mac password.
 
 </td>
