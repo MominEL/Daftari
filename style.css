@@ -5,7 +5,10 @@
    click, a yellow highlighter only behind words that matter. Square corners, flat surfaces, a 1 px line for depth, no glows.
    Fonts: Atkinson Hyperlegible Next for everything you read on the page; Source Serif 4 for the notes inside the drawn
    window (as in the app). Every text colour passes 4.5:1 on its background, in light and dark. */
-@font-face { font-family: 'Atkinson Hyperlegible Next'; font-weight: 200 800; font-display: swap; src: url('fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2') format('woff2'); }
+/* Shifty Notes: a hand-lettered text font (Niskala Huruf). This file has NO digits on purpose: the free demo version draws a "DEMO"
+   badge in their place, so every digit comes from Mali SemiBold (SIL Open Font Licence) through the font stack. */
+@font-face { font-family: 'Shifty Notes'; font-display: swap; src: url('fonts/shifty-notes-nodigits.woff2') format('woff2'); }
+@font-face { font-family: 'Mali Digits'; font-weight: 600; font-display: swap; size-adjust: 86%; src: url('fonts/mali-digits.woff2') format('woff2'); }
 @font-face { font-family: 'Source Serif 4'; font-weight: 200 900; font-display: swap; src: url('fonts/source-serif-4-latin-wght-normal.woff2') format('woff2'); }
 
 /* ---------- colours (light is the main look; dark follows the computer, or the sun/moon button) ---------- */
@@ -16,7 +19,7 @@
   --rule: #dde0e5; --rule-2: #b9bec7;
   --biro: #1f3fb8; --biro-hover: #18339a; --on-biro: #ffffff; --link: #1f3fb8; --biro-soft: #e7ebfa;
   --hl: #ffe24d; --on-hl: #15171c; --rec: #c8291c; --ok: #2f7a45;
-  --font: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font: 'Shifty Notes', 'Mali Digits', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --read: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --mono: ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace;
   --ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -42,7 +45,7 @@
 /* ---------- base ---------- */
 * { box-sizing: border-box; }
 html { background: var(--paper); scroll-padding-top: 88px; }
-body { margin: 0; color: var(--ink); background: var(--paper); font: 400 calc(18px * var(--ws))/1.6 var(--font); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body { margin: 0; color: var(--ink); background: var(--paper); font: 400 calc(22px * var(--ws))/1.5 var(--font); font-synthesis: none; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 ::selection { background: var(--hl); color: var(--on-hl); }
 a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { text-decoration-thickness: 2px; }
@@ -423,3 +426,30 @@ footer .small { color: var(--ink-3); font-size: calc(15px * var(--ws)); }
 .tongue { transform-box: fill-box; transform-origin: 50% 0; transform: rotate(var(--wag, 0deg)); transition: transform 150ms ease-out; }
 .js .step.on .step-art { animation: hop 700ms var(--ease); }
 @keyframes hop { 0% { transform: translateY(0); } 32% { transform: translateY(-16px); } 58% { transform: translateY(0) scaleY(0.97); } 100% { transform: translateY(0); } }
+
+
+/* ---------- Shifty Notes sizing (the font is narrow, so sizes go up; it has one weight, so headings are not "bold") ---------- */
+h1, h2, h3, .button, .dl-head strong, .step-count, .progress a, .brand-name, summary { font-synthesis: none; }
+h1, h2, h3 { font-weight: 400; letter-spacing: 0; line-height: 1.04; }
+.hero h1 { font-size: clamp(calc(46px * var(--ws)), 6.2vw, calc(78px * var(--ws))); }
+h2 { font-size: clamp(calc(38px * var(--ws)), 4.8vw, calc(58px * var(--ws))); }
+h3 { font-size: calc(28px * var(--ws)); }
+.step h2 { font-size: clamp(calc(38px * var(--ws)), 4.2vw, calc(54px * var(--ws))); }
+.step p, .hero .lead, .section-head p, .why-text p { font-size: calc(24px * var(--ws)); line-height: 1.4; }
+.why-text p { font-family: var(--font); }
+.why-text .sign { font: 400 calc(34px * var(--ws))/1.1 var(--font); }
+.button { font-size: calc(24px * var(--ws)); padding: 16px 28px; }
+.small, .muted.small, .meta, .hash, .stage-caption, .faq-more { font-size: calc(19px * var(--ws)); }
+.faq summary { font-size: calc(25px * var(--ws)); }
+.answer { font-size: calc(21px * var(--ws)); }
+.dl-head strong { font-size: calc(30px * var(--ws)); }
+.progress a { font-size: calc(18px * var(--ws)); }
+.top nav a { font-size: calc(21px * var(--ws)); }
+
+/* a narrow hand font needs a larger floor for small text */
+.dl-head span, .hash, .hash-label, .soon-list, .scroll-hint, .meta, .hero .meta, .needs li, .verify summary, .verify p, .plain-list li, .changes li,
+.note, .answer, .stage-caption, footer, footer .small, .progress a, .tag, .phone-note, .step .more { font-size: calc(21px * var(--ws)); }
+.step .more { font-size: calc(20px * var(--ws)); }
+.sha, code { font-size: calc(14px * var(--ws)); }
+.progress a { font-size: calc(19px * var(--ws)); }
+.tag { font-size: calc(17px * var(--ws)); }
