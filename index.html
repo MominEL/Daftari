@@ -4,207 +4,380 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!--
-    Security: no analytics, no cookies, no forms, no third-party anything. One small script from this site (site.js) moves
-    the notebook and the lecture scene on to the next step as you scroll, makes the mouse wheel glide, draws the desk lamp
-    and switches between light and dark; it sends and stores nothing. Without it the page is complete, just still and dark.
+    Security: no analytics, no cookies, no forms, no third-party anything. One small script from this site (site.js) shows
+    the step of the lecture you have scrolled to in the drawn Daftari window, and switches between light and dark; it sends
+    and stores nothing. Without it the page is complete: every step is readable and the window shows the finished notes.
     Pictures, fonts and the script come from this site only.
     (GitHub Pages cannot send security headers, so the policy is set here.)
   -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'" />
   <meta name="referrer" content="no-referrer" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#1c1917" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#ffffff" />
   <title>Daftari – a quiet notebook for lectures</title>
-  <meta name="description" content="Daftari: a calm, free notebook for lectures, with built-in AI. Records and transcribes on your own computer; your notes are plain files in a folder you choose." />
+  <meta name="description" content="Daftari: a free notebook for lectures, with built-in AI. Records and transcribes on your own computer, writes the notes while you listen, and keeps them as plain files in a folder you choose." />
   <link rel="canonical" href="https://mominel.github.io/Daftari/" />
   <!-- How the link looks when it is shared (WhatsApp, iMessage, Discord…) -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Daftari" />
   <meta property="og:title" content="Daftari – a quiet notebook for lectures" />
-  <meta property="og:description" content="A calm, free notebook for Windows and Mac. Records a lecture, transcribes it on your computer and turns it into notes." />
+  <meta property="og:description" content="A free notebook for Windows and Mac. Records a lecture, transcribes it on your computer and writes the notes while you listen." />
   <meta property="og:url" content="https://mominel.github.io/Daftari/" />
   <meta property="og:image" content="https://mominel.github.io/Daftari/img/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="The Daftari notebook icon, a cream notebook with a gold binding and a bold D, on a dark desk under lamp light, with the words: Daftari, a quiet notebook for lectures." />
+  <meta property="og:image:alt" content="Daftari, a notebook for lectures. The words “One lecture, from the first word to the flashcards.” beside a small Daftari window: a lecture transcript with key words marked in yellow, and the note written from them." />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="img/icon.png" type="image/png" />
-  <link rel="stylesheet" href="style.css?v=225fa549fd" />
-  <script src="site.js?v=698e33764e"></script>
+  <link rel="icon" href="img/icon.png?v=1ff9049137" type="image/png" />
+  <link rel="stylesheet" href="style.css?v=2a8f30205d" />
+  <script src="site.js?v=e7e65a9bec"></script>
 </head>
 <body>
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- a slight wobble, so the lines look drawn by hand -->
+    <filter id="wobble" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- the character: a notebook with a face. Local size about 130 x 200. -->
+    <!-- the character: one body and a few faces. The face changes with what is happening (the bookmark tongue is for concentrating,
+         and it is the logo's face) -->
+    <g id="hair"><path class="ink f-hl" d="M84 8 L84 -14 L92 -6 L100 -14 L100 8"/></g>
+    <g id="nb-body">
+      <path class="ink thick" d="M48 150 L46 178 M86 150 L88 178"/>
+      <path class="ink thick" d="M34 180 L58 180 M76 180 L100 180"/>
+      <rect class="ink f-paper" x="8" y="6" width="108" height="148" rx="12"/>
+      <path class="ink f-hl" d="M34 6 H20 Q8 6 8 18 V142 Q8 154 20 154 H34 Z"/>
+      <circle class="ink thin f-paper" cx="21" cy="40" r="4.5"/>
+      <circle class="ink thin f-paper" cx="21" cy="80" r="4.5"/>
+      <circle class="ink thin f-paper" cx="21" cy="120" r="4.5"/>
+    </g>
+    <g id="face-smile">
+      <circle class="f-ink eye" cx="62" cy="54" r="6"/><circle class="f-ink eye" cx="94" cy="54" r="6"/>
+      <path class="ink thick" d="M48 82 H108 Q108 116 78 116 Q48 116 48 82 Z"/>
+    </g>
+    <g id="face-listen">
+      <circle class="f-ink eye" cx="62" cy="54" r="6"/><circle class="f-ink eye" cx="94" cy="54" r="6"/>
+      <ellipse class="ink thick" cx="78" cy="96" rx="10" ry="13"/>
+    </g>
+    <g id="face-tongue">
+      <circle class="f-ink eye" cx="62" cy="56" r="6"/><circle class="f-ink eye" cx="94" cy="56" r="6"/>
+      <path class="ink thick f-ink" d="M48 84 H108 Q108 118 78 118 Q48 118 48 84 Z"/>
+      <path class="ink f-hl tongue" d="M69 106 V140 L78 133 L87 140 V106 Z"/>
+    </g>
+    <g id="nb"><use href="#hair"/><use href="#nb-body"/><use href="#face-smile"/></g>
+    <g id="nb-listen"><use href="#hair"/><use href="#nb-body"/><use href="#face-listen"/></g>
+    <g id="nb-tongue"><use href="#nb-body"/><use href="#face-tongue"/></g>
+
+    <!-- parts the scenes are made of -->
+    <g id="p-mic">
+      <rect class="ink f-paper" x="0" y="0" width="28" height="48" rx="14"/>
+      <path class="ink" d="M-6 34 Q14 62 34 34 M14 58 V76"/>
+      <path class="ink thin" d="M6 14 H22 M6 24 H22"/>
+    </g>
+    <g id="p-waves">
+      <path class="ink biro" d="M0 0 Q14 14 0 28"/>
+      <path class="ink biro" d="M14 -10 Q36 14 14 38"/>
+      <path class="ink biro" d="M28 -20 Q58 14 28 48"/>
+    </g>
+    <g id="p-rec">
+      <rect class="ink f-paper" x="0" y="0" width="68" height="28" rx="7"/>
+      <circle class="f-rec" cx="16" cy="14" r="6.5"/>
+      <path class="ink thin" d="M32 14 H58"/>
+    </g>
+    <g id="p-page">
+      <rect class="ink f-paper" x="0" y="0" width="124" height="156" rx="4"/>
+      <path class="ink thick" d="M16 24 H70"/>
+      <path class="f-hl" d="M24 62 Q50 56 112 60 Q120 66 113 75 Q60 80 26 75 Q18 69 24 62 Z"/>
+      <circle class="f-ink" cx="20" cy="50" r="3"/><path class="ink thin" d="M30 50 H98"/>
+      <circle class="f-ink" cx="20" cy="66" r="3"/><path class="ink thin" d="M30 66 H108"/>
+      <circle class="f-ink" cx="20" cy="86" r="3"/><path class="ink thin" d="M30 86 H92"/>
+      <circle class="f-ink" cx="20" cy="106" r="3"/><path class="ink thin" d="M30 106 H104"/>
+      <path class="ink thin" d="M16 128 H60"/>
+    </g>
+    <g id="p-card">
+      <rect class="ink f-paper" x="0" y="0" width="112" height="76" rx="6"/>
+      <path class="ink thick biro" d="M20 30 Q20 14 34 14 Q48 14 48 26 Q48 34 38 38 V44 M38 54 V55"/>
+      <path class="ink thin" d="M60 28 H98 M60 44 H88"/>
+    </g>
+    <g id="p-card-ok">
+      <rect class="ink f-paper" x="0" y="0" width="112" height="76" rx="6"/>
+      <path class="ink thick biro" d="M18 40 L30 52 L52 24"/>
+      <path class="ink thin" d="M64 28 H98 M64 44 H88"/>
+    </g>
+    <g id="p-folder">
+      <path class="ink f-hl" d="M4 20 Q4 8 16 8 H52 L66 24 H138 Q150 24 150 36 V104 Q150 116 138 116 H16 Q4 116 4 104 Z"/>
+      <path class="ink thin" d="M24 64 H92 M24 82 H70"/>
+    </g>
+    <g id="p-page-mini">
+      <rect class="ink f-paper" x="0" y="0" width="52" height="64" rx="3"/>
+      <path class="ink thin" d="M10 18 H42 M10 30 H42 M10 42 H30"/>
+    </g>
+    <g id="p-pen">
+      <rect class="ink f-hl" x="0" y="0" width="14" height="54" rx="3"/>
+      <path class="ink f-paper" d="M0 54 L7 70 L14 54 Z"/>
+    </g>
+
+    <!-- one scene per step -->
+    <g id="s-record" filter="url(#wobble)">
+      <path class="ink thin" d="M14 236 H346"/>
+      <use href="#nb-listen" transform="translate(70,36)"/>
+      <path class="ink" d="M78 132 Q60 150 66 178"/>
+      <path class="ink" d="M186 132 Q218 142 226 100"/>
+      <use href="#p-mic" transform="translate(212,50)"/>
+      <use href="#p-waves" transform="translate(256,70)"/>
+      <use href="#p-rec" transform="translate(20,6)"/>
+    </g>
+    <g id="s-transcript" filter="url(#wobble)">
+      <path class="ink thin" d="M14 236 H346"/>
+      <!-- the lecturer, behind a lectern -->
+      <circle class="ink f-paper" cx="58" cy="72" r="20"/>
+      <path class="ink thin" d="M42 62 Q50 48 66 52 M48 56 Q52 46 62 48"/>
+      <circle class="f-ink" cx="52" cy="72" r="2.6"/><circle class="f-ink" cx="64" cy="72" r="2.6"/>
+      <path class="ink thin" d="M50 80 Q58 86 66 80"/>
+      <path class="ink" d="M58 92 V150 M58 108 L100 96"/>
+      <path class="ink f-paper" d="M22 150 H98 L106 236 H14 Z"/>
+      <path class="ink biro" d="M118 80 q10 -9 20 0 t20 0 t20 0 t20 0"/>
+      <path class="ink biro" d="M118 100 q10 -9 20 0 t20 0 t20 0"/>
+      <path class="ink biro" d="M118 120 q10 -9 20 0 t20 0"/>
+      <g transform="translate(228,42) scale(0.78)"><use href="#nb"/></g>
+      <path class="ink" d="M236 130 Q214 128 206 150"/>
+      <g transform="translate(184,142) rotate(-8)"><use href="#p-page-mini"/></g>
+      <rect class="f-hl" x="194" y="168" width="34" height="9" transform="rotate(-8 194 168)"/>
+    </g>
+    <g id="s-notes" filter="url(#wobble)">
+      <path class="ink thin" d="M14 236 H346"/>
+      <use href="#nb-tongue" transform="translate(30,36)"/>
+      <path class="ink" d="M38 132 Q22 150 28 178"/>
+      <path class="ink" d="M146 132 Q190 120 200 98"/>
+      <g transform="translate(196,52) rotate(5)"><use href="#p-page"/></g>
+      <g transform="translate(178,60) rotate(-62)"><use href="#p-pen"/></g>
+    </g>
+    <g id="s-study" filter="url(#wobble)">
+      <path class="ink thin" d="M14 236 H346"/>
+      <use href="#nb" transform="translate(24,36)"/>
+      <path class="ink" d="M32 132 Q16 150 22 178"/>
+      <path class="ink" d="M140 132 Q154 126 160 110"/>
+      <!-- holding up a round badge with a green tick -->
+      <circle class="ink f-paper" cx="178" cy="76" r="30"/>
+      <path class="ink ok thick2" d="M162 78 L174 91 L196 60"/>
+      <circle class="ink f-paper" cx="161" cy="106" r="9"/>
+      <g transform="translate(206,50) rotate(-12)"><use href="#p-card"/></g>
+      <g transform="translate(196,96) rotate(6)"><use href="#p-card"/></g>
+      <g transform="translate(212,150) rotate(-4)"><use href="#p-card-ok"/></g>
+    </g>
+    <g id="s-files" filter="url(#wobble)">
+      <path class="ink thin" d="M14 236 H346"/>
+      <g transform="translate(176,118)"><use href="#p-page-mini" transform="translate(14,-48) rotate(-6)"/><use href="#p-page-mini" transform="translate(52,-62) rotate(5)"/><use href="#p-page-mini" transform="translate(88,-46) rotate(-3)"/><use href="#p-folder"/></g>
+      <use href="#nb" transform="translate(26,36)"/>
+      <path class="ink" d="M34 132 Q18 150 24 178"/>
+      <path class="ink" d="M142 132 Q170 138 190 150"/>
+    </g>
+    <g id="s-hero" filter="url(#wobble)">
+      <path class="ink thin" d="M20 396 H500"/>
+      <g transform="translate(150,40) scale(1.5)"><use href="#nb"/></g>
+      <path class="ink" d="M162 196 Q98 216 50 152"/>
+      <path class="ink" d="M342 190 Q392 176 408 130"/>
+      <g transform="translate(396,70) rotate(6)"><use href="#p-page"/></g>
+      <g transform="translate(364,84) rotate(-62)"><use href="#p-pen"/></g>
+      <g transform="translate(36,70)"><use href="#p-mic"/></g>
+      <g transform="translate(76,86)"><use href="#p-waves"/></g>
+      <g transform="translate(30,330) rotate(-6)"><use href="#p-rec"/></g>
+      <g transform="translate(394,262) rotate(-8)"><use href="#p-card"/></g>
+    </g>
+  </defs>
+</svg>
+
   <a class="skip" href="#main">Skip to the content</a>
 
   <header class="top">
-    <a class="brand" href="#top" id="top" aria-label="Daftari, back to the top"><img src="img/icon.png" width="40" height="40" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
-    <nav aria-label="Sections">
-      <a href="#how">The notebook</a>
-      <a href="#lecture">Lectures</a>
-      <a href="#features">What it does</a>
-      <a href="#open">Opening it</a>
-      <a href="#privacy">Privacy</a>
-      <a href="#faq">Questions</a>
-      <button class="theme-toggle" type="button" aria-label="Switch to light mode" title="Light or dark">
-        <svg class="icon i-sun" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M122 40V16a6 6 0 0 1 12 0v24a6 6 0 0 1-12 0m68 88a62 62 0 1 1-62-62a62.07 62.07 0 0 1 62 62m-12 0a50 50 0 1 0-50 50a50.06 50.06 0 0 0 50-50M59.76 68.24a6 6 0 1 0 8.48-8.48l-16-16a6 6 0 0 0-8.48 8.48Zm0 119.52l-16 16a6 6 0 1 0 8.48 8.48l16-16a6 6 0 1 0-8.48-8.48M192 70a6 6 0 0 0 4.24-1.76l16-16a6 6 0 0 0-8.48-8.48l-16 16A6 6 0 0 0 192 70m4.24 117.76a6 6 0 0 0-8.48 8.48l16 16a6 6 0 0 0 8.48-8.48ZM46 128a6 6 0 0 0-6-6H16a6 6 0 0 0 0 12h24a6 6 0 0 0 6-6m82 82a6 6 0 0 0-6 6v24a6 6 0 0 0 12 0v-24a6 6 0 0 0-6-6m112-88h-24a6 6 0 0 0 0 12h24a6 6 0 0 0 0-12"/></svg><svg class="icon i-moon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M232.13 143.64a6 6 0 0 0-6-1.49a90.07 90.07 0 0 1-112.27-112.3a6 6 0 0 0-7.49-7.48a102.88 102.88 0 0 0-51.89 36.31a102 102 0 0 0 142.84 142.84a102.88 102.88 0 0 0 36.31-51.89a6 6 0 0 0-1.5-5.99m-42 48.29a90 90 0 0 1-126-126a90.9 90.9 0 0 1 35.52-28.27a102.06 102.06 0 0 0 118.69 118.69a90.9 90.9 0 0 1-28.24 35.58Z"/></svg>
-      </button>
-      <a class="pill" href="#download">Download</a>
-    </nav>
+    <div class="wrap">
+      <a class="brand" href="#top" id="top" aria-label="Daftari, back to the top"><img src="img/icon.png?v=1ff9049137" width="32" height="32" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
+      <nav aria-label="Sections">
+        <a href="#story">How it works</a>
+        <a href="#open">Opening it</a>
+        <a href="#privacy">Your data</a>
+        <a href="#faq">Questions</a>
+        <button class="theme-toggle" type="button" aria-label="Switch between light and dark" title="Light or dark">
+          <svg class="sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="miter"/></svg>
+        </button>
+        <a class="button" href="#download">Download</a>
+      </nav>
+    </div>
   </header>
 
   <main id="main">
-    <section class="story" id="how" aria-label="Daftari, the notebook" data-steps="5" data-step="0">
-      <div class="stage" data-stage>
-        <div class="captions">
-          <div class="caption cH">
-            <h1>A quiet notebook for long lectures.</h1>
-            <p class="lead">Daftari (Arabic <span lang="ar" dir="rtl">دفتري</span>, “my notebook”) records a lecture, turns it into written notes, and keeps everything as <strong>plain files in a folder you choose</strong> on your own computer. No account, no subscription, no lock-in.</p>
-            <div class="cta">
-              <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Download for Windows</a>
-              <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
-            </div>
-            <p class="meta">Free, for Windows 10 or 11 and Macs with Apple silicon. <a href="#open">Opening it the first time</a>.</p>
-            <p class="phone-note">Daftari is for Windows and Mac computers. Open this page on your computer to download.</p>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-title">A free notes app <span class="swipe">for students</span>, with <span class="swipe">AI</span> built in.</h1>
+          <p class="lead">Record a lecture, get notes written from it, and revise from them. Daftari runs on your own computer and costs nothing. Your notes are plain files in a folder you choose.</p>
+          <div class="cta">
+            <a class="button" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Download for Windows</a>
+            <a class="button second" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
           </div>
-          <div class="caption c0">
-            <h2>Plain files, in a folder you choose.</h2>
-            <p>Every page is one file you can back up, sync or read without Daftari. Delete the app and your notes are still there.</p>
-          </div>
-          <div class="caption c1">
-            <h2>Write it down.</h2>
-            <p>Headings, tables, code, formulas, toggles. Tabs for the pages you have open, and nothing else on screen until you ask for it.</p>
-          </div>
-          <div class="caption c2">
-            <h2>Find it. Learn it.</h2>
-            <p>One search covers titles and every word inside every page, formulas included. Flashcards and quizzes live in the pages, with spaced repetition that remembers what you know.</p>
-          </div>
-          <div class="caption c3">
-            <h2>Press record in the lecture.</h2>
-            <p>Audio is saved every 30 seconds. Speech-to-text runs on your computer, and the AI you choose writes the notes as the lecture goes.</p>
-          </div>
+          <p class="meta">For Windows 10 or 11 and Macs with Apple silicon. <a href="#open">Opening it the first time</a>.</p>
+          <p class="phone-note">Daftari is for Windows and Mac computers. Open this page on your computer to download.</p>
         </div>
+        <svg class="ill hero-art" viewBox="0 0 520 420" role="img" aria-label="A cartoon notebook with a face, recording a lecture. A microphone, a page of notes with a highlighted line and a flashcard are around it."><use href="#s-hero"/></svg>
+      </div>
+      <p class="scroll-hint wrap">Here is one lecture, from start to finish</p>
+    </section>
 
-        <div class="chapters" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="scene">
-          <div class="book">
-            <div class="ground"></div>
+    <section class="story-wrap" id="story" aria-label="How it works, one lecture in five steps">
+      <div class="wrap story" data-view="notes">
+        <ol class="steps">
+          <li class="step" id="step-record" data-view="record">
+            <span class="step-count">1 of 5</span>
+            <h2>Press record</h2>
+            <p>Record with your microphone, with your computer’s own sound (a Teams call, an online lecture), or both. Daftari saves the audio to disk every 30 seconds, so if the battery dies you lose very little.</p>
+            <p class="more">You can pause and resume. The recording stays on your computer.</p>
+          
+            <svg class="ill step-art" viewBox="0 0 360 260" role="img" aria-label="The notebook holding a microphone, with a recording badge"><use href="#s-record"/></svg>
+          </li>
+          <li class="step" id="step-transcript" data-view="transcript">
+            <span class="step-count">2 of 5</span>
+            <h2>Read along</h2>
+            <p>Speech-to-text runs on your computer while you listen, so the lecture is not sent anywhere to be transcribed. Each part shows up in the transcript a few seconds after it is said.</p>
+            <p class="more">English only for now. It works with no internet.</p>
+          
+            <svg class="ill step-art" viewBox="0 0 360 260" role="img" aria-label="A lecturer speaking, the words flowing to the notebook as a page"><use href="#s-transcript"/></svg>
+          </li>
+          <li class="step" id="step-notes" data-view="notes">
+            <span class="step-count">3 of 5</span>
+            <h2>Notes appear as you go</h2>
+            <p>About every ten minutes, the AI you set up writes notes for that part: headings, definitions, formulas. When you press Stop, Daftari puts them together into one page, linked to the full transcript. You read it before anything is saved.</p>
+            <p class="more">The AI needs your own key. <a href="#ai">Which providers, and which are free</a>.</p>
+          
+            <svg class="ill step-art" viewBox="0 0 360 260" role="img" aria-label="The notebook highlighting a line on a page of notes"><use href="#s-notes"/></svg>
+          </li>
+          <li class="step" id="step-study" data-view="study">
+            <span class="step-count">4 of 5</span>
+            <h2>Revise from the same page</h2>
+            <p>Turn the notes into flashcards or a quiz, by hand or with the AI. Spaced repetition shows each card just before you would forget it, and your progress is saved inside the page.</p>
+          
+            <svg class="ill step-art" viewBox="0 0 360 260" role="img" aria-label="The notebook giving a thumbs up beside three flashcards"><use href="#s-study"/></svg>
+          </li>
+          <li class="step" id="step-files" data-view="files">
+            <span class="step-count">5 of 5</span>
+            <h2>Everything stays as plain files</h2>
+            <p>Every page is one file in a folder you choose: on this computer, or in OneDrive, iCloud Drive, Google Drive or Dropbox. Back it up, sync it, or read it without Daftari. If you delete the app, your notes are still there.</p>
+          
+            <svg class="ill step-art" viewBox="0 0 360 260" role="img" aria-label="The notebook next to a folder with pages in it"><use href="#s-files"/></svg>
+          </li>
+        </ol>
 
-            <!-- the last page: the download, inside the back cover -->
-            <div class="base">
-              <div class="face">
-                <div class="take">
-                  <p class="take-title">Take it with you.</p>
-                  <p>Free, for Windows 10 or 11 and Macs with Apple silicon.</p>
-                  <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Windows</a>
-                  <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Mac</a>
-                </div>
+        <div class="stage">
+          <nav class="progress" aria-label="Steps of the lecture">
+            <a href="#step-record" data-view="record"><b>1</b>Record</a>
+            <a href="#step-transcript" data-view="transcript"><b>2</b>Transcript</a>
+            <a href="#step-notes" data-view="notes"><b>3</b>Notes</a>
+            <a href="#step-study" data-view="study"><b>4</b>Revise</a>
+            <a href="#step-files" data-view="files"><b>5</b>Files</a>
+          </nav>
+          <div class="window" aria-hidden="true">
+            <!-- 1. recording has just started -->
+            <div class="view v-record">
+              <div class="w-top"><span>Pages</span><span class="on"><i class="dot"></i>Week 3: Sleep and memory</span><span class="off"><i class="dot b"></i>Week 4: Stress</span><span class="grow"></span><span class="rec"><i></i>Recording <b>0:12</b><u class="tag">Recording has started</u></span></div>
+              <div class="w-body">
+                <div class="w-page"><div class="crumbs">Psychology / Week 3</div><div class="title">Sleep and memory</div><div class="tags"><span>lecture</span></div>
+                  <div class="notes"><p class="waiting">Notes for each part of the lecture appear here while you listen.</p></div></div>
+                <div class="w-side"><div class="head"><b>Transcript</b><span>listening</span></div>
+                  <ol class="tx"><li><time>0:04</time><span>Right, let’s start with a question: why do you remember more after a good night’s sleep?</span></li></ol></div>
               </div>
             </div>
-
-            <!-- the leaves, back to front -->
-            <div class="leaf l2">
-              <div class="face ruled"><div class="print"><img src="img/shot-study.png" width="800" height="1105" alt="Daftari reviewing a flashcard: the question “What is φ(15)?”, its answer, and buttons to rate how well you knew it." /></div></div>
-              <div class="face back ruled">
-                <div class="page">
-                  <p class="page-title">Lecture, 10:02</p>
-                  <p class="mono">0:12 Modular inverses.</p>
-                  <p class="mono">0:48 gcd(a, n) = 1,</p>
-                  <p class="mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so a has an inverse.</p>
-                  <p class="mono">1:30 Euler gives it.</p>
-                  <p class="stamp">Notes written: 3 sections</p>
-                </div>
+            <!-- 2. the transcript fills in -->
+            <div class="view v-transcript">
+              <div class="w-top"><span>Pages</span><span class="on"><i class="dot"></i>Week 3: Sleep and memory</span><span class="off"><i class="dot b"></i>Week 4: Stress</span><span class="grow"></span><span class="rec"><i></i>Recording <b>48:07</b></span></div>
+              <div class="w-body">
+                <div class="w-page"><div class="crumbs">Psychology / Week 3</div><div class="title">Sleep and memory</div><div class="tags"><span>lecture</span></div>
+                  <div class="notes"><p class="waiting">Writing the notes for this part…</p></div></div>
+                <div class="w-side"><div class="head"><b>Transcript</b><span>up to date</span></div>
+                  <ol class="tx">
+                    <li><time>47:02</time><span>So when you sleep, your brain is not switching off. It is busy sorting out the day.</span></li>
+                    <li><time>47:18</time><span>During deep sleep, <mark>new memories are replayed and stored</mark>.</span></li>
+                    <li><time>47:41</time><span>Dreaming is mostly in REM sleep, <mark>about a quarter of the night</mark>.</span></li>
+                    <li><time>48:05</time><span>So <mark>sleeping after you study helps you remember more than extra cramming</mark>.</span></li>
+                  </ol><u class="tag">Words appear as they are said</u></div>
               </div>
             </div>
-            <div class="leaf l1">
-              <div class="face ruled"><div class="print"><img src="img/shot-page.png" width="800" height="1105" alt="A Daftari page of notes on modular arithmetic, with headings, a bulleted list, a formula and two flashcards." /></div></div>
-              <div class="face back ruled"><div class="print"><img src="img/shot-search.png" width="800" height="1105" alt="Daftari’s search: typing “euler” finds a page title and the matching words inside other pages." /></div></div>
-            </div>
-            <div class="leaf l0" aria-hidden="true">
-              <div class="face cover">
-                <span class="stitch s1"></span><span class="stitch s2"></span><span class="stitch s3"></span>
-                <span class="d">D</span>
-                <span class="title">Daftari</span>
-                <span class="ribbon"></span>
-              </div>
-              <div class="face back ruled">
-                <div class="page">
-                  <p class="page-title">Your notes</p>
-                  <p class="mono">Notes/</p>
-                  <p class="mono">&nbsp;&nbsp;Cryptography/</p>
-                  <p class="mono">&nbsp;&nbsp;&nbsp;&nbsp;Week 3 – Euler.json</p>
-                  <p class="mono">&nbsp;&nbsp;&nbsp;&nbsp;Week 4 – RSA.json</p>
-                  <p class="mono">&nbsp;&nbsp;assets/</p>
-                  <p class="stamp">Plain files. Yours.</p>
-                </div>
+            <!-- 3. the notes, written from it (also what shows without the script) -->
+            <div class="view v-notes">
+              <div class="w-top"><span>Pages</span><span class="on"><i class="dot"></i>Week 3: Sleep and memory</span><span class="off"><i class="dot b"></i>Week 4: Stress</span><span class="grow"></span><span class="rec"><i></i>Recording <b>48:07</b></span></div>
+              <div class="w-body">
+                <div class="w-page"><div class="crumbs">Psychology / Week 3</div><div class="title">Sleep and memory</div><div class="tags"><span>lecture</span><span>exam</span></div>
+                  <div class="notes"><p class="h">Why sleep helps memory</p>
+                    <ul><li>Deep sleep replays and stores new memories.</li>
+                      <li>REM sleep is about a quarter of the night.</li>
+                      <li>Sleeping after studying beats extra cramming.</li></ul>
+                    <div class="fcard"><small>Flashcard</small>What happens to new memories in deep sleep?</div></div><u class="tag">Notes from the transcript</u></div>
+                <div class="w-side"><div class="head"><b>Transcript</b><span>up to date</span></div>
+                  <ol class="tx">
+                    <li><time>47:18</time><span>During deep sleep, <mark>new memories are replayed and stored</mark>.</span></li>
+                    <li><time>47:41</time><span>Dreaming is mostly in REM sleep, <mark>about a quarter of the night</mark>.</span></li>
+                    <li><time>48:05</time><span>So <mark>sleeping after you study helps you remember more than extra cramming</mark>.</span></li>
+                  </ol></div>
               </div>
             </div>
+            <!-- 4. revising -->
+            <div class="view v-study">
+              <div class="w-top"><span class="on">Review: Psychology</span><span class="grow"></span><span class="count">12 cards left</span></div>
+              <div class="study"><div class="flip"><div class="card"><div class="face front">What is memory consolidation?</div><div class="face back"><small>Answer</small>Turning new, fragile memories into stable long-term ones, mostly during deep sleep.</div></div></div>
+                <div class="rate"><span>Again</span><span>Hard</span><span class="pick">Good</span><span>Easy</span><u class="tag">Rate each card</u></div></div>
+            </div>
+            <!-- 5. the files on disk -->
+            <div class="view v-files">
+              <div class="w-top"><span class="on">Daftari Notes (the folder you chose)</span><span class="grow"></span></div>
+              <div class="files">
+                <div class="d">Daftari Notes/<u class="tag">One file per page</u></div>
+                <div class="d">&nbsp;&nbsp;pages/</div>
+                <div class="f">&nbsp;&nbsp;&nbsp;&nbsp;8f2c…e41a.json<span>Sleep and memory</span></div>
+                <div class="f">&nbsp;&nbsp;&nbsp;&nbsp;1b7d…90c3.json<span>Sleep and memory – transcript</span></div>
+                <div class="f">&nbsp;&nbsp;&nbsp;&nbsp;c03a…5d12.json<span>Week 4: Stress</span></div>
+                <div class="d">&nbsp;&nbsp;folders/</div>
+                <div class="d">&nbsp;&nbsp;assets/</div>
+                <p class="apart">The recording itself is kept apart, in Daftari’s own folder on this computer, and is never synced.</p>
+              </div>
+            </div>
+            <div class="w-bottom"><span>Saved 14:32</span><span class="cmd"><span>Search or run a command</span><kbd>Ctrl K</kbd></span><span class="sync">Sync is off</span></div>
           </div>
+          <p class="stage-caption" aria-hidden="true">An example lecture, as Daftari shows it. The yellow marks show which words became which note.</p>
         </div>
       </div>
     </section>
 
-    <section class="lecture" id="lecture" aria-labelledby="lecture-title" data-steps="4" data-step="0">
-      <div class="lecture-stage" data-stage>
-        <div class="lecture-words">
-          <h2 id="lecture-title">From the lecture hall to your notes.</h2>
-          <p>Daftari records with your microphone, your computer’s own sound, or both. Speech-to-text runs on your computer while you listen, and the AI you choose turns what was said into notes before the lecture ends.</p>
-          <p class="small muted">An example lecture, as Daftari shows it.</p>
+    <section class="why" id="why" aria-labelledby="why-title">
+      <div class="wrap">
+        <h2 id="why-title">Why I made this</h2>
+        <div class="why-text">
+          <p>I’m a student too. I was not going to pay a monthly subscription just to use AI in my notes, and I did not think other students should have to either. So I built my own notes app, and I’m sharing it.</p>
+          <p>Daftari itself costs nothing and never will. The AI part uses a key from a provider you choose. Several have a free plan, and the app walks you through getting one. If you would rather not use AI at all, everything else still works.</p>
+          <p>I’m one person, so it is rough in places. If something breaks or confuses you, tell me. That is the most useful thing you can do.</p>
+          <p class="sign">Momin</p>
         </div>
-        <div class="desk2">
-          <div class="recorder" aria-hidden="true">
-            <span class="rec-dot"></span><span class="rec-label">Recording</span><span class="rec-time">48:07</span>
-            <span class="wave"><span class="wave-inner"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></span>
-            <span class="rec-ok">Mic OK</span>
-          </div>
-          <h3 class="sr">An example transcript</h3>
-          <ol class="transcript">
-            <li class="t1"><time>47:02</time><span>So an inverse modulo n only exists when a and n share no factor.</span></li>
-            <li class="t2"><time>47:18</time><span>In other words, when the gcd of a and n is one.</span></li>
-            <li class="t3"><time>47:41</time><span>Euler’s theorem gives it to us directly: a to the phi of n is one, mod n.</span></li>
-            <li class="t4"><time>48:05</time><span>So the inverse is a to the phi of n minus one.</span></li>
-          </ol>
-          <article class="notes-page" aria-label="The notes Daftari writes">
-            <h3>Modular inverses</h3>
-            <ul>
-              <li class="n1">An inverse of <var>a</var> modulo <var>n</var> exists only when gcd(<var>a</var>, <var>n</var>) = 1.</li>
-              <li class="n2">Euler’s theorem: <span class="math"><var>a</var><sup>φ(<var>n</var>)</sup> ≡ 1 (mod <var>n</var>)</span></li>
-              <li class="n3">So <span class="math"><var>a</var><sup>−1</sup> ≡ <var>a</var><sup>φ(<var>n</var>)−1</sup> (mod <var>n</var>)</span></li>
-            </ul>
-            <div class="card2">
-              <div class="card-face card-front"><span class="card-tag">Flashcard</span>When does <var>a</var> have an inverse modulo <var>n</var>?</div>
-              <div class="card-face card-back"><span class="card-tag">Answer</span>Exactly when gcd(<var>a</var>, <var>n</var>) = 1.</div>
-            </div>
-          </article>
-        </div>
+        <p class="why-more">It also has a block editor with nested pages, tables and code, search through every word of every page, maths typed as LaTeX, spell checking, a trash you can restore from, and optional sync through your own private GitHub repository or a cloud folder.</p>
       </div>
     </section>
 
-    <section class="plain" id="features" aria-label="What it does">
-      <h2>What it does</h2>
-      <ul class="index">
-        <li><strong><svg class="icon i-pen" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M246 92.68a13.94 13.94 0 0 0-4.1-9.9L173.21 14.1a14 14 0 0 0-19.8 0l-28.73 28.73l-58.46 21.93a14 14 0 0 0-8.9 10.8L34.08 215a6 6 0 0 0 5.92 7a6.6 6.6 0 0 0 1-.08l139.44-23.24a14 14 0 0 0 10.81-8.9l21.92-58.46l28.74-28.74a13.92 13.92 0 0 0 4.09-9.9m-66 92.89a2 2 0 0 1-1.54 1.27L57.49 207l52.87-52.88a26 26 0 1 0-8.48-8.48L49 198.53l20.17-121A2 2 0 0 1 70.43 76l56.06-21L201 129.51ZM110 132a14 14 0 1 1 14 14a14 14 0 0 1-14-14m123.41-37.9L208 119.51L136.48 48l25.42-25.42a2 2 0 0 1 2.83 0l68.68 68.69a2 2 0 0 1 0 2.83"/></svg>Write</strong><span>Headings, lists, tables, code, toggles, formulas, flashcards and quizzes. Everything else stays hidden until you ask.</span></li>
-        <li><strong><svg class="icon i-mic" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M128 174a46.06 46.06 0 0 0 46-46V64a46 46 0 0 0-92 0v64a46.06 46.06 0 0 0 46 46M94 64a34 34 0 0 1 68 0v64a34 34 0 0 1-68 0Zm40 141.75V240a6 6 0 0 1-12 0v-34.25A78.09 78.09 0 0 1 50 128a6 6 0 0 1 12 0a66 66 0 0 0 132 0a6 6 0 0 1 12 0a78.09 78.09 0 0 1-72 77.75"/></svg>Record</strong><span>Record a lecture or a call, watch it turn into text as it goes, and get structured notes at the end. The speech-to-text runs on your computer.</span></li>
-        <li><strong><svg class="icon i-lamp" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="m245.51 149.64l-48-112A6 6 0 0 0 192 34H64a6 6 0 0 0-5.51 3.64l-48 112A6 6 0 0 0 16 158h106v52H96a6 6 0 0 0 0 12h64a6 6 0 0 0 0-12h-26v-52h60v34a6 6 0 0 0 12 0v-34h34a6 6 0 0 0 5.51-8.36M25.1 146L68 46h120l42.9 100Z"/></svg>Ask</strong><span>Improve, summarise or quiz yourself on a page. You always see a preview first, and nothing is replaced until you say so.</span></li>
-        <li><strong><svg class="icon i-folder" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="M19.895 12.392c-1.626-.24-9.599.12-10.277.12c-.898 0-.798.279-.998-.51a4.46 4.46 0 0 0-.619-2.025c-.808-.808-6.166 0-6.825 1.417c-.329.688.39 2.375.61 3.093a51 51 0 0 0 2.234 6.985a.301.301 0 1 0 .549-.25a51 51 0 0 1-1.996-6.904a10 10 0 0 1-.578-2.505c.319-.638 3.173-1.107 3.99-1.097l1.388.06c.24.349.18 1.995.778 2.604c.599.608 4.25.06 8.84.18c.2 0 3.233-.21 3.622.259c.39.469-.279 2.933-.429 3.482c-.339 1.277-.738 4.1-1.357 5.168c-.16.28-.13.46-1.826.6c-2.205.189-3.701-.06-8.191 0l-2.146-.12c-.548 0-1.087-.26-1.177.209c-.13.728 1.157.4 8.89.798c1.48.112 2.97.008 4.42-.31c1.357-.498 1.766-4.13 2.325-6.086c.34-1.157.998-3.562.27-4.49a2.46 2.46 0 0 0-1.497-.678M5.597 8.35c.13.43.509.4.618.15c.21-.458-.14-1.376-.14-1.396s-.339-4.111.01-5.199c.26-.788 2.794-.768 3.623-.778c1.237 0 8.261.26 8.82 1.058c.16.239.08.608 0 .997a47 47 0 0 1-1.177 7.125a.339.339 0 1 0 .658.15a49.6 49.6 0 0 0 1.477-7.175a2.23 2.23 0 0 0-.16-1.696C18.778.698 17.151.608 16.143.448C13.56.08 8.64-.4 6.205.578c-1.057.42-1.077 1.197-1.097 2.255c.028 1.849.192 3.693.489 5.518m17.192-3.033a3.22 3.22 0 0 0-1.816-1.228a.3.3 0 0 0-.25.54c1.647.937 1.178 1.266.918 1.835a28.4 28.4 0 0 1-1.786 4.12a.34.34 0 0 0 .589.34c.409-.758 3.053-4.24 2.345-5.607"/><path d="M16.523 5.258a.4.4 0 0 0 .09-.689c-.18-.17-.62-.22-1.906-.399a17 17 0 0 0-4.191-.06c-1.637 0-1.716 0-1.996.14a.29.29 0 0 0 .17.489l.569.08c1.774.34 3.586.44 5.388.299c.07.01 1.796.18 1.876.14m-.469 2.554a4.6 4.6 0 0 0-1.906-.449a14.8 14.8 0 0 0-3.053-.19c-1.098.08-2.904-.19-2.675.53a.3.3 0 0 0 .38.189c.538-.13.738.38 5.278.439a4.6 4.6 0 0 1 1.616.05a.339.339 0 1 0 .36-.569M1.945 6.036q.432 1.039.758 2.115a.3.3 0 0 0 .599-.06a18 18 0 0 0-.49-3.103c-.129-.608-.528-.997 1.527-1.706a.34.34 0 0 0-.16-.658c-2.683.369-2.973 1.367-2.234 3.412"/></g></svg>Keep</strong><span>Plain files you can back up, sync with the service you already use, or read without Daftari. Deleted pages go to a Trash you can restore from.</span></li>
-        <li><strong><svg class="icon i-sigma" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M186 72V54H76.48l56.21 70.25a6 6 0 0 1 0 7.5L76.48 202H186v-18a6 6 0 0 1 12 0v24a6 6 0 0 1-6 6H64a6 6 0 0 1-4.69-9.75l61-76.25l-61-76.25A6 6 0 0 1 64 42h128a6 6 0 0 1 6 6v24a6 6 0 0 1-12 0"/></svg>Maths</strong><span>Type <code>$…$</code> for an equation. Shorthand turns <code>a/b</code> into a fraction as you type, and templates cover the formulas you write all the time.</span></li>
-        <li><strong><svg class="icon i-check" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="m228.24 76.24l-128 128a6 6 0 0 1-8.48 0l-56-56a6 6 0 0 1 8.48-8.48L96 191.51L219.76 67.76a6 6 0 0 1 8.48 8.48"/></svg>Spelling</strong><span>Fixes clear typos as you type, and leaves code, formulas, acronyms and names alone.</span></li>
-      </ul>
-    </section>
-
-    <section class="plain" id="download" aria-labelledby="download-title">
-      <h2 id="download-title">Download</h2>
-      <p class="muted">Version <strong>1.0.0</strong>, 11 October 2026. Free. The installers are not signed (that needs a paid certificate), so your computer will ask you to confirm the first time: see <a href="#open">Opening it</a>.</p>
+    <section class="plain download" id="download" aria-labelledby="download-title">
+      <div class="wrap">
+      <h2 id="download-title">Download Daftari</h2>
+      <p class="muted">Version 1.0.0, 13 October 2026. Free. Daftari is not registered with Microsoft or Apple (that costs money every year), so your computer will ask you to confirm the first time: see <a href="#open">Opening it</a>.</p>
       <p class="phone-note">Daftari is for Windows and Mac computers. Open this page on your computer to download.</p>
       <ul class="downloads">
         <li>
           <div class="dl-head"><strong>Windows</strong><span>Windows 10 or 11, 64-bit</span></div>
-          <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Download for Windows</a>
+          <a class="button" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Download for Windows</a>
           <p class="hash"><span class="hash-label">SHA-256 of <code class="file">Daftari-Windows-Setup.exe</code></span><code class="sha">0849f41c59e3772cf0e7a65e9700c0b5f949564b3a0c263ecb4582c4f8940d7e</code></p>
         </li>
         <li>
           <div class="dl-head"><strong>Mac, Apple silicon</strong><span>M1, M2, M3, M4 and newer, macOS 12 or later</span></div>
-          <a class="button primary" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
+          <a class="button" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
           <p class="hash"><span class="hash-label">SHA-256 of <code class="file">Daftari-Mac-AppleSilicon.dmg</code></span><code class="sha">86d125df526f3bd0829986cceeab1fccfd199b136a2bdfe2b1dbf1f6561b403d</code></p>
-          <p class="muted small">Not sure which Mac you have? Apple menu → <strong>About This Mac</strong> → look at <strong>Chip</strong>. If it says “Apple M…”, this is the one. If it says “Intel”, the Intel version is not ready yet.</p>
+          <p class="muted small">Not sure which Mac you have? Apple menu → About This Mac → look at Chip. If it says “Apple M…”, this is the one. If it says “Intel”, the Intel version is not ready yet.</p>
         </li>
       </ul>
       <ul class="soon-list">
@@ -214,27 +387,29 @@
 
       <div class="needs" aria-labelledby="needs-title">
         <h3 id="needs-title">What you need</h3>
-        <ul class="plain">
-          <li><strong>Windows 10 or 11</strong> (64-bit), or <strong>macOS 12 or later</strong> on a Mac with Apple silicon.</li>
-          <li><strong>Disk:</strong> the Windows installer is 108 MB and Daftari takes about 380 MB once installed; the Mac download is 127 MB.</li>
-          <li><strong>Speech-to-text (optional)</strong>, downloaded inside Daftari when you want it: a speech model of 148 MB (Base), 488 MB (Small), 1.5 GB (Medium) or 1.6 GB (Large v3 Turbo). On Windows the speech program adds 9 MB, or 685 MB for computers with an NVIDIA graphics card. On a Mac it is installed with Homebrew, and Daftari shows the two commands.</li>
-          <li><strong>Memory:</strong> a Mac with 8 GB works well with the Small and Medium models. Daftari suggests one for your computer.</li>
-          <li><strong>Internet:</strong> only to download Daftari and the speech models, to sync, and to use an online AI provider. Writing, search, flashcards, recording and speech-to-text work offline.</li>
+        <ul>
+          <li>Windows 10 or 11 (64-bit), or macOS 12 or later on a Mac with Apple silicon.</li>
+          <li>Disk: the Windows installer is 108 MB and Daftari takes about 380 MB once installed; the Mac download is 127 MB.</li>
+          <li>Speech-to-text (optional), downloaded inside Daftari when you want it: a speech model of 148 MB (Base), 488 MB (Small), 1.5 GB (Medium) or 1.6 GB (Large v3 Turbo). On Windows the speech program adds 9 MB, or 685 MB for computers with an NVIDIA graphics card. On a Mac it is installed with Homebrew, and Daftari shows the two commands.</li>
+          <li>Memory: a Mac with 8 GB works well with the Small and Medium models. Daftari suggests one for your computer.</li>
+          <li>Internet: only to download Daftari and the speech models, to sync, and to use an online AI provider. Writing, search, flashcards, recording and speech-to-text work offline.</li>
         </ul>
       </div>
 
       <details class="verify">
         <summary>Check that your download is genuine</summary>
         <p>Each file has a SHA-256 checksum above (and in <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>). After downloading, compare it with your own:</p>
-        <p><strong>Windows</strong> (PowerShell): <code>Get-FileHash Daftari-Windows-Setup.exe -Algorithm SHA256</code></p>
-        <p><strong>Mac</strong> (Terminal): <code>shasum -a 256 Daftari-Mac-AppleSilicon.dmg</code></p>
+        <p>Windows (PowerShell): <code>Get-FileHash Daftari-Windows-Setup.exe -Algorithm SHA256</code></p>
+        <p>Mac (Terminal): <code>shasum -a 256 Daftari-Mac-AppleSilicon.dmg</code></p>
         <p>If the two do not match exactly, do not open the file.</p>
       </details>
+    </div>
     </section>
 
     <section class="plain" id="open" aria-labelledby="open-title">
+      <div class="wrap">
       <h2 id="open-title">Opening it the first time</h2>
-      <p class="muted">Because the installers are not signed, Windows and macOS warn you once. That is expected. Only continue if you downloaded the file from this page.</p>
+      <p class="muted">Because Daftari is not registered with Microsoft or Apple, Windows and macOS warn you the first time you open it. That is expected. Only continue if you downloaded the file from this page.</p>
       <div class="two">
         <div>
           <h3>Windows</h3>
@@ -255,12 +430,14 @@
         </div>
       </div>
       <p class="muted small">Updates: on Windows, Daftari downloads new versions itself and installs them when you close it. On a Mac it tells you a new version is ready and opens this page.</p>
+    </div>
     </section>
 
     <section class="plain" id="ai" aria-labelledby="ai-title">
+      <div class="wrap">
       <h2 id="ai-title">The AI helper needs your own key</h2>
-      <p>Daftari comes with <strong>no AI key</strong>: you use your own, from the company you choose, and it is stored encrypted on your computer. The first-time setup walks you through it with step-by-step guides. The official pages:</p>
-      <ul class="plain">
+      <p>Daftari comes with no AI key: you use your own, from the company you choose, and it is stored encrypted on your computer. The first-time setup walks you through it with step-by-step guides. The official pages:</p>
+      <ul class="plain-list">
         <li><a rel="noopener noreferrer" href="https://ai.google.dev/gemini-api/docs/api-key">Gemini (Google)</a>: has a free plan.</li>
         <li><a rel="noopener noreferrer" href="https://console.groq.com/docs/rate-limits">Groq</a>: has a free plan.</li>
         <li><a rel="noopener noreferrer" href="https://openrouter.ai/docs/faq">OpenRouter</a>: some free models with low limits.</li>
@@ -269,28 +446,28 @@
         <li><a rel="noopener noreferrer" href="https://ollama.com/download">Ollama</a>: runs on your own computer, free, nothing leaves it.</li>
       </ul>
       <p class="note muted">Free tiers can be generous, but some providers may use what you send them to improve their products, so keep private notes out of free-tier requests. Daftari works fully without the AI.</p>
+    </div>
     </section>
 
     <section class="plain" id="privacy" aria-labelledby="privacy-title">
-      <h2 id="privacy-title">How it looks after your data</h2>
-      <ul class="facts">
-        <li><strong><svg class="icon i-key" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M215.15 40.85A78 78 0 0 0 86.2 121.31l-56.1 56.1a13.94 13.94 0 0 0-4.1 9.9V216a14 14 0 0 0 14 14h32a6 6 0 0 0 6-6v-18h18a6 6 0 0 0 6-6v-18h18a6 6 0 0 0 4.24-1.76l10.45-10.44A77.6 77.6 0 0 0 160 174h.1a78 78 0 0 0 55.05-133.15M226 98.16c-1.12 35.16-30.67 63.8-65.88 63.84a65.9 65.9 0 0 1-24.51-4.67a6 6 0 0 0-6.64 1.26L117.51 170H96a6 6 0 0 0-6 6v18H72a6 6 0 0 0-6 6v18H40a2 2 0 0 1-2-2v-28.69a2 2 0 0 1 .58-1.41l58.83-58.83a6 6 0 0 0 1.26-6.64A65.6 65.6 0 0 1 94 95.92c0-35.21 28.68-64.76 63.83-65.92A66 66 0 0 1 226 98.16M190 76a10 10 0 1 1-10-10a10 10 0 0 1 10 10"/></svg>Your AI keys are locked away.</strong> They are encrypted with your computer’s own secure storage and kept in Daftari’s settings, never in your notes folder.</li>
-        <li><strong><svg class="icon i-mic" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M128 174a46.06 46.06 0 0 0 46-46V64a46 46 0 0 0-92 0v64a46.06 46.06 0 0 0 46 46M94 64a34 34 0 0 1 68 0v64a34 34 0 0 1-68 0Zm40 141.75V240a6 6 0 0 1-12 0v-34.25A78.09 78.09 0 0 1 50 128a6 6 0 0 1 12 0a66 66 0 0 0 132 0a6 6 0 0 1 12 0a78.09 78.09 0 0 1-72 77.75"/></svg>Recordings stay on your computer.</strong> Lecture audio is kept in Daftari’s own folder, outside your notes, and is never synced.</li>
-        <li><strong><svg class="icon i-lock" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M208 82h-34V56a46 46 0 0 0-92 0v26H48a14 14 0 0 0-14 14v112a14 14 0 0 0 14 14h160a14 14 0 0 0 14-14V96a14 14 0 0 0-14-14M94 56a34 34 0 0 1 68 0v26H94Zm116 152a2 2 0 0 1-2 2H48a2 2 0 0 1-2-2V96a2 2 0 0 1 2-2h160a2 2 0 0 1 2 2Z"/></svg>No analytics, no tracking.</strong> No accounts, no analytics, no advertising, in the app and on this website (no cookies, no forms, nothing from other sites; its one small script only moves the pictures and the lamp, and switches between light and dark; it stores nothing).</li>
-        <li><strong><svg class="icon i-sync" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 48v48a6 6 0 0 1-6 6h-48a6 6 0 0 1 0-12h33.52l-18.05-18a81.5 81.5 0 0 0-57.53-24h-.46a81.5 81.5 0 0 0-57.29 23.28a6 6 0 1 1-8.38-8.58a93.38 93.38 0 0 1 65.67-26.76h.52a93.45 93.45 0 0 1 66 27.53l18 18V48a6 6 0 0 1 12 0m-34.19 136.72a81.5 81.5 0 0 1-57.29 23.34h-.46a81.5 81.5 0 0 1-57.53-24L54.48 166H88a6 6 0 0 0 0-12H40a6 6 0 0 0-6 6v48a6 6 0 0 0 12 0v-33.52l18 18.05a93.45 93.45 0 0 0 66 27.53h.52a93.38 93.38 0 0 0 65.67-26.76a6 6 0 1 0-8.38-8.58"/></svg>You decide about updates.</strong> The check for a new version can be switched off in Settings → About.</li>
+      <div class="wrap">
+      <h2 id="privacy-title">What happens to your data</h2>
+      <ul class="plain-list">
+        <li>Your AI keys are encrypted with your computer’s own secure storage and kept in Daftari’s settings, never in your notes folder.</li>
+        <li>Lecture audio is kept in Daftari’s own folder, outside your notes, and is never synced.</li>
+        <li>There are no accounts, no analytics and no advertising, in the app or on this website. The website has no cookies and no forms, loads nothing from other sites, and its one small script stores nothing.</li>
+        <li>The check for a new version can be switched off in Settings → About.</li>
       </ul>
       <p class="muted small">Daftari contacts the internet only when you ask it to: the AI company you set up, GitHub (if you turn on sync, and to look for a new version), and the download sites for the speech-to-text program. Your notes stay in the folder you chose; if you pick a cloud folder or turn on GitHub sync, that service holds a copy.</p>
+    </div>
     </section>
 
     <section class="plain" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
       <h2 id="faq-title">Questions</h2>
-      <p class="muted faq-intro">Short answers, grouped. Click a question to open it.</p>
-      <div class="faq-groups">
-        <div class="faq-group" role="group" aria-labelledby="faq-start">
-          <h3 id="faq-start"><svg class="icon i-download" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 144v64a6 6 0 0 1-6 6H40a6 6 0 0 1-6-6v-64a6 6 0 0 1 12 0v58h164v-58a6 6 0 0 1 12 0m-98.24 4.24a6 6 0 0 0 8.48 0l40-40a6 6 0 0 0-8.48-8.48L134 129.51V32a6 6 0 0 0-12 0v97.51L92.24 99.76a6 6 0 0 0-8.48 8.48Z"/></svg>Getting started</h3>
-          <div class="faq">
-            <details>
-              <summary><span class="q">Does it cost anything?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
+      <div class="faq">
+        <details>
+              <summary><span class="q">Does it cost anything?</span></summary>
               <div class="answer">
                 <p>No. Daftari is free:</p>
                 <ul>
@@ -299,169 +476,78 @@
                 </ul>
               </div>
             </details>
-            <details>
-              <summary><span class="q">Which computers does it run on?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
+        <details>
+              <summary><span class="q">Why does Windows or macOS warn me?</span></summary>
               <div class="answer">
+                <p>Because Daftari is not registered with Microsoft or Apple. Registering means paying them every year so that your computer recognises who made a program, and Daftari, a free project by one person, is not registered. The warning appears when you first open it:</p>
                 <ul>
-                  <li><strong>Windows 10 or 11</strong>, 64-bit.</li>
-                  <li><strong>Macs with Apple silicon</strong> (M1 or newer) on macOS 12 or later. Not sure? See <a rel="noopener noreferrer" href="https://support.apple.com/en-us/116943">Apple’s list of Macs with Apple silicon</a>.</li>
-                  <li>Intel Macs and Linux are coming. There is no phone version.</li>
-                </ul>
-                <p class="answer-more"><a href="#needs-title">What you need</a> lists the disk space.</p>
-              </div>
-            </details>
-            <details>
-              <summary><span class="q">Why does Windows or macOS warn me?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
-              <div class="answer">
-                <p>Because the installers are not signed. A signature is a paid certificate that tells your computer who made a program, and Daftari, a free project by one person, does not have one yet. The warning appears once:</p>
-                <ul>
-                  <li><strong>Windows:</strong> “Windows protected your PC” → <strong>More info</strong> → <strong>Run anyway</strong>.</li>
-                  <li><strong>Mac:</strong> System Settings → Privacy &amp; Security → <strong>Open Anyway</strong> (<a rel="noopener noreferrer" href="https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac">Apple’s guide</a>).</li>
+                  <li>Windows: “Windows protected your PC” → More info → Run anyway.</li>
+                  <li>Mac: System Settings → Privacy &amp; Security → Open Anyway (<a rel="noopener noreferrer" href="https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac">Apple’s guide</a>).</li>
                 </ul>
                 <p class="answer-more">Step by step: <a href="#open">Opening it the first time</a>.</p>
               </div>
             </details>
-            <details>
-              <summary><span class="q">Is it safe?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
+        <details>
+              <summary><span class="q">Is it safe?</span></summary>
               <div class="answer">
                 <ul>
-                  <li><strong>Checkable downloads:</strong> the installers are built automatically on GitHub and published with a SHA-256 checksum, so you can <a href="#download">check your file is the one that was published</a>.</li>
-                  <li><strong>Only what it needs:</strong> Daftari reads and writes your notes folder, its own settings folder and files you pick yourself, and uses the microphone only while you record.</li>
-                  <li><strong>Little internet:</strong> it goes online only for the things listed under <a href="#privacy">How it looks after your data</a>.</li>
-                  <li><strong>Nothing runs by surprise:</strong> programs attached to a page are never opened, only shown in their folder.</li>
+                  <li>Checkable downloads: the installers are built automatically on GitHub and published with a SHA-256 checksum, so you can <a href="#download">check your file is the one that was published</a>.</li>
+                  <li>Only what it needs: Daftari reads and writes your notes folder, its own settings folder and files you pick yourself, and uses the microphone only while you record.</li>
+                  <li>Little internet: it goes online only for the things listed under <a href="#privacy">How it looks after your data</a>.</li>
+                  <li>Nothing runs by surprise: programs attached to a page are never opened, only shown in their folder.</li>
                 </ul>
                 <p class="answer-more">Found a security problem? <a href="#report">Report it privately</a>.</p>
               </div>
             </details>
-          </div>
-        </div>
-
-        <div class="faq-group" role="group" aria-labelledby="faq-notes">
-          <h3 id="faq-notes"><svg class="icon i-folder" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="M19.895 12.392c-1.626-.24-9.599.12-10.277.12c-.898 0-.798.279-.998-.51a4.46 4.46 0 0 0-.619-2.025c-.808-.808-6.166 0-6.825 1.417c-.329.688.39 2.375.61 3.093a51 51 0 0 0 2.234 6.985a.301.301 0 1 0 .549-.25a51 51 0 0 1-1.996-6.904a10 10 0 0 1-.578-2.505c.319-.638 3.173-1.107 3.99-1.097l1.388.06c.24.349.18 1.995.778 2.604c.599.608 4.25.06 8.84.18c.2 0 3.233-.21 3.622.259c.39.469-.279 2.933-.429 3.482c-.339 1.277-.738 4.1-1.357 5.168c-.16.28-.13.46-1.826.6c-2.205.189-3.701-.06-8.191 0l-2.146-.12c-.548 0-1.087-.26-1.177.209c-.13.728 1.157.4 8.89.798c1.48.112 2.97.008 4.42-.31c1.357-.498 1.766-4.13 2.325-6.086c.34-1.157.998-3.562.27-4.49a2.46 2.46 0 0 0-1.497-.678M5.597 8.35c.13.43.509.4.618.15c.21-.458-.14-1.376-.14-1.396s-.339-4.111.01-5.199c.26-.788 2.794-.768 3.623-.778c1.237 0 8.261.26 8.82 1.058c.16.239.08.608 0 .997a47 47 0 0 1-1.177 7.125a.339.339 0 1 0 .658.15a49.6 49.6 0 0 0 1.477-7.175a2.23 2.23 0 0 0-.16-1.696C18.778.698 17.151.608 16.143.448C13.56.08 8.64-.4 6.205.578c-1.057.42-1.077 1.197-1.097 2.255c.028 1.849.192 3.693.489 5.518m17.192-3.033a3.22 3.22 0 0 0-1.816-1.228a.3.3 0 0 0-.25.54c1.647.937 1.178 1.266.918 1.835a28.4 28.4 0 0 1-1.786 4.12a.34.34 0 0 0 .589.34c.409-.758 3.053-4.24 2.345-5.607"/><path d="M16.523 5.258a.4.4 0 0 0 .09-.689c-.18-.17-.62-.22-1.906-.399a17 17 0 0 0-4.191-.06c-1.637 0-1.716 0-1.996.14a.29.29 0 0 0 .17.489l.569.08c1.774.34 3.586.44 5.388.299c.07.01 1.796.18 1.876.14m-.469 2.554a4.6 4.6 0 0 0-1.906-.449a14.8 14.8 0 0 0-3.053-.19c-1.098.08-2.904-.19-2.675.53a.3.3 0 0 0 .38.189c.538-.13.738.38 5.278.439a4.6 4.6 0 0 1 1.616.05a.339.339 0 1 0 .36-.569M1.945 6.036q.432 1.039.758 2.115a.3.3 0 0 0 .599-.06a18 18 0 0 0-.49-3.103c-.129-.608-.528-.997 1.527-1.706a.34.34 0 0 0-.16-.658c-2.683.369-2.973 1.367-2.234 3.412"/></g></svg>Your notes</h3>
-          <div class="faq">
-            <details>
-              <summary><span class="q">Where do my notes go?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
+        <details>
+              <summary><span class="q">Where do my notes go?</span></summary>
               <div class="answer">
                 <p>Into a folder you choose the first time Daftari opens:</p>
                 <ul>
-                  <li><strong>Only on this computer:</strong> “Documents/Daftari Notes”;</li>
-                  <li><strong>In a cloud folder:</strong> OneDrive, iCloud Drive, Google Drive or Dropbox;</li>
-                  <li><strong>Synced with GitHub</strong>, for advanced users.</li>
+                  <li>Only on this computer: “Documents/Daftari Notes”;</li>
+                  <li>In a cloud folder: OneDrive, iCloud Drive, Google Drive or Dropbox;</li>
+                  <li>Synced with GitHub, for advanced users.</li>
                 </ul>
                 <p>Every page is its own file; pictures and attachments sit next to them in an <code>assets</code> folder. Recordings and Daftari’s settings are kept apart, in Daftari’s own folder on your computer.</p>
               </div>
             </details>
-            <details>
-              <summary><span class="q">Can I use my notes on two computers?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
-              <div class="answer">
-                <p>Yes, in one of two ways:</p>
-                <ul>
-                  <li><strong>A cloud folder</strong> (OneDrive, iCloud Drive, Google Drive or Dropbox) that both computers can see. Avoid editing the same page on both at once.</li>
-                  <li><strong>GitHub sync</strong>, in Settings → Sync, with your own private repository (<a rel="noopener noreferrer" href="https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository">how to make one</a>). If a page changed on both computers, Daftari keeps both versions.</li>
-                </ul>
-                <p class="answer-more">Use one or the other, not both together.</p>
-              </div>
-            </details>
-            <details>
-              <summary><span class="q">Does it work offline?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
+        <details>
+              <summary><span class="q">Does it work offline?</span></summary>
               <div class="answer">
                 <ul>
-                  <li><strong>Without the internet:</strong> writing, search, flashcards, quizzes, recording, and speech-to-text once its model is downloaded.</li>
-                  <li><strong>Needs a connection:</strong> an online AI provider (<a rel="noopener noreferrer" href="https://ollama.com/download">Ollama</a> runs on your own computer instead), sync, downloads and updates.</li>
+                  <li>Without the internet: writing, search, flashcards, quizzes, recording, and speech-to-text once its model is downloaded.</li>
+                  <li>Needs a connection: an online AI provider (<a rel="noopener noreferrer" href="https://ollama.com/download">Ollama</a> runs on your own computer instead), sync, downloads and updates.</li>
                 </ul>
               </div>
             </details>
-            <details>
-              <summary><span class="q">Can I get my notes out of Daftari?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
+        <details>
+              <summary><span class="q">How do I remove it?</span></summary>
               <div class="answer">
-                <ul>
-                  <li>They are already ordinary files in your folder.</li>
-                  <li>Settings → Notes → <strong>Export all notes</strong> makes a zip with one <a rel="noopener noreferrer" href="https://www.markdownguide.org/getting-started/">Markdown</a> file per page, plus the pictures and attachments, in the same folders as in Daftari. Almost any other notes app can open them.</li>
-                </ul>
-              </div>
-            </details>
-          </div>
-        </div>
-
-        <div class="faq-group" role="group" aria-labelledby="faq-lectures">
-          <h3 id="faq-lectures"><svg class="icon i-mic" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M128 174a46.06 46.06 0 0 0 46-46V64a46 46 0 0 0-92 0v64a46.06 46.06 0 0 0 46 46M94 64a34 34 0 0 1 68 0v64a34 34 0 0 1-68 0Zm40 141.75V240a6 6 0 0 1-12 0v-34.25A78.09 78.09 0 0 1 50 128a6 6 0 0 1 12 0a66 66 0 0 0 132 0a6 6 0 0 1 12 0a78.09 78.09 0 0 1-72 77.75"/></svg>Lectures and AI</h3>
-          <div class="faq">
-            <details>
-              <summary><span class="q">Do I need an AI key?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
-              <div class="answer">
-                <p>No. Writing, recording, transcription, search and flashcards all work without one. A key adds:</p>
-                <ul>
-                  <li>the AI helper (improve, summarise, make flashcards or a quiz from a page);</li>
-                  <li>written notes from a lecture, made as it goes.</li>
-                </ul>
-                <p class="answer-more">The first-time setup shows how to get one. <a href="#ai">Which providers, and which are free</a>.</p>
-              </div>
-            </details>
-            <details>
-              <summary><span class="q">Which languages can it transcribe?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
-              <div class="answer">
-                <p>English, for now. The speech-to-text (<a rel="noopener noreferrer" href="https://github.com/ggml-org/whisper.cpp">whisper.cpp</a>) runs on your computer and is set to English for every model.</p>
-              </div>
-            </details>
-            <details>
-              <summary><span class="q">What happens to my lecture recordings?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
-              <div class="answer">
-                <ul>
-                  <li>The audio stays on your computer, in Daftari’s own folder (not your notes folder), and is <strong>never synced</strong>.</li>
-                  <li>After you save a lecture’s notes, Daftari offers to delete the audio and keep the transcript.</li>
-                  <li>From the Recordings list you can export a recording as an audio file, or delete it.</li>
-                </ul>
-              </div>
-            </details>
-          </div>
-        </div>
-
-        <div class="faq-group" role="group" aria-labelledby="faq-keep">
-          <h3 id="faq-keep"><svg class="icon i-sync" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 48v48a6 6 0 0 1-6 6h-48a6 6 0 0 1 0-12h33.52l-18.05-18a81.5 81.5 0 0 0-57.53-24h-.46a81.5 81.5 0 0 0-57.29 23.28a6 6 0 1 1-8.38-8.58a93.38 93.38 0 0 1 65.67-26.76h.52a93.45 93.45 0 0 1 66 27.53l18 18V48a6 6 0 0 1 12 0m-34.19 136.72a81.5 81.5 0 0 1-57.29 23.34h-.46a81.5 81.5 0 0 1-57.53-24L54.48 166H88a6 6 0 0 0 0-12H40a6 6 0 0 0-6 6v48a6 6 0 0 0 12 0v-33.52l18 18.05a93.45 93.45 0 0 0 66 27.53h.52a93.38 93.38 0 0 0 65.67-26.76a6 6 0 1 0-8.38-8.58"/></svg>Updating, removing and help</h3>
-          <div class="faq">
-            <details>
-              <summary><span class="q">How do I update?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
-              <div class="answer">
-                <ul>
-                  <li><strong>Windows:</strong> Daftari downloads a new version by itself and installs it when you close it, or at once with <strong>Update now</strong> in Settings → About. Never in the middle of a recording or a transcription.</li>
-                  <li><strong>Mac:</strong> Daftari tells you a new version is ready and opens this page. <a href="#download">Download it</a> and drag it into Applications to replace the old one.</li>
-                </ul>
-                <p class="answer-more">Your notes are not touched either way. <a href="#changes">What changed in each version</a>.</p>
-              </div>
-            </details>
-            <details>
-              <summary><span class="q">How do I remove it?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
-              <div class="answer">
-                <p><strong>From Daftari 0.2:</strong> Settings → General → <strong>Remove Daftari from this computer…</strong></p>
+                <p>Open Settings → General → Remove Daftari from this computer…</p>
                 <ul>
                   <li>Choose whether Daftari’s settings, keys and recordings go too.</li>
                   <li>Your notes stay unless you tick them and type DELETE.</li>
                   <li>Everything goes to the Recycle Bin or Bin first, so it can be put back.</li>
                 </ul>
-                <p><strong>In version 0.1:</strong></p>
-                <ul>
-                  <li><strong>Windows:</strong> Settings → Apps → Installed apps → Daftari → <strong>Uninstall</strong> (<a rel="noopener noreferrer" href="https://support.microsoft.com/en-us/windows/uninstall-or-remove-apps-and-programs-in-windows-4b55f974-2cc6-2d2b-d092-5905080eaf98">Microsoft’s guide</a>).</li>
-                  <li><strong>Mac:</strong> quit Daftari and drag it from Applications to the Bin.</li>
-                  <li>Your notes folder stays. To remove Daftari’s own folder too, delete <code>%APPDATA%\Daftari</code> (Windows) or <code>~/Library/Application Support/Daftari</code> (Mac).</li>
-                </ul>
               </div>
             </details>
-            <details id="report">
-              <summary><span class="q">How do I report a bug or ask for a feature?</span><svg class="faq-plus" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path fill="currentColor" d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6"/></svg></summary>
+        <details id="report">
+              <summary><span class="q">How do I report a bug or ask for a feature?</span></summary>
               <div class="answer">
                 <ol>
-                  <li>Open <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">Daftari’s Issues page</a> on GitHub and choose <strong>New issue</strong> (you need a free account: <a rel="noopener noreferrer" href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github">how to make one</a>).</li>
+                  <li>Open <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">Daftari’s Issues page</a> on GitHub and choose New issue (you need a free account: <a rel="noopener noreferrer" href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github">how to make one</a>).</li>
                   <li>Say what you did, what happened, and your Daftari version (Settings → About).</li>
                 </ol>
-                <p class="answer-more"><strong>A security problem?</strong> Don’t post it publicly: use <strong>Security</strong> → <strong>Report a vulnerability</strong> in the repository (<a rel="noopener noreferrer" href="https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability">GitHub’s guide</a>).</p>
+                <p class="answer-more">A security problem? Don’t post it publicly: use Security → Report a vulnerability in the repository (<a rel="noopener noreferrer" href="https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability">GitHub’s guide</a>).</p>
               </div>
             </details>
-          </div>
-        </div>
       </div>
+      <p class="muted small faq-more">Something else? <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">Ask on GitHub</a>, or message me.</p>
+    </div>
     </section>
 
     <section class="plain" id="changes" aria-labelledby="changes-title">
+      <div class="wrap">
       <h2 id="changes-title">Changes</h2>
       <!-- One line per release, newest first: <li><strong>0.2.0</strong> – 1 November 2026 – what changed.</li> -->
       <ol class="changes" reversed>
@@ -470,14 +556,17 @@
         <li><strong>0.1.2</strong> – 10 October 2026 – no changes you will notice; checked that Windows installs updates by itself.</li>
         <li><strong>0.1.1</strong> – 10 October 2026 – first release.</li>
       </ol>
+    </div>
     </section>
   </main>
 
   <footer>
-    <a class="brand" href="#top" aria-label="Daftari, back to the top"><img src="img/icon.png" width="40" height="40" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
-    <p>Found a bug or have an idea? Message Momin on <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">GitHub</a>.</p>
-    <p><strong>Made by Momin.</strong> © 2026 Momin. All rights reserved.</p>
-    <p class="muted small"><a href="#changes">Changes</a> · Daftari is built with open-source software, fonts and icons, listed with their licences in <a href="notices.txt">the notices</a>. The Lexend and Source Serif fonts on this page are under the SIL Open Font Licence; the icons are Phosphor (MIT) and Streamline Freehand by Streamline (CC BY 4.0), as in the app.</p>
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Daftari, back to the top"><img src="img/icon.png?v=1ff9049137" width="32" height="32" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
+      <p>Found a bug or have an idea? Message Momin on <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">GitHub</a>.</p>
+      <p><strong>Made by Momin.</strong> © 2026 Momin. All rights reserved.</p>
+      <p class="small"><a href="#changes">Changes</a>. Daftari is built with open-source software, fonts and icons, listed with their licences in <a href="notices.txt">the notices</a>. The fonts on this page, Atkinson Hyperlegible Next and Source Serif 4, are under the SIL Open Font Licence.</p>
+    </div>
   </footer>
 </body>
 </html>
