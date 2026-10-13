@@ -1,22 +1,11 @@
-// The Daftari website's only script. It sends nothing anywhere and stores nothing. It does three small things:
-//
-// 1. Light or dark. It follows the computer's setting; the sun/moon button switches it for this visit only.
-// 2. A link to a question (for example "#report") opens that question.
-// 3. The story. While you scroll through the five steps of a lecture, the drawn Daftari window shows the step in view:
-//    the script only writes the step's name on the story (data-view="transcript"); the style sheet shows that view.
-//    On a phone there is no pinned window: the script copies each view into its own step instead, so each step has a small
-//    window under its text.
-//    When the transcript step arrives, its lines come in one by one and the key words are marked, once.
-//
-// Without this script the page is complete: every step is readable and the window shows the finished notes.
-// When the computer asks for less motion, the window still changes with the steps, but nothing slides or fades.
+// site.js - sends nothing, saves nothing. dark mode, faq links n the scroll story. page works fine w/o it
 (function () {
   'use strict'
   var root = document.documentElement
   root.classList.add('js')
   var lessMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-  // ---------- 1. light or dark ----------
+  // light / dark
   var darkSetting = window.matchMedia('(prefers-color-scheme: dark)')
   var chosenTheme = null
   function applyTheme() {
@@ -38,7 +27,7 @@
       applyTheme()
     })
 
-    // ---------- 2. a link to a question opens it ----------
+    // #link to a question opens it
     function openTarget() {
       var id = location.hash.slice(1)
       var el = id ? document.getElementById(id) : null
@@ -48,9 +37,7 @@
     openTarget()
 
 
-    // ---------- 4. the character blinks and wags its tongue now and then ----------
-    // (A few moments, not a constant animation: the lines are drawn with a wobble filter, and a filter that is redrawn
-    // every frame would use the battery. Only drawings that are on screen move, and not while the page is hidden.)
+    // blinks + tongue now n then. only on screen stuff, not a loop (battery)
     var drawings = document.querySelectorAll('.ill')
     function onScreen(el) {
       var r = el.getBoundingClientRect()
@@ -72,14 +59,13 @@
       steps.forEach(function (st) { setTimeout(function () { forVisible(function (d) { d.style.setProperty('--wag', st[0]) }) }, st[1]) })
     })
 
-    // ---------- 3. the story ----------
+    // the story
     var story = document.querySelector('.story')
     var steps = story ? story.querySelectorAll('.step') : []
     var transcript = story ? story.querySelector('.v-transcript') : null
     if (!story || !steps.length || !('IntersectionObserver' in window)) return
 
-    // Each step plays its own small moment when it arrives: the view gets the class "go" again, which restarts its animations.
-    // (The recording clock really counts while the first step is in view.)
+    // replay each step's lil animation when u get there. the rec clock actually counts on step 1
     var clockTimer = null
     function startClock(view) {
       if (clockTimer) { clearInterval(clockTimer); clockTimer = null }
@@ -93,7 +79,7 @@
       var el = story.querySelector('.stage .v-' + view)
       if (!el || lessMotion.matches) return
       el.classList.remove('go')
-      void el.offsetWidth // let the browser notice, so the animations start again
+      void el.offsetWidth // restart the animation
       el.classList.add('go')
     }
     var progress = story.querySelectorAll('.progress a')
@@ -111,20 +97,18 @@
       if (story.getAttribute('data-view') === view) return
       story.setAttribute('data-view', view)
       startClock(view)
-      // the flashcard only turns while step 4 is in view
+      // card only flips on step 4
       var study = story.querySelector('.stage .v-study')
       if (study && view !== 'study') study.classList.remove('go')
       if (view !== 'transcript') replay(view)
-      // the transcript plays in the first time it is shown (not when the computer asks for less motion)
+      // transcript plays once (not w/ reduced motion)
       if (view === 'transcript' && !played && transcript && !lessMotion.matches) {
         played = true
         transcript.classList.add('play')
-        // afterwards it is just shown, so coming back to this step does not play it again
         setTimeout(function () { transcript.classList.remove('play') }, 3400)
       }
     }
-    // On a phone each step gets its own small window: the views are copied into the steps (the copies are only drawn on
-    // narrow screens; the style sheet hides them elsewhere).
+    // phones: copy each view under its step
     var stageWindow = story.querySelector('.stage .window')
     if (stageWindow) {
       for (var s = 0; s < steps.length; s++) {
@@ -142,12 +126,11 @@
       story.classList.add('has-mini')
     }
 
-    // The step that crosses the middle of the window is the one in view (the stage is hidden on a phone, where this does nothing visible).
+    // whichever step crosses the middle is the active one
     var watcher = new IntersectionObserver(function (entries) {
       for (var i = 0; i < entries.length; i++) if (entries[i].isIntersecting) show(entries[i].target)
     }, { rootMargin: '-45% 0px -45% 0px' })
     for (var i = 0; i < steps.length; i++) watcher.observe(steps[i])
-    // Before the first step reaches the middle, show the start of the lecture.
     story.setAttribute('data-view', 'record')
     steps[0].classList.add('on')
     markProgress('record')

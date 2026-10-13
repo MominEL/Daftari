@@ -3,13 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!--
-    Security: no analytics, no cookies, no forms, no third-party anything. One small script from this site (site.js) shows
-    the step of the lecture you have scrolled to in the drawn Daftari window, and switches between light and dark; it sends
-    and stores nothing. Without it the page is complete: every step is readable and the window shows the finished notes.
-    Pictures, fonts and the script come from this site only.
-    (GitHub Pages cannot send security headers, so the policy is set here.)
-  -->
+  <!-- no tracking, no cookies, nothing third party. site.js only does the scroll story + dark mode -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'" />
   <meta name="referrer" content="no-referrer" />
   <meta name="color-scheme" content="light dark" />
@@ -17,7 +11,7 @@
   <title>Daftari – a quiet notebook for lectures</title>
   <meta name="description" content="Daftari: a free notebook for lectures, with built-in AI. Records and transcribes on your own computer, writes the notes while you listen, and keeps them as plain files in a folder you choose." />
   <link rel="canonical" href="https://mominel.github.io/Daftari/" />
-  <!-- How the link looks when it is shared (WhatsApp, iMessage, Discord…) -->
+  <!-- link previews -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Daftari" />
   <meta property="og:title" content="Daftari – a quiet notebook for lectures" />
@@ -29,21 +23,19 @@
   <meta property="og:image:alt" content="Daftari, a notebook for lectures. The words “One lecture, from the first word to the flashcards.” beside a small Daftari window: a lecture transcript with key words marked in yellow, and the note written from them." />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="img/icon.png?v=1ff9049137" type="image/png" />
-  <link rel="stylesheet" href="style.css?v=76f946a4a6" />
-  <script src="site.js?v=e7e65a9bec"></script>
+  <link rel="stylesheet" href="style.css?v=2c757b162e" />
+  <script src="site.js?v=2a7e565e59"></script>
 </head>
 <body>
 <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
   <defs>
-    <!-- a slight wobble, so the lines look drawn by hand -->
+    <!-- wobble filter so the lines look hand drawn -->
     <filter id="wobble" x="-6%" y="-6%" width="112%" height="112%">
       <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7" result="n"/>
       <feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
 
-    <!-- the character: a notebook with a face. Local size about 130 x 200. -->
-    <!-- the character: one body and a few faces. The face changes with what is happening (the bookmark tongue is for concentrating,
-         and it is the logo's face) -->
+    <!-- the notebook + its faces (tongue out = concentrating, same as the logo) -->
     <g id="hair"><path class="ink f-hl" d="M84 8 L84 -14 L92 -6 L100 -14 L100 8"/></g>
     <g id="nb-body">
       <path class="ink thick" d="M48 150 L46 178 M86 150 L88 178"/>
@@ -71,7 +63,7 @@
     <g id="nb-listen"><use href="#hair"/><use href="#nb-body"/><use href="#face-listen"/></g>
     <g id="nb-tongue"><use href="#nb-body"/><use href="#face-tongue"/></g>
 
-    <!-- parts the scenes are made of -->
+    <!-- bits for the scenes -->
     <g id="p-mic">
       <rect class="ink f-paper" x="0" y="0" width="28" height="48" rx="14"/>
       <path class="ink" d="M-6 34 Q14 62 34 34 M14 58 V76"/>
@@ -120,7 +112,7 @@
       <path class="ink f-paper" d="M0 54 L7 70 L14 54 Z"/>
     </g>
 
-    <!-- one scene per step -->
+    <!-- a scene per step -->
     <g id="s-record" filter="url(#wobble)">
       <path class="ink thin" d="M14 236 H346"/>
       <use href="#nb-listen" transform="translate(70,36)"/>
@@ -132,7 +124,7 @@
     </g>
     <g id="s-transcript" filter="url(#wobble)">
       <path class="ink thin" d="M14 236 H346"/>
-      <!-- the lecturer, behind a lectern -->
+      <!-- lecturer -->
       <circle class="ink f-paper" cx="58" cy="72" r="20"/>
       <path class="ink thin" d="M42 62 Q50 48 66 52 M48 56 Q52 46 62 48"/>
       <circle class="f-ink" cx="52" cy="72" r="2.6"/><circle class="f-ink" cx="64" cy="72" r="2.6"/>
@@ -160,7 +152,7 @@
       <use href="#nb" transform="translate(24,36)"/>
       <path class="ink" d="M32 132 Q16 150 22 178"/>
       <path class="ink" d="M140 132 Q154 126 160 110"/>
-      <!-- holding up a round badge with a green tick -->
+      <!-- holding a tick badge -->
       <circle class="ink f-paper" cx="178" cy="76" r="30"/>
       <path class="ink ok thick2" d="M162 78 L174 91 L196 60"/>
       <circle class="ink f-paper" cx="161" cy="106" r="9"/>
@@ -279,7 +271,7 @@
             <a href="#step-files" data-view="files"><b>5</b>Files</a>
           </nav>
           <div class="window" aria-hidden="true">
-            <!-- 1. recording has just started -->
+            <!-- 1 recording -->
             <div class="view v-record">
               <div class="w-top"><span>Pages</span><span class="on"><i class="dot"></i>Week 3: Sleep and memory</span><span class="off"><i class="dot b"></i>Week 4: Stress</span><span class="grow"></span><span class="rec"><i></i>Recording <b>0:12</b><u class="tag">Recording has started</u></span></div>
               <div class="w-body">
@@ -289,7 +281,7 @@
                   <ol class="tx"><li><time>0:04</time><span>Right, let’s start with a question: why do you remember more after a good night’s sleep?</span></li></ol></div>
               </div>
             </div>
-            <!-- 2. the transcript fills in -->
+            <!-- 2 transcript -->
             <div class="view v-transcript">
               <div class="w-top"><span>Pages</span><span class="on"><i class="dot"></i>Week 3: Sleep and memory</span><span class="off"><i class="dot b"></i>Week 4: Stress</span><span class="grow"></span><span class="rec"><i></i>Recording <b>48:07</b></span></div>
               <div class="w-body">
@@ -304,7 +296,7 @@
                   </ol><u class="tag">Words appear as they are said</u></div>
               </div>
             </div>
-            <!-- 3. the notes, written from it (also what shows without the script) -->
+            <!-- 3 notes (also what u see w/o js) -->
             <div class="view v-notes">
               <div class="w-top"><span>Pages</span><span class="on"><i class="dot"></i>Week 3: Sleep and memory</span><span class="off"><i class="dot b"></i>Week 4: Stress</span><span class="grow"></span><span class="rec"><i></i>Recording <b>48:07</b></span></div>
               <div class="w-body">
@@ -322,13 +314,13 @@
                   </ol></div>
               </div>
             </div>
-            <!-- 4. revising -->
+            <!-- 4 revising -->
             <div class="view v-study">
               <div class="w-top"><span class="on">Review: Psychology</span><span class="grow"></span><span class="count">12 cards left</span></div>
               <div class="study"><div class="flip"><div class="card"><div class="face front">What is memory consolidation?</div><div class="face back"><small>Answer</small>Turning new, fragile memories into stable long-term ones, mostly during deep sleep.</div></div></div>
                 <div class="rate"><span>Again</span><span>Hard</span><span class="pick">Good</span><span>Easy</span><u class="tag">Rate each card</u></div></div>
             </div>
-            <!-- 5. the files on disk -->
+            <!-- 5 files -->
             <div class="view v-files">
               <div class="w-top"><span class="on">Daftari Notes (the folder you chose)</span><span class="grow"></span></div>
               <div class="files">
@@ -549,7 +541,7 @@
     <section class="plain" id="changes" aria-labelledby="changes-title">
       <div class="wrap">
       <h2 id="changes-title">Changes</h2>
-      <!-- One line per release, newest first: <li><strong>0.2.0</strong> – 1 November 2026 – what changed.</li> -->
+      <!-- newest first -->
       <ol class="changes" reversed>
         <li><strong>1.0.0</strong> – 11 October 2026 – the first version for everyone (earlier versions were testing). Mac: Daftari offers to move itself into Applications, ejects the download window and offers to bin the installer; only one Daftari runs at a time; no password prompts after updates. “Report a problem” in Settings → About, plainer error messages with codes, and a fix for flashcards and quizzes hiding when clicked.</li>
         <li><strong>0.2.0</strong> – 11 October 2026 – remove Daftari from Settings → General, choosing what goes with it; clearer update message on Windows.</li>

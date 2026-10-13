@@ -1,18 +1,12 @@
-/* The Daftari website (redesign 2, 2026-10-12; plan: docs/DE_AI_DESIGN_PLAN.md section 3).
-   One idea: follow one lecture through Daftari. While five steps scroll past on the left, one Daftari window stays put on
-   the right and changes with each step (site.js only says which step is in view; this style sheet shows that view).
-   Look: what is on a student's desk in a lecture. White printed handouts, black ink, a blue biro for anything you can
-   click, a yellow highlighter only behind words that matter. Square corners, flat surfaces, a 1 px line for depth, no glows.
-   Fonts: Atkinson Hyperlegible Next for everything you read on the page; Source Serif 4 for the notes inside the drawn
-   window (as in the app). Every text colour passes 4.5:1 on its background, in light and dark. */
-/* Shifty Notes: a hand-lettered font (Niskala Huruf, licence bought by Momin) for headings and buttons. This file has NO digits on purpose: the free demo version draws a "DEMO"
-   badge in their place, so every digit comes from Mali SemiBold (SIL Open Font Licence) through the font stack. */
+/* daftari site. one lecture, 5 steps scrolling on the left, the app window stays put on the right */
+
 @font-face { font-family: 'Atkinson Hyperlegible Next'; font-weight: 200 800; font-display: swap; src: url('fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2') format('woff2'); }
+/* shifty notes for headings. no numbers in this file so mali does the digits */
 @font-face { font-family: 'Shifty Notes'; font-display: swap; src: url('fonts/shifty-notes-nodigits.woff2') format('woff2'); }
 @font-face { font-family: 'Mali Digits'; font-weight: 600; font-display: swap; size-adjust: 86%; src: url('fonts/mali-digits.woff2') format('woff2'); }
 @font-face { font-family: 'Source Serif 4'; font-weight: 200 900; font-display: swap; src: url('fonts/source-serif-4-latin-wght-normal.woff2') format('woff2'); }
 
-/* ---------- colours (light is the main look; dark follows the computer, or the sun/moon button) ---------- */
+/* colours. light by default, dark if ur computer is (or the moon button) */
 :root {
   color-scheme: light;
   --paper: #ffffff; --paper-2: #f3f4f6; --paper-3: #e9ebee;
@@ -20,16 +14,15 @@
   --rule: #dde0e5; --rule-2: #b9bec7;
   --biro: #1f3fb8; --biro-hover: #18339a; --on-biro: #ffffff; --link: #1f3fb8; --biro-soft: #e7ebfa;
   --hl: #ffe24d; --on-hl: #15171c; --rec: #c8291c; --ok: #2f7a45;
-  --font: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', sans-serif; /* all ordinary text */
-  --hand: 'Shifty Notes', 'Mali Digits', 'Atkinson Hyperlegible Next', system-ui, sans-serif; /* headings, buttons, question titles, the signature */
+  --font: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --hand: 'Shifty Notes', 'Mali Digits', 'Atkinson Hyperlegible Next', system-ui, sans-serif; /* headings, buttons */
   --read: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --mono: ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace;
   --ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --ws: 1; /* text and layout scale: 1 on normal screens, larger on wide ones (see the end of this block) */
+  --ws: 1; /* everything gets a bit bigger on big screens */
   --maxw: calc(1180px * var(--ws));
 }
-/* Wide screens: the same page, a little larger. --ws scales every font size, the column and the drawn window together. */
 @media (min-width: 1680px) { :root { --ws: 1.1; } }
 @media (min-width: 2100px) { :root { --ws: 1.25; } }
 @media (min-width: 2800px) { :root { --ws: 1.5; } }
@@ -44,7 +37,7 @@
   --hl: #e8cf45; --rec: #ef5b4c; --ok: #7cc792;
 }
 
-/* ---------- base ---------- */
+/* base */
 * { box-sizing: border-box; }
 html { background: var(--paper); scroll-padding-top: 88px; }
 body { margin: 0; color: var(--ink); background: var(--paper); font: 400 calc(18px * var(--ws))/1.6 var(--font); -webkit-font-smoothing: antialiased; overflow-x: clip; }
@@ -66,7 +59,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 .skip { position: absolute; left: 16px; top: -60px; z-index: 20; background: var(--ink); color: var(--paper); padding: 10px 16px; text-decoration: none; }
 .skip:focus { top: 12px; }
 
-/* buttons: square, flat, a 1 px press. One blue for "do this"; outlined for the second choice. */
+/* buttons */
 .button { display: inline-flex; align-items: center; gap: 10px; padding: 14px 20px; border: 2px solid var(--biro); border-radius: 0;
   background: var(--biro); color: var(--on-biro); font: 700 calc(17px * var(--ws))/1 var(--font); text-decoration: none; transition: background-color 150ms, color 150ms, transform 100ms; }
 .button:hover { background: var(--biro-hover); border-color: var(--biro-hover); }
@@ -75,7 +68,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 .button.second:hover { background: var(--ink); color: var(--paper); }
 .button svg { width: 18px; height: 18px; flex: none; }
 
-/* ---------- header ---------- */
+/* header */
 .top { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 1px solid var(--rule); }
 .top .wrap { display: flex; align-items: center; gap: 24px; min-height: 68px; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 700; font-size: calc(21px * var(--ws)); }
@@ -93,7 +86,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 @media (max-width: 900px) { .top nav a:not(.button) { display: none; } .top .wrap { gap: 12px; } }
 @media (max-width: 420px) { .brand-arabic { display: none; } }
 
-/* ---------- opening ---------- */
+/* top bit */
 .hero { padding: 88px 0 72px; }
 .hero h1 { font-size: clamp(calc(40px * var(--ws)), 6vw, calc(76px * var(--ws))); letter-spacing: -0.035em; line-height: 1.02; max-width: 15ch; }
 .hero-row { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px 56px; align-items: end; margin-top: 28px; }
@@ -112,7 +105,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 @media (max-width: 900px) { .hero { padding: 56px 0 48px; } .hero-row { grid-template-columns: 1fr; } }
 @media (max-width: 700px) { .phone-note { display: block; font-size: calc(16px * var(--ws)); color: var(--ink); background: var(--hl); color: var(--on-hl); padding: 10px 12px; margin-top: 16px; } }
 
-/* ---------- the story: steps on the left, one window that stays put on the right ---------- */
+/* the story */
 .story-wrap { background: var(--paper-2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .story { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); gap: 56px; padding-bottom: 12vh; }
 .steps { list-style: none; margin: 0; padding: 0; }
@@ -127,7 +120,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 .stage { position: sticky; top: 104px; height: calc(100vh - 150px); max-height: calc(640px * var(--ws)); margin-top: clamp(40px, 9vh, 120px); display: flex; flex-direction: column; }
 @supports (height: 100svh) { .stage { height: calc(100svh - 150px); } }
 .stage .window { flex: 1 1 0; min-height: 0; height: auto; }
-/* where you are in the five steps (links, so it works without the script) */
+/* step tabs. plain links so it still works w/o js */
 .progress { display: flex; margin: 0 0 10px; border: 1px solid var(--rule-2); background: var(--paper); font: 600 calc(14px * var(--ws))/1 var(--font); }
 .progress a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 4px; color: var(--ink-2); text-decoration: none; border-right: 1px solid var(--rule); transition: background-color 200ms, color 200ms; }
 .progress a:last-child { border-right: 0; }
@@ -139,14 +132,14 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 .step-window { display: none; }
 .stage-caption { font-size: calc(15px * var(--ws)); color: var(--ink-3); margin: 10px 0 0; }
 
-/* the drawn Daftari window (looks like the app; every view is in the page, the story shows one) */
+/* the fake app window */
 .window { position: relative; height: 100%; border: 1px solid var(--rule-2); background: var(--paper); color: var(--ink); font: calc(15px * var(--ws))/1.5 var(--ui); display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); overflow: hidden; }
 .view { display: grid; grid-area: 1 / 1 / 3 / 2; min-height: 0; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr);
   opacity: 0; visibility: hidden; transform: translateY(8px); pointer-events: none;
   transition: opacity 320ms var(--ease), transform 320ms var(--ease), visibility 0s linear 320ms; }
 .story[data-view="record"] .v-record, .story[data-view="transcript"] .v-transcript, .story[data-view="notes"] .v-notes,
 .story[data-view="study"] .v-study, .story[data-view="files"] .v-files { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition-delay: 0s; }
-/* in each view the part the step is about is outlined and tagged; the rest steps back */
+/* highlight the bit each step is about, dim the rest */
 .tag { position: absolute; z-index: 3; background: var(--biro); color: var(--on-biro); font: 700 calc(12.5px * var(--ws))/1.25 var(--ui); padding: 4px 8px; text-decoration: none; white-space: nowrap; }
 .w-top .rec { position: relative; }
 .v-record .rec { outline: 2px solid var(--biro); outline-offset: -2px; }
@@ -195,7 +188,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 .w-bottom { display: flex; align-items: center; gap: 14px; padding: 7px 14px; border-top: 1px solid var(--rule); background: var(--paper-2); font-size: calc(13px * var(--ws)); color: var(--ink-3); }
 .w-bottom .cmd { flex: 0 1 360px; margin: 0 auto; display: flex; justify-content: space-between; border: 1px solid var(--rule-2); background: var(--paper); padding: 3px 12px; color: var(--ink-2); }
 .w-bottom kbd { font: calc(12.5px * var(--ws)) var(--mono); color: var(--ink-3); }
-/* the transcript plays in when its step arrives (site.js adds .play; without it everything is simply shown) */
+/* transcript types itself in when u get there */
 .v-transcript.play .tx li { animation: line-in 450ms var(--ease) both; }
 .v-transcript.play .tx li:nth-child(2) { animation-delay: 0.7s; } .v-transcript.play .tx li:nth-child(3) { animation-delay: 1.4s; } .v-transcript.play .tx li:nth-child(4) { animation-delay: 2.1s; }
 .v-transcript.play mark { background-size: 0% 100%; animation: swipe 600ms cubic-bezier(0.45, 0, 0.2, 1) forwards; }
@@ -203,8 +196,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 @keyframes line-in { from { opacity: 0; transform: translateY(6px); } }
 @keyframes swipe { to { background-size: 100% 100%; } }
 
-/* Each step plays one small moment when it arrives (site.js adds .go; without the script everything is simply shown).
-   They happen once, they never loop, and they only use opacity and transform. */
+/* small animation per step. plays once, no loops */
 .view.go .notes li, .view.go .notes .h { animation: line-in 450ms var(--ease) both; }
 .view.go .notes .h { animation-delay: 0.2s; }
 .view.go .notes li:nth-child(1) { animation-delay: 0.7s; }
@@ -212,8 +204,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 .view.go .notes li:nth-child(3) { animation-delay: 2.3s; }
 .view.go .fcard { animation: line-in 450ms var(--ease) 3.1s both; }
 .v-study.go .card { animation: flip 7s ease-in-out infinite; }
-/* the visible face changes while the card is edge-on (halfway), so no browser has to hide a card's back.
-   The turn repeats about every 7 seconds while step 4 is on screen (site.js removes "go" when you leave it). */
+/* swap sides halfway thru the flip. repeats every ~7s on step 4 */
 .v-study.go .face.front { animation: face-out 7s linear infinite; }
 .v-study.go .face.back { animation: face-in 7s linear infinite; }
 .v-study.go .rate span { animation: line-in 400ms var(--ease) 1s both; }
@@ -221,10 +212,9 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 @keyframes flip { 0%, 35% { transform: rotateY(0deg); } 46%, 82% { transform: rotateY(180deg); } 93%, 100% { transform: rotateY(360deg); } }
 @keyframes face-out { 0%, 40.4% { visibility: visible; } 40.5%, 87.4% { visibility: hidden; } 87.5%, 100% { visibility: visible; } }
 @keyframes face-in { 0%, 40.4% { visibility: hidden; } 40.5%, 87.4% { visibility: visible; } 87.5%, 100% { visibility: hidden; } }
-/* revise: the review screen */
+/* revise */
 .study { display: grid; place-content: center; gap: 18px; padding: 24px; background: var(--paper-2); justify-items: center; }
-/* the flashcard: the question side first, then the card turns over to show the answer on its back.
-   Resting state (no script, reduced motion, the copy on a phone) is the answer side; site.js's "go" class plays the turn. */
+/* flashcard. no js = just shows the answer */
 .flip { perspective: 900px; width: min(460px, 100%); }
 .card { display: grid; transform-style: preserve-3d; transform: rotateY(180deg); }
 .face { grid-area: 1 / 1; -webkit-backface-visibility: hidden; backface-visibility: hidden; background: var(--paper); border: 1px solid var(--rule-2); padding: 26px; min-height: calc(150px * var(--ws)); display: grid; place-content: center; text-align: center; }
@@ -234,7 +224,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 .study .rate { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .study .rate span { border: 1px solid var(--rule-2); background: var(--paper); padding: 5px 14px; font-size: calc(14px * var(--ws)); }
 .study .rate .pick { border-color: var(--biro); color: var(--link); }
-/* keep: the folder on disk */
+/* files */
 .files { padding: 24px 30px; font: calc(15px * var(--ws))/2 var(--mono); overflow: hidden; }
 .files .d { font-weight: 700; color: var(--ink); }
 .files .f { color: var(--ink-2); }
@@ -243,8 +233,7 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 @media (max-width: 1000px) { .w-body { grid-template-columns: minmax(0, 1fr) 240px; } .w-page { padding: 18px 20px; } }
 @media (max-width: 860px) {
   .story { grid-template-columns: minmax(0, 1fr); gap: 0; padding-bottom: 6vh; }
-  /* Phones: no window pinned over the text. Without the script the finished window sits above the steps; with it, each step
-     carries its own small window right under its text (site.js copies the views into the steps). */
+  /* phones: no sticky window, each step gets its own mini one */
   .stage { position: static; height: auto; max-height: none; margin: 0 -32px; padding: 16px; order: -1; background: var(--paper-2); border-bottom: 1px solid var(--rule); }
   .stage .window { height: auto; display: block; }
   .stage .view { display: none; }
@@ -268,13 +257,13 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
   .v-record .w-page { padding-top: 54px; }
 }
 
-/* ---------- plain sections ---------- */
+/* normal sections */
 .plain { padding: 104px 0 0; }
 .plain:last-of-type { padding-bottom: 104px; }
 .section-head { max-width: 760px; margin-bottom: 32px; }
 .section-head p { font-size: calc(19px * var(--ws)); color: var(--ink-2); }
 
-/* download: plain, on the page's own paper */
+/* download */
 .download { padding-bottom: 8px; }
 .downloads { list-style: none; padding: 0; margin: 28px 0 0; border-top: 2px solid var(--ink); }
 .downloads > li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 40px; align-items: center; padding: 24px 0; margin: 0; border-bottom: 1px solid var(--rule); }
@@ -295,14 +284,14 @@ code { font: 400 0.82em var(--mono); background: var(--paper-2); border: 1px sol
 .verify[open] { padding-bottom: 8px; }
 @media (max-width: 700px) { .downloads > li { grid-template-columns: 1fr; } }
 
-/* why I made this: one narrow column of ordinary prose, left-aligned, not a grid */
+/* why i made this */
 .why { padding: 120px 0 0; }
 .why-text { max-width: 31em; }
 .why-text p { font: 400 calc(21px * var(--ws))/1.65 var(--read); margin: 0 0 1em; }
 .why-text .sign { font: italic 400 calc(24px * var(--ws))/1.2 var(--read); margin-top: 1.4em; }
 .why-more { max-width: 40em; margin: 40px 0 0; padding-top: 20px; border-top: 1px solid var(--rule); font-size: calc(16px * var(--ws)); color: var(--ink-2); }
 .faq-more { margin-top: 20px; }
-/* opening it the first time: two numbered lists, side by side */
+/* opening it the first time */
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
 .two ol { list-style: none; counter-reset: s; padding: 0; margin: 0; }
 .two ol li { counter-increment: s; position: relative; padding: 12px 0 12px 34px; margin: 0; border-top: 1px solid var(--rule); }
@@ -314,7 +303,7 @@ ul.plain-list li { padding: 10px 0; margin: 0; border-top: 1px solid var(--rule)
 .note { color: var(--ink-2); max-width: 820px; }
 
 
-/* questions: plain <details>, opening smoothly where the browser can (no script needed) */
+/* faq */
 .faq-intro { margin-bottom: 28px; }
 .faq-groups { display: grid; gap: 48px; }
 .faq-group h3 { font-size: calc(22px * var(--ws)); margin-bottom: 10px; }
@@ -339,7 +328,7 @@ ul.plain-list li { padding: 10px 0; margin: 0; border-top: 1px solid var(--rule)
 .changes li { padding: 14px 0; margin: 0; border-top: 1px solid var(--rule); color: var(--ink-2); }
 .changes strong { color: var(--ink); }
 
-/* ---------- footer ---------- */
+/* footer */
 footer { border-top: 1px solid var(--rule); margin-top: 104px; padding: 40px 0 64px; font-size: calc(16px * var(--ws)); color: var(--ink-2); }
 footer .wrap { display: grid; grid-template-columns: auto 1fr; gap: 12px 48px; align-items: start; }
 footer .brand { grid-row: span 3; }
@@ -354,7 +343,7 @@ footer .small { color: var(--ink-3); font-size: calc(15px * var(--ws)); }
   .why { padding-top: 80px; }
 }
 
-/* less motion, when asked */
+/* reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .faq details::details-content { transition: none !important; }
@@ -362,7 +351,7 @@ footer .small { color: var(--ink-3); font-size: calc(15px * var(--ws)); }
 }
 
 
-/* ---------- the drawings: a notebook with a face, in felt-tip lines (original artwork, made for Daftari) ---------- */
+/* drawings */
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 .ink { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .ink.thin { stroke-width: 3; }
@@ -378,16 +367,13 @@ footer .small { color: var(--ink-3); font-size: calc(15px * var(--ws)); }
 .f-ink { fill: var(--ink); stroke: none; }
 .ill { display: block; width: 100%; height: auto; overflow: visible; }
 
-/* the opening: words on the left, the character on the right; a calmer headline with a highlighter swipe */
+/* hero */
 .hero { padding: 72px 0 56px; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr); gap: 24px 56px; align-items: center; }
 .hero h1 { font-size: clamp(calc(34px * var(--ws)), 4.6vw, calc(58px * var(--ws))); letter-spacing: -0.025em; line-height: 1.12; max-width: none; margin-bottom: 0.5em; }
 .hero .lead { margin: 0 0 28px; }
 .hero-art { max-width: 560px; justify-self: end; }
-/* The highlighter stroke sits just under the letters: in Shifty Notes the baseline is 0.95em below the top of the word's box,
-   so the stroke box starts 0.04em under the baseline (0.99em), the same place it had under Atkinson before the font change: the
-   visible stroke runs from about 0.11em to 0.31em below the baseline. It is drawn, not stretched: the finished
-   stroke is uncovered from left to right (clip-path), the way a marker moves. isolation keeps it behind the words but above the page. */
+/* highlighter under the words. draws itself left to right, no stretching */
 .swipe { position: relative; isolation: isolate; white-space: nowrap; }
 .swipe::after { content: ""; position: absolute; z-index: -1; left: -0.08em; right: -0.1em; top: 0.99em; height: 0.34em; background: url(img/underline.svg) no-repeat 0 0 / 100% 100%; }
 .js .swipe::after { clip-path: inset(0 100% 0 0); animation: swipe-draw 850ms cubic-bezier(0.6, 0.05, 0.35, 1) 0.5s forwards; }
@@ -396,11 +382,11 @@ footer .small { color: var(--ink-3); font-size: calc(15px * var(--ws)); }
 .scroll-hint { margin-top: 40px; }
 @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .hero-art { justify-self: center; max-width: 440px; } }
 
-/* a small drawing under each step's words */
+/* doodle under each step */
 .step-art { width: min(100%, calc(300px * var(--ws))); margin-top: 26px; }
 @media (max-width: 860px) { .step-art { width: min(78%, 300px); } }
 
-/* the drawings settle in once; the one for the step in view is a little stronger (opacity and transform only) */
+/* doodles fade in once */
 .js .hero-art { animation: settle 800ms var(--ease) 0.2s both; }
 .js .step-art { transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
 .js .step:not(.on) .step-art { opacity: 0.5; transform: translateY(8px); }
@@ -408,8 +394,8 @@ footer .small { color: var(--ink-3); font-size: calc(15px * var(--ws)); }
 @media (max-width: 860px) { .js .step:not(.on) .step-art { opacity: 1; transform: none; } }
 
 
-/* ---------- hand-made shapes, to match the character (made by tools/make-site-marks.cjs) ---------- */
-/* highlighter marks in the drawn window: marker strokes with uneven ends, three different ones */
+/* hand drawn bits */
+/* marker highlights */
 .window mark { background: url(img/marker-a.svg) no-repeat 0 50% / 100% 100%; color: var(--on-hl); padding: 0 4px; margin: 0 -4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .tx li:nth-child(2) mark { background-image: url(img/marker-b.svg); }
 .tx li:nth-child(3) mark { background-image: url(img/marker-c.svg); }
@@ -417,7 +403,7 @@ footer .small { color: var(--ink-3); font-size: calc(15px * var(--ws)); }
 [data-theme="dark"] .tx li:nth-child(2) mark { background-image: url(img/marker-b-dark.svg); }
 [data-theme="dark"] .tx li:nth-child(3) mark { background-image: url(img/marker-c-dark.svg); }
 [data-theme="dark"] .swipe::after { background-image: url(img/underline-dark.svg); }
-/* buttons and the little labels: felt-tip outlines that are not quite straight */
+/* wobbly buttons n tags */
 .button, .button:hover, .button.second, .button.second:hover { border: 0; border-radius: 0; background: url(img/btn-primary.svg) no-repeat center / 100% 100%; color: var(--on-biro); padding: 17px 26px; }
 .button.second, .button.second:hover { background-image: url(img/btn-second.svg); color: var(--ink); }
 .button:hover { filter: brightness(1.12); }
@@ -428,16 +414,14 @@ footer .small { color: var(--ink-3); font-size: calc(15px * var(--ws)); }
 [data-theme="dark"] .tag { background-image: url(img/tag-dark.svg); }
 
 
-/* the character moves a little: it blinks and wags its tongue now and then (site.js sets --eyes and --wag for a moment, so nothing
-   runs all the time), and a step's drawing hops once when the step arrives */
+/* it blinks n sticks its tongue out sometimes. not looping, saves battery */
 .eye { transform-box: fill-box; transform-origin: center; transform: scaleY(var(--eyes, 1)); transition: transform 90ms; }
 .tongue { transform-box: fill-box; transform-origin: 50% 0; transform: rotate(var(--wag, 0deg)); transition: transform 150ms ease-out; }
 .js .step.on .step-art { animation: hop 700ms var(--ease); }
 @keyframes hop { 0% { transform: translateY(0); } 32% { transform: translateY(-16px); } 58% { transform: translateY(0) scaleY(0.97); } 100% { transform: translateY(0); } }
 
 
-/* ---------- Two fonts (Momin's choice, 2026-10-13): Shifty Notes for headings, buttons, question titles and the signature, spaced out a
-   little because it is narrow; Atkinson Hyperlegible Next for every other text. Shifty has one weight, so nothing in it is "bold". ---------- */
+/* fonts: shifty for headings, atkinson for the rest. shifty is narrow so a bit more spacing */
 h1, h2, h3, .button, .dl-head strong, .brand-name, .faq summary, .why-text .sign { font-family: var(--hand); font-weight: 400; font-synthesis: none; letter-spacing: 0.02em; word-spacing: 0.1em; }
 h1, h2, h3 { line-height: 1.08; }
 .hero h1 { font-size: clamp(calc(46px * var(--ws)), 6.2vw, calc(78px * var(--ws))); letter-spacing: 0.02em; }
