@@ -27,6 +27,24 @@
       applyTheme()
     })
 
+    // headline highlight: put it just under the letters on every device (measures the baseline, not the font box)
+    function placeSwipes() {
+      var marks = document.querySelectorAll('.swipe')
+      for (var i = 0; i < marks.length; i++) {
+        var s = marks[i]
+        var probe = document.createElement('i')
+        probe.className = 'swipe-probe'
+        s.appendChild(probe)
+        var size = parseFloat(getComputedStyle(s).fontSize)
+        var base = (probe.getBoundingClientRect().bottom - s.getBoundingClientRect().top) / size
+        s.removeChild(probe)
+        if (base > 0.3 && base < 2) s.style.setProperty('--swipe-top', (base + 0.04).toFixed(3) + 'em')
+      }
+    }
+    placeSwipes()
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeSwipes)
+    window.addEventListener('resize', placeSwipes)
+
     // #link to a question opens it
     function openTarget() {
       var id = location.hash.slice(1)
@@ -137,4 +155,15 @@
     startClock('record')
     replay('record')
   })
+})()
+
+// the drawings only move while you can see them (saves battery)
+;(function () {
+  if (!('IntersectionObserver' in window)) return
+  var watch = new IntersectionObserver(function (entries) {
+    for (var i = 0; i < entries.length; i++) entries[i].target.classList.toggle('inview', entries[i].isIntersecting)
+  }, { threshold: 0.15 })
+  function hook() { var all = document.querySelectorAll('.ill'); for (var i = 0; i < all.length; i++) watch.observe(all[i]) }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { hook(); setTimeout(hook, 500) })
+  else hook()
 })()

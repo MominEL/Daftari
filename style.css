@@ -375,7 +375,9 @@ footer .small { color: var(--ink-3); font-size: calc(15px * var(--ws)); }
 .hero-art { max-width: 560px; justify-self: end; }
 /* highlighter under the words. draws itself left to right, no stretching */
 .swipe { position: relative; isolation: isolate; white-space: nowrap; }
-.swipe::after { content: ""; position: absolute; z-index: -1; left: -0.08em; right: -0.1em; top: 0.99em; height: 0.34em; background: url(img/underline.svg) no-repeat 0 0 / 100% 100%; }
+/* site.js measures where the letters stand on this device (fonts sit differently on windows / mac) and sets --swipe-top */
+.swipe-probe { display: inline-block; width: 0; height: 0; }
+.swipe::after { content: ""; position: absolute; z-index: -1; left: -0.08em; right: -0.1em; top: var(--swipe-top, 0.99em); height: 0.34em; background: url(img/underline.svg) no-repeat 0 0 / 100% 100%; }
 .js .swipe::after { clip-path: inset(0 100% 0 0); animation: swipe-draw 850ms cubic-bezier(0.6, 0.05, 0.35, 1) 0.5s forwards; }
 .js .swipe ~ .swipe::after { animation-duration: 420ms; animation-delay: 1.45s; }
 @keyframes swipe-draw { to { clip-path: inset(0 -2px 0 0); } }
@@ -433,3 +435,54 @@ h3 { font-size: calc(28px * var(--ws)); }
 .top nav .button { font-size: calc(19px * var(--ws)); }
 .faq summary { font-size: calc(24px * var(--ws)); }
 .dl-head strong { font-size: calc(30px * var(--ws)); }
+
+/* added 2026-10-17: a handwriting font for the personal note, the version underlined, clearer first-time steps,
+   and Habibi and the drawings moving while they are on screen */
+@font-face { font-family: 'Caveat'; font-weight: 400 700; font-display: swap; src: url('fonts/caveat-latin-wght-normal.woff2') format('woff2'); }
+
+/* "Why I made this" reads like a note in Momin's handwriting */
+.why-text p { font: 500 calc(31px * var(--ws))/1.3 'Caveat', var(--read); color: var(--ink); max-width: 30em; }
+.why-text .sign { font: 700 calc(42px * var(--ws))/1 'Caveat', var(--read); margin-top: 0.6em; }
+
+/* the version, underlined like the headline */
+.version-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 28px; }
+.version-line .ver { font: 400 calc(38px * var(--ws))/1.1 var(--hand); color: var(--ink); letter-spacing: 0.02em; }
+.version-line .ver-date { color: var(--ink-2); font-size: calc(18px * var(--ws)); }
+
+/* first time: a numbered circle, the action in bold on its own line, the detail quietly under it */
+.two ol.first-steps { display: grid; gap: 4px; }
+.two ol.first-steps li { padding: 14px 0 14px 56px; border-top: 1px solid var(--rule); }
+.two ol.first-steps li::before { left: 0; top: 12px; width: 36px; height: 36px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 50%; font: 400 calc(20px * var(--ws))/1 var(--hand); color: var(--ink); }
+.first-steps b { display: block; font-size: calc(19px * var(--ws)); color: var(--ink); }
+.first-steps span { display: block; margin-top: 2px; color: var(--ink-2); font-size: calc(17px * var(--ws)); line-height: 1.5; }
+.first-steps kbd { font: inherit; font-weight: 700; color: var(--ink); }
+
+/* ---------- Habibi and the drawings move (only while on screen; anim.js adds .inview) ---------- */
+.ill { --play: paused; }
+.ill.inview { --play: running; }
+.a-rec, .a-wave, .a-talk, .a-talk-l, .a-flow, .a-write, .a-hl, .a-tick, .a-bob, .a-drop { animation-play-state: var(--play, paused); transform-box: fill-box; }
+.a-rec { animation: rec-blink 1.1s steps(1) infinite; }
+.a-wave { animation: wave 1.6s ease-in-out infinite; }
+.a-w2 { animation-delay: 0.2s; } .a-w3 { animation-delay: 0.4s; }
+.a-talk { transform-origin: 50% 50%; animation: talk 0.9s ease-in-out infinite; }
+.a-talk-l { transform-origin: 50% 0; animation: talk-l 0.7s ease-in-out infinite; }
+.a-flow { stroke-dasharray: 8 6; animation: flow 1.2s linear infinite; }
+.a-f2 { animation-delay: 0.3s; } .a-f3 { animation-delay: 0.6s; }
+.a-write { transform-origin: 50% 100%; animation: write 1.4s ease-in-out infinite; }
+.a-hl { transform-origin: 0 50%; animation: hl 3.2s ease-out infinite; }
+.a-tick { stroke-dasharray: 70; animation: tick 2.6s ease-out infinite; }
+.a-bob { transform-origin: 50% 50%; animation: bob 3s ease-in-out infinite; }
+.a-b2 { animation-delay: 0.5s; } .a-b3 { animation-delay: 1s; }
+.a-drop { animation: drop 3.4s ease-in-out infinite; }
+.a-d2 { animation-delay: 0.6s; } .a-d3 { animation-delay: 1.2s; }
+@keyframes rec-blink { 0% { opacity: 1; } 50% { opacity: 0.15; } }
+@keyframes wave { 0%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+@keyframes talk { 0%, 100% { transform: scaleY(1); } 20% { transform: scaleY(0.45); } 45% { transform: scaleY(0.9); } 65% { transform: scaleY(0.35); } 85% { transform: scaleY(0.8); } }
+@keyframes talk-l { 0%, 100% { transform: scaleY(1); } 30% { transform: scaleY(2.2); } 60% { transform: scaleY(1.2); } 80% { transform: scaleY(2); } }
+@keyframes flow { to { stroke-dashoffset: -28; } }
+@keyframes write { 0%, 100% { transform: translate(0, 0) rotate(0); } 25% { transform: translate(-3px, 4px) rotate(-4deg); } 50% { transform: translate(3px, 1px) rotate(3deg); } 75% { transform: translate(-2px, 3px) rotate(-2deg); } }
+@keyframes hl { 0% { transform: scaleX(0); } 45%, 100% { transform: scaleX(1); } }
+@keyframes tick { 0% { stroke-dashoffset: 70; } 40%, 100% { stroke-dashoffset: 0; } }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-5px) rotate(1.5deg); } }
+@keyframes drop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@media (prefers-reduced-motion: reduce) { .a-rec, .a-wave, .a-talk, .a-talk-l, .a-flow, .a-write, .a-hl, .a-tick, .a-bob, .a-drop { animation: none !important; } }

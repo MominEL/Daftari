@@ -23,8 +23,8 @@
   <meta property="og:image:alt" content="Daftari, a notebook for lectures. The words “One lecture, from the first word to the flashcards.” beside a small Daftari window: a lecture transcript with key words marked in yellow, and the note written from them." />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="img/icon.png?v=1ff9049137" type="image/png" />
-  <link rel="stylesheet" href="style.css?v=2c757b162e" />
-  <script src="site.js?v=2a7e565e59"></script>
+  <link rel="stylesheet" href="style.css?v=185ef0fa4b" />
+  <script src="site.js?v=71b3354997"></script>
 </head>
 <body>
 <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
@@ -52,7 +52,7 @@
     </g>
     <g id="face-listen">
       <circle class="f-ink eye" cx="62" cy="54" r="6"/><circle class="f-ink eye" cx="94" cy="54" r="6"/>
-      <ellipse class="ink thick" cx="78" cy="96" rx="10" ry="13"/>
+      <ellipse class="ink thick a-talk" cx="78" cy="96" rx="10" ry="13"/>
     </g>
     <g id="face-tongue">
       <circle class="f-ink eye" cx="62" cy="56" r="6"/><circle class="f-ink eye" cx="94" cy="56" r="6"/>
@@ -70,19 +70,19 @@
       <path class="ink thin" d="M6 14 H22 M6 24 H22"/>
     </g>
     <g id="p-waves">
-      <path class="ink biro" d="M0 0 Q14 14 0 28"/>
-      <path class="ink biro" d="M14 -10 Q36 14 14 38"/>
-      <path class="ink biro" d="M28 -20 Q58 14 28 48"/>
+      <path class="ink biro a-wave" d="M0 0 Q14 14 0 28"/>
+      <path class="ink biro a-wave a-w2" d="M14 -10 Q36 14 14 38"/>
+      <path class="ink biro a-wave a-w3" d="M28 -20 Q58 14 28 48"/>
     </g>
     <g id="p-rec">
       <rect class="ink f-paper" x="0" y="0" width="68" height="28" rx="7"/>
-      <circle class="f-rec" cx="16" cy="14" r="6.5"/>
+      <circle class="f-rec a-rec" cx="16" cy="14" r="6.5"/>
       <path class="ink thin" d="M32 14 H58"/>
     </g>
     <g id="p-page">
       <rect class="ink f-paper" x="0" y="0" width="124" height="156" rx="4"/>
       <path class="ink thick" d="M16 24 H70"/>
-      <path class="f-hl" d="M24 62 Q50 56 112 60 Q120 66 113 75 Q60 80 26 75 Q18 69 24 62 Z"/>
+      <path class="f-hl a-hl" d="M24 62 Q50 56 112 60 Q120 66 113 75 Q60 80 26 75 Q18 69 24 62 Z"/>
       <circle class="f-ink" cx="20" cy="50" r="3"/><path class="ink thin" d="M30 50 H98"/>
       <circle class="f-ink" cx="20" cy="66" r="3"/><path class="ink thin" d="M30 66 H108"/>
       <circle class="f-ink" cx="20" cy="86" r="3"/><path class="ink thin" d="M30 86 H92"/>
@@ -128,12 +128,12 @@
       <circle class="ink f-paper" cx="58" cy="72" r="20"/>
       <path class="ink thin" d="M42 62 Q50 48 66 52 M48 56 Q52 46 62 48"/>
       <circle class="f-ink" cx="52" cy="72" r="2.6"/><circle class="f-ink" cx="64" cy="72" r="2.6"/>
-      <path class="ink thin" d="M50 80 Q58 86 66 80"/>
+      <path class="ink thin a-talk-l" d="M50 80 Q58 86 66 80"/>
       <path class="ink" d="M58 92 V150 M58 108 L100 96"/>
       <path class="ink f-paper" d="M22 150 H98 L106 236 H14 Z"/>
-      <path class="ink biro" d="M118 80 q10 -9 20 0 t20 0 t20 0 t20 0"/>
-      <path class="ink biro" d="M118 100 q10 -9 20 0 t20 0 t20 0"/>
-      <path class="ink biro" d="M118 120 q10 -9 20 0 t20 0"/>
+      <path class="ink biro a-flow" d="M118 80 q10 -9 20 0 t20 0 t20 0 t20 0"/>
+      <path class="ink biro a-flow a-f2" d="M118 100 q10 -9 20 0 t20 0 t20 0"/>
+      <path class="ink biro a-flow a-f3" d="M118 120 q10 -9 20 0 t20 0"/>
       <g transform="translate(228,42) scale(0.78)"><use href="#nb"/></g>
       <path class="ink" d="M236 130 Q214 128 206 150"/>
       <g transform="translate(184,142) rotate(-8)"><use href="#p-page-mini"/></g>
@@ -145,7 +145,7 @@
       <path class="ink" d="M38 132 Q22 150 28 178"/>
       <path class="ink" d="M146 132 Q190 120 200 98"/>
       <g transform="translate(196,52) rotate(5)"><use href="#p-page"/></g>
-      <g transform="translate(178,60) rotate(-62)"><use href="#p-pen"/></g>
+      <g transform="translate(178,60) rotate(-62)"><use class="a-write" href="#p-pen"/></g>
     </g>
     <g id="s-study" filter="url(#wobble)">
       <path class="ink thin" d="M14 236 H346"/>
@@ -154,15 +154,15 @@
       <path class="ink" d="M140 132 Q154 126 160 110"/>
       <!-- holding a tick badge -->
       <circle class="ink f-paper" cx="178" cy="76" r="30"/>
-      <path class="ink ok thick2" d="M162 78 L174 91 L196 60"/>
+      <path class="ink ok thick2 a-tick" d="M162 78 L174 91 L196 60"/>
       <circle class="ink f-paper" cx="161" cy="106" r="9"/>
-      <g transform="translate(206,50) rotate(-12)"><use href="#p-card"/></g>
-      <g transform="translate(196,96) rotate(6)"><use href="#p-card"/></g>
-      <g transform="translate(212,150) rotate(-4)"><use href="#p-card-ok"/></g>
+      <g transform="translate(206,50) rotate(-12)"><use class="a-bob" href="#p-card"/></g>
+      <g transform="translate(196,96) rotate(6)"><use class="a-bob a-b2" href="#p-card"/></g>
+      <g transform="translate(212,150) rotate(-4)"><use class="a-bob a-b3" href="#p-card-ok"/></g>
     </g>
     <g id="s-files" filter="url(#wobble)">
       <path class="ink thin" d="M14 236 H346"/>
-      <g transform="translate(176,118)"><use href="#p-page-mini" transform="translate(14,-48) rotate(-6)"/><use href="#p-page-mini" transform="translate(52,-62) rotate(5)"/><use href="#p-page-mini" transform="translate(88,-46) rotate(-3)"/><use href="#p-folder"/></g>
+      <g transform="translate(176,118)"><g transform="translate(14,-48) rotate(-6)"><use class="a-drop" href="#p-page-mini"/></g><g transform="translate(52,-62) rotate(5)"><use class="a-drop a-d2" href="#p-page-mini"/></g><g transform="translate(88,-46) rotate(-3)"><use class="a-drop a-d3" href="#p-page-mini"/></g><use href="#p-folder"/></g>
       <use href="#nb" transform="translate(26,36)"/>
       <path class="ink" d="M34 132 Q18 150 24 178"/>
       <path class="ink" d="M142 132 Q170 138 190 150"/>
@@ -173,11 +173,11 @@
       <path class="ink" d="M162 196 Q98 216 50 152"/>
       <path class="ink" d="M342 190 Q392 176 408 130"/>
       <g transform="translate(396,70) rotate(6)"><use href="#p-page"/></g>
-      <g transform="translate(364,84) rotate(-62)"><use href="#p-pen"/></g>
+      <g transform="translate(364,84) rotate(-62)"><use class="a-write" href="#p-pen"/></g>
       <g transform="translate(36,70)"><use href="#p-mic"/></g>
       <g transform="translate(76,86)"><use href="#p-waves"/></g>
       <g transform="translate(30,330) rotate(-6)"><use href="#p-rec"/></g>
-      <g transform="translate(394,262) rotate(-8)"><use href="#p-card"/></g>
+      <g transform="translate(394,262) rotate(-8)"><use class="a-bob" href="#p-card"/></g>
     </g>
   </defs>
 </svg>
@@ -211,12 +211,10 @@
             <a class="button" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Download for Windows</a>
             <a class="button second" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
           </div>
-          <p class="meta">For Windows 10 or 11 and Macs with Apple silicon. <a href="#open">Opening it the first time</a>.</p>
           <p class="phone-note">Daftari is for Windows and Mac computers. Open this page on your computer to download.</p>
         </div>
         <svg class="ill hero-art" viewBox="0 0 520 420" role="img" aria-label="A cartoon notebook with a face, recording a lecture. A microphone, a page of notes with a highlighted line and a flashcard are around it."><use href="#s-hero"/></svg>
       </div>
-      <p class="scroll-hint wrap">Here is one lecture, from start to finish</p>
     </section>
 
     <section class="story-wrap" id="story" aria-label="How it works, one lecture in five steps">
@@ -226,7 +224,6 @@
             <span class="step-count">1 of 5</span>
             <h2>Press record</h2>
             <p>Record with your microphone, with your computer’s own sound (a Teams call, an online lecture), or both. Daftari saves the audio to disk every 30 seconds, so if the battery dies you lose very little.</p>
-            <p class="more">You can pause and resume. The recording stays on your computer.</p>
           
             <svg class="ill step-art" viewBox="0 0 360 260" role="img" aria-label="The notebook holding a microphone, with a recording badge"><use href="#s-record"/></svg>
           </li>
@@ -234,7 +231,6 @@
             <span class="step-count">2 of 5</span>
             <h2>Read along</h2>
             <p>Speech-to-text runs on your computer while you listen, so the lecture is not sent anywhere to be transcribed. Each part shows up in the transcript a few seconds after it is said.</p>
-            <p class="more">English only for now. It works with no internet.</p>
           
             <svg class="ill step-art" viewBox="0 0 360 260" role="img" aria-label="A lecturer speaking, the words flowing to the notebook as a page"><use href="#s-transcript"/></svg>
           </li>
@@ -242,7 +238,6 @@
             <span class="step-count">3 of 5</span>
             <h2>Notes appear as you go</h2>
             <p>About every ten minutes, the AI you set up writes notes for that part: headings, definitions, formulas. When you press Stop, Daftari puts them together into one page, linked to the full transcript. You read it before anything is saved.</p>
-            <p class="more">The AI needs your own key. <a href="#ai">Which providers, and which are free</a>.</p>
           
             <svg class="ill step-art" viewBox="0 0 360 260" role="img" aria-label="The notebook highlighting a line on a page of notes"><use href="#s-notes"/></svg>
           </li>
@@ -336,7 +331,6 @@
             </div>
             <div class="w-bottom"><span>Saved 14:32</span><span class="cmd"><span>Search or run a command</span><kbd>Ctrl K</kbd></span><span class="sync">Sync is off</span></div>
           </div>
-          <p class="stage-caption" aria-hidden="true">An example lecture, as Daftari shows it. The yellow marks show which words became which note.</p>
         </div>
       </div>
     </section>
@@ -345,56 +339,29 @@
       <div class="wrap">
         <h2 id="why-title">Why I made this</h2>
         <div class="why-text">
-          <p>I’m a student too. I was not going to pay a monthly subscription just to use AI in my notes, and I did not think other students should have to either. So I built my own notes app, and I’m sharing it.</p>
-          <p>Daftari itself costs nothing and never will. The AI part uses a key from a provider you choose. Several have a free plan, and the app walks you through getting one. If you would rather not use AI at all, everything else still works.</p>
-          <p>I’m one person, so it is rough in places. If something breaks or confuses you, tell me. That is the most useful thing you can do.</p>
+          <p>I’m a student too. I wasn’t going to pay a monthly subscription just to have AI in my notes, and I don’t think other students should have to either. So I made my own notes app, and I’m sharing it.</p>
+          <p>Daftari is free, and it’s staying free. For the AI part you plug in a key from whichever company you like. A few have free plans, and the app shows you how to get one. Don’t want AI at all? Everything else works without it.</p>
+          <p>It’s just me working on this, so it’s rough in places. If something breaks or confuses you, please tell me. Honestly, that’s the most helpful thing you can do.</p>
           <p class="sign">Momin</p>
         </div>
-        <p class="why-more">It also has a block editor with nested pages, tables and code, search through every word of every page, maths typed as LaTeX, spell checking, a trash you can restore from, and optional sync through your own private GitHub repository or a cloud folder.</p>
       </div>
     </section>
 
     <section class="plain download" id="download" aria-labelledby="download-title">
       <div class="wrap">
       <h2 id="download-title">Download Daftari</h2>
-      <p class="muted">Version 1.1.0, 14 October 2026. Free. Daftari is not registered with Microsoft or Apple (that costs money every year), so your computer will ask you to confirm the first time: see <a href="#open">Opening it</a>.</p>
+      <p class="version-line"><span class="swipe ver">Version 1.1.0</span><span class="ver-date">14 October 2026 · free</span></p>
       <p class="phone-note">Daftari is for Windows and Mac computers. Open this page on your computer to download.</p>
       <ul class="downloads">
         <li>
           <div class="dl-head"><strong>Windows</strong><span>Windows 10 or 11, 64-bit</span></div>
           <a class="button" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe">Download for Windows</a>
-          <p class="hash"><span class="hash-label">SHA-256 of <code class="file">Daftari-Windows-Setup.exe</code></span><code class="sha">671eaae99acc50e32c64857485722c5ec75bb70397febbd4f767bdfa721bd98c</code></p>
         </li>
         <li>
           <div class="dl-head"><strong>Mac, Apple silicon</strong><span>M1, M2, M3, M4 and newer, macOS 12 or later</span></div>
           <a class="button" rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg">Download for Mac</a>
-          <p class="hash"><span class="hash-label">SHA-256 of <code class="file">Daftari-Mac-AppleSilicon.dmg</code></span><code class="sha">d9449cf9c5d2ef9fb2f83bd3de0e01430e87eb613a3d4ba765611ab422c6e122</code></p>
-          <p class="muted small">Not sure which Mac you have? Apple menu → About This Mac → look at Chip. If it says “Apple M…”, this is the one. If it says “Intel”, the Intel version is not ready yet.</p>
         </li>
       </ul>
-      <ul class="soon-list">
-        <li>Intel Mac – coming soon</li>
-        <li>Linux – coming soon</li>
-      </ul>
-
-      <div class="needs" aria-labelledby="needs-title">
-        <h3 id="needs-title">What you need</h3>
-        <ul>
-          <li>Windows 10 or 11 (64-bit), or macOS 12 or later on a Mac with Apple silicon.</li>
-          <li>Disk: the Windows installer is 108 MB and Daftari takes about 380 MB once installed; the Mac download is 127 MB.</li>
-          <li>Speech-to-text (optional), downloaded inside Daftari when you want it: a speech model of 148 MB (Base), 488 MB (Small), 1.5 GB (Medium) or 1.6 GB (Large v3 Turbo). On Windows the speech program adds 9 MB, or 685 MB for computers with an NVIDIA graphics card. On a Mac it is installed with Homebrew, and Daftari shows the two commands.</li>
-          <li>Memory: a Mac with 8 GB works well with the Small and Medium models. Daftari suggests one for your computer.</li>
-          <li>Internet: only to download Daftari and the speech models, to sync, and to use an online AI provider. Writing, search, flashcards, recording and speech-to-text work offline.</li>
-        </ul>
-      </div>
-
-      <details class="verify">
-        <summary>Check that your download is genuine</summary>
-        <p>Each file has a SHA-256 checksum above (and in <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>). After downloading, compare it with your own:</p>
-        <p>Windows (PowerShell): <code>Get-FileHash Daftari-Windows-Setup.exe -Algorithm SHA256</code></p>
-        <p>Mac (Terminal): <code>shasum -a 256 Daftari-Mac-AppleSilicon.dmg</code></p>
-        <p>If the two do not match exactly, do not open the file.</p>
-      </details>
     </div>
     </section>
 
@@ -405,23 +372,21 @@
       <div class="two">
         <div>
           <h3>Windows</h3>
-          <ol>
-            <li>Run the installer. If a blue “Windows protected your PC” box appears, click <strong>More info</strong>, then <strong>Run anyway</strong>.</li>
-            <li>Follow the installer, then open Daftari from the Start menu.</li>
+          <ol class="first-steps">
+            <li><b>Run the installer.</b><span>Double-click the file you downloaded.</span></li>
+            <li><b>If “Windows protected your PC” appears,</b><span>click <kbd>More info</kbd>, then <kbd>Run anyway</kbd>.</span></li>
           </ol>
         </div>
         <div>
           <h3>Mac</h3>
-          <ol>
-            <li>Open the downloaded file and drag Daftari into <strong>Applications</strong>. Then open it <strong>from Applications</strong>, not from the download window.</li>
-            <li>Open Daftari from Applications. macOS says “Daftari Not Opened” because it <strong>could not verify</strong> it. That is expected (Daftari is free and not registered with Apple). Click <strong>Done</strong>. <strong>Do not click “Move to Bin”</strong>, even though it is highlighted: that would delete Daftari.</li>
-            <li>Open <strong>System Settings → Privacy &amp; Security</strong>, scroll down to <strong>Security</strong>, and click <strong>Open Anyway</strong> next to Daftari. (The button is there for about an hour after the first try.)</li>
-            <li>The box appears once more: click <strong>Open Anyway</strong> and enter your Mac password. That's all. From now on Daftari opens like any other app.</li>
+          <ol class="first-steps">
+            <li><b>Drag Daftari into Applications.</b><span>Open the file you downloaded and drag the icon across.</span></li>
+            <li><b>Open Daftari from Applications.</b><span>macOS says it can’t check it. Click <kbd>Done</kbd>, not “Move to Bin”.</span></li>
+            <li><b>Open System Settings → Privacy &amp; Security.</b><span>Scroll down and click <kbd>Open Anyway</kbd>.</span></li>
+            <li><b>Click Open Anyway once more.</b><span>Type your Mac password. That’s it: from now on it opens like any app.</span></li>
           </ol>
-          <p class="muted small">The same steps are shown in the window that opens with the download. Each new version you download asks once again.</p>
         </div>
       </div>
-      <p class="muted small">Updates: on Windows, Daftari downloads new versions itself and installs them when you close it. On a Mac it tells you a new version is ready and opens this page.</p>
     </div>
     </section>
 
@@ -437,7 +402,6 @@
         <li><a rel="noopener noreferrer" href="https://platform.claude.com/docs/en/get-api-key">Anthropic (Claude)</a>: paid.</li>
         <li><a rel="noopener noreferrer" href="https://ollama.com/download">Ollama</a>: runs on your own computer, free, nothing leaves it.</li>
       </ul>
-      <p class="note muted">Free tiers can be generous, but some providers may use what you send them to improve their products, so keep private notes out of free-tier requests. Daftari works fully without the AI.</p>
     </div>
     </section>
 
@@ -450,7 +414,6 @@
         <li>There are no accounts, no analytics and no advertising, in the app or on this website. The website has no cookies and no forms, loads nothing from other sites, and its one small script stores nothing.</li>
         <li>The check for a new version can be switched off in Settings → About.</li>
       </ul>
-      <p class="muted small">Daftari contacts the internet only when you ask it to: the AI company you set up, GitHub (if you turn on sync, and to look for a new version), and the download sites for the speech-to-text program. Your notes stay in the folder you chose; if you pick a cloud folder or turn on GitHub sync, that service holds a copy.</p>
     </div>
     </section>
 
@@ -458,6 +421,42 @@
       <div class="wrap">
       <h2 id="faq-title">Questions</h2>
       <div class="faq">
+        <details>
+              <summary><span class="q">Which Mac do I need?</span></summary>
+              <div class="answer"><p>A Mac with Apple silicon (M1, M2, M3, M4 or newer) and macOS 12 or later. To check: Apple menu → About This Mac → Chip. If it says “Intel”, that version isn’t ready yet.</p></div>
+            </details>
+        <details>
+              <summary><span class="q">What does my computer need?</span></summary>
+              <div class="answer"><ul><li>Windows 10 or 11 (64-bit), or a Mac with Apple silicon.</li><li>About 400 MB of space; speech-to-text adds 150 MB to 1.6 GB, only if you want it.</li><li>A Mac with 8 GB works well with the Small and Medium speech models.</li></ul></div>
+            </details>
+        <details>
+              <summary><span class="q">Is there a version for Intel Macs or Linux?</span></summary>
+              <div class="answer"><p>Not yet. Both are coming.</p></div>
+            </details>
+        <details>
+              <summary><span class="q">How do I check my download is genuine?</span></summary>
+              <div class="answer"><p>Compare its SHA-256 with the one published here (also in <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>):</p><ul><li>Windows: <code class="sha">671eaae99acc50e32c64857485722c5ec75bb70397febbd4f767bdfa721bd98c</code></li><li>Mac: <code class="sha">d9449cf9c5d2ef9fb2f83bd3de0e01430e87eb613a3d4ba765611ab422c6e122</code></li></ul><p>Windows (PowerShell): <code>Get-FileHash Daftari-Windows-Setup.exe -Algorithm SHA256</code><br>Mac (Terminal): <code>shasum -a 256 Daftari-Mac-AppleSilicon.dmg</code></p></div>
+            </details>
+        <details>
+              <summary><span class="q">How do updates work?</span></summary>
+              <div class="answer"><p>On Windows, Daftari downloads new versions itself and installs them when you close it. On a Mac it tells you when a new version is ready and opens this page.</p></div>
+            </details>
+        <details>
+              <summary><span class="q">Does the AI see my notes?</span></summary>
+              <div class="answer"><p>Only the text you ask it about, sent to the AI company you chose. Some free plans may use what you send to improve their products, so keep private notes out of free-plan requests. <a href="https://ollama.com/download" rel="noopener noreferrer">Ollama</a> runs on your own computer, so nothing leaves it.</p></div>
+            </details>
+        <details>
+              <summary><span class="q">When does Daftari use the internet?</span></summary>
+              <div class="answer"><p>Only when you ask it to: your AI company, GitHub (if you turn on sync, and to look for a new version) and downloading the speech-to-text program. Recording and speech-to-text work offline.</p></div>
+            </details>
+        <details>
+              <summary><span class="q">Which languages does it understand?</span></summary>
+              <div class="answer"><p>Speech-to-text understands English for now. You can write notes in any language.</p></div>
+            </details>
+        <details>
+              <summary><span class="q">What else can it do?</span></summary>
+              <div class="answer"><p>Nested pages, tables and code, search through every word, maths typed as LaTeX, spell checking, a trash you can restore from, and optional sync through GitHub or a cloud folder.</p></div>
+            </details>
         <details>
               <summary><span class="q">Does it cost anything?</span></summary>
               <div class="answer">
@@ -534,7 +533,6 @@
               </div>
             </details>
       </div>
-      <p class="muted small faq-more">Something else? <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">Ask on GitHub</a>, or message me.</p>
     </div>
     </section>
 
@@ -558,7 +556,6 @@
       <a class="brand" href="#top" aria-label="Daftari, back to the top"><img src="img/icon.png?v=1ff9049137" width="32" height="32" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
       <p>Found a bug or have an idea? Message Momin on <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">GitHub</a>.</p>
       <p><strong>Made by Momin.</strong> © 2026 Momin. All rights reserved.</p>
-      <p class="small"><a href="#changes">Changes</a>. Daftari is built with open-source software, fonts and icons, listed with their licences in <a href="notices.txt">the notices</a>. The fonts on this page are Shifty Notes (by Niskala Huruf), Mali (digits) and Source Serif 4; Mali and Source Serif 4 are under the SIL Open Font Licence.</p>
     </div>
   </footer>
 </body>
