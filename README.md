@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <a href="https://mominel.github.io/Daftari/"><picture><source media="(prefers-color-scheme: dark)" srcset="img/readme-btn-website-dark.png"><img src="img/readme-btn-website.png" alt="Visit the website" height="54"></picture></a>
+  <a href="https://mominel.github.io/Daftari/"><picture><source media="(prefers-color-scheme: dark)" srcset="img/readme-button-website-dark.png"><img src="img/readme-button-website.png" alt="Visit the website" height="54"></picture></a>
   &nbsp;
-  <a href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe"><picture><source media="(prefers-color-scheme: dark)" srcset="img/readme-btn-windows-dark.png"><img src="img/readme-btn-windows.png" alt="Download for Windows" height="54"></picture></a>
+  <a href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Windows-Setup.exe"><picture><source media="(prefers-color-scheme: dark)" srcset="img/readme-button-windows-dark.png"><img src="img/readme-button-windows.png" alt="Download for Windows" height="54"></picture></a>
   &nbsp;
-  <a href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg"><picture><source media="(prefers-color-scheme: dark)" srcset="img/readme-btn-mac-dark.png"><img src="img/readme-btn-mac.png" alt="Download for Mac" height="54"></picture></a>
+  <a href="https://github.com/MominEL/Daftari/releases/latest/download/Daftari-Mac-AppleSilicon.dmg"><picture><source media="(prefers-color-scheme: dark)" srcset="img/readme-button-mac-dark.png"><img src="img/readme-button-mac.png" alt="Download for Mac" height="54"></picture></a>
 </p>
 
 <p align="center"><sub>Free · Windows 10 and 11 · Macs with Apple silicon (M1 or newer)</sub></p>
