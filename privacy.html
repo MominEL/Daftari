@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Daftari – privacy policy</title>
+  <meta name="description" content="What Daftari keeps, where, and what it sends to whom. Short version: your notes stay with you; Momin never receives anything." />
+  <link rel="canonical" href="https://mominel.github.io/Daftari/privacy.html" />
+  <link rel="icon" href="img/icon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="top" class="policy">
+    <section class="plain" aria-labelledby="policy-title">
+      <div class="wrap">
+        <p><a href="./">← Daftari</a></p>
+        <h1 id="policy-title">Privacy policy</h1>
+        <p>Last updated: 27 October 2026. This policy covers the Daftari app (from this website or the Microsoft Store), this website and Daftari’s study page for phones.</p>
+
+        <h2>The short version</h2>
+        <ul class="plain-list">
+          <li><strong>Momin (who makes Daftari) never receives anything from you.</strong> There are no accounts, no analytics, no advertising and no tracking, in the app or on this website.</li>
+          <li>Your notes are plain files in a folder you choose, on your own computer.</li>
+          <li>Daftari only goes online when you use something that needs it, and then only to the service you chose (listed below).</li>
+        </ul>
+
+        <h2>What Daftari keeps on your computer</h2>
+        <ul class="plain-list">
+          <li><strong>Your notes</strong> (pages, folders, pictures and other attachments, flashcards and their review history, and short sounds you add to flashcards) in the notes folder you choose.</li>
+          <li><strong>Lecture recordings</strong> from your microphone or your computer’s sound, only when you press Record. They are kept in Daftari’s own data folder, outside your notes folder, and are never synced or sent anywhere. Transcribing them happens on your computer.</li>
+          <li><strong>Settings</strong>, including the AI service you chose and its key, and your GitHub sync key if you use sync. Keys are encrypted with your computer’s own secure storage and kept in Daftari’s data folder, never in your notes folder.</li>
+          <li><strong>A small problem log</strong> on your computer, with personal details removed (no note text, titles, file names or keys). It is only sent anywhere if you copy it yourself to report a problem.</li>
+          <li><strong>Automatic backups</strong> of your notes (if switched on) as zip files in a folder on your computer.</li>
+        </ul>
+
+        <h2>What is sent, to whom, and when</h2>
+        <ul class="plain-list">
+          <li><strong>The AI service you choose</strong> (for example Google Gemini, Groq, OpenRouter, OpenAI, Anthropic): only the text you ask the AI about, such as the part of a page you select, a lecture’s transcript when Daftari writes notes from it, or a PDF’s text when you ask for notes or flashcards from it. It is sent with your own key, directly from your computer to that company, under that company’s own privacy policy. Some free plans may use what you send to improve their products. Ollama runs on your own computer, so nothing leaves it. The AI is optional: Daftari works without it.</li>
+          <li><strong>GitHub</strong>, only if you switch on sync: your notes are copied to a private repository in your own GitHub account. Daftari also asks GitHub whether a newer version exists (a plain request with nothing about you; it can be switched off, and the Microsoft Store copy doesn’t ask at all).</li>
+          <li><strong>Downloads you ask for</strong>: the speech-to-text program (whisper.cpp, from GitHub), speech models (from Hugging Face) and the audio converter ffmpeg (from gyan.dev on Windows). These are ordinary downloads; nothing about you is sent.</li>
+          <li><strong>Studying on your phone</strong>, only if you set it up: the phone reads your flashcards from your own GitHub repository (or from your computer over your home Wi-Fi) and saves its reviews there. The code you scan contains the key to your notes repository; it stays on your phone and is never sent to this website.</li>
+          <li><strong>The Microsoft Store</strong> (if you installed Daftari from it) handles installing and updating under Microsoft’s own privacy statement.</li>
+        </ul>
+
+        <h2>This website</h2>
+        <p>This website has no cookies, no forms and no analytics, loads nothing from other sites, and its small script stores nothing. It is hosted by GitHub Pages, which, like any web host, may keep ordinary server logs (such as IP addresses) under GitHub’s privacy statement.</p>
+
+        <h2>Your choices</h2>
+        <ul class="plain-list">
+          <li>Use Daftari without any AI, without sync and without speech-to-text: everything else works offline.</li>
+          <li>Remove a saved key at any time in Settings → AI or Settings → Sync.</li>
+          <li>Delete recordings in Recordings; delete or export your notes at any time (Settings → Notes → Export all notes).</li>
+          <li>Remove Daftari and its data: Settings → General → “Remove Daftari from this computer” (or, for the Microsoft Store copy, Windows Settings → Apps). Your notes folder is only removed if you choose that.</li>
+        </ul>
+
+        <h2>Children</h2>
+        <p>Daftari is made for students. It collects nothing about anyone, so it collects nothing about children either. A student who uses an AI service must follow that service’s own age rules.</p>
+
+        <h2>Changes and contact</h2>
+        <p>If what Daftari does with information changes, this page is updated first, with a new date at the top. Questions: message Momin on <a rel="noopener noreferrer" href="https://github.com/MominEL/Daftari/issues">GitHub</a>.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <a class="brand" href="./" aria-label="Daftari"><img src="img/icon.png" width="32" height="32" alt="" /><span class="brand-name">Daftari</span><span class="brand-arabic" lang="ar" dir="rtl">دفتري</span></a>
+      <p><strong>Made by Momin.</strong> © 2026 Momin. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

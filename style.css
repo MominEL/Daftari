@@ -486,3 +486,8 @@ h3 { font-size: calc(28px * var(--ws)); }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-5px) rotate(1.5deg); } }
 @keyframes drop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 @media (prefers-reduced-motion: reduce) { .a-rec, .a-wave, .a-talk, .a-talk-l, .a-flow, .a-write, .a-hl, .a-tick, .a-bob, .a-drop { animation: none !important; } }
+
+/* privacy.html */
+.policy h1 { margin: 12px 0 8px; }
+.policy h2 { margin-top: 44px; }
+.policy .plain-list li { margin-bottom: 10px; }
