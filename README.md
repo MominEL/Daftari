@@ -34,7 +34,7 @@
 1. **Press record.** Your microphone, your computer’s own sound (a Teams call, an online lecture), or both. The audio is saved every 30 seconds, so a flat battery loses very little.
 2. **Read along.** Speech-to-text runs on your own computer, so the lecture is never sent anywhere to be transcribed.
 3. **Notes appear as you go.** About every ten minutes the AI writes notes for that part: headings, definitions, formulas. When you stop, you read the finished page before anything is saved.
-4. **Revise from the same page.** Turn notes into flashcards or a quiz. Spaced repetition shows each card just before you’d forget it.
+4. **Revise from the same page.** Turn notes into flashcards or a quiz. Spaced repetition shows each card just before you’d forget it. Scan a code once to review them on your phone too.
 5. **Everything stays as plain files.** One file per page, in a folder you choose: on your computer, or in OneDrive, iCloud Drive, Google Drive or Dropbox.
 
 ## Find and revise

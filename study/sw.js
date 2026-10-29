@@ -1,6 +1,6 @@
 // Keeps the study page itself on the phone, so it opens without internet (the cards come from the phone's own copy).
 // Only the page's own files are kept; GitHub's answers are never stored here.
-const CACHE = 'daftari-study-1aed9f9d8e9b'
+const CACHE = 'daftari-study-4e3aee38f578'
 const FILES = ['./', 'index.html', 'app.js', 'app.css', 'icon.png', 'manifest.webmanifest']
 
 self.addEventListener('install', (event) => {
